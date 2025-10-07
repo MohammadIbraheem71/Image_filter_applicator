@@ -10,18 +10,30 @@ class image_handler:
             raise Exception(f"file: {file_path} not found")
             return
         
-        self.image = Image.open(file_path)
+        try:
+            self.image = Image.open(file_path)
+        except Exception as e:
+            raise Exception(f"error uploading image: {e}")
         
     def apply_filter(self, filter_obj):
         if self.image is None:
             raise Exception("there is no image loaded")
-        self.image = filter_obj.apply(self.image)
+        
+        try:
+            self.image = filter_obj.apply(self.image)
+        except Exception as e:
+            raise Exception(f"error applying filter: {e}")
         
     def download_image(self, save_path: str):
         if not os.path.exists(save_path):
             raise Exception(f"file: {save_path} not found")
             return
-        self.image.save(save_path)
+        
+        try:
+            os.makedirs(os.path.dirname(save_path), exist_ok=True)
+            self.image.save(save_path)
+        except Exception as e:
+            raise Exception(f"error saving image: {e}")
         
     def clear_image(self):
         self.Image = None
