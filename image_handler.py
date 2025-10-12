@@ -25,9 +25,11 @@ class image_handler:
             raise Exception(f"error applying filter: {e}")
         
     def download_image(self, save_path: str):
-        if not os.path.exists(save_path):
-            raise Exception(f"file: {save_path} not found")
-            return
+        
+        if self.image is None:
+            raise Exception("there is no image loaded")
+        
+        os.makedirs(os.path.dirname(save_path), exist_ok=True)
         
         try:
             os.makedirs(os.path.dirname(save_path), exist_ok=True)
