@@ -1,6 +1,6 @@
 #testing goes on in here
-from image_handler import image_handler
-from filter_factory import filter_factory
+from python_application.image_handler import image_handler
+from python_application.filter_factory import filter_factory
 from filters.blur_filter import blur_filter
 from filters.edge_filter import edge_filter
 from filters.grayscale_filter import grayscale_filter
