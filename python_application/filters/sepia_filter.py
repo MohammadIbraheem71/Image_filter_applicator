@@ -25,3 +25,4 @@ class SepiaFilter(Filter):
 
         # Convert back to PIL Image (ensuring RGB mode)
         return Image.fromarray(sepia_image.astype(np.uint8), "RGB")
+ 
