@@ -30,8 +30,6 @@ ENV/
 env.bak/
 venv.bak/
 
-# PyCharm
-.idea/
 
 # VS Code
 .vscode/
@@ -55,36 +53,8 @@ yarn-error.log*
 package-lock.json
 yarn.lock
 
-# Logs
-logs/
-*.log
+python_application/test_images/
 
-# OS
-.DS_Store
-Thumbs.db
-*.swp
-*.swo
-*~
-
-# Test coverage
-htmlcov/
-.tox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-.hypothesis/
-.pytest_cache/
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# Temporary files
-*.tmp
-*.bak
-*.orig
 
 # Uploads/Media (uncomment if you don't want to track uploaded images)
 # uploads/
