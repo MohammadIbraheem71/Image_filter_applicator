@@ -7,8 +7,14 @@
 #need to make this a singelton
 
 class filter_factory:
-    def __init__(self):
-        self.filter_dict = {}
+    _instance = None
+    
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super(filter_factory, cls).__new__(cls)
+            cls._instance.filter_dict = {}
+        
+        return cls.instance
     
     def add_filter(self, filter_name : str, filter_obj):
         self.filter_dict[filter_name] = filter_obj

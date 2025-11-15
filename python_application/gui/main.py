@@ -1,47 +1,86 @@
 import sys
 from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
+from PySide6.QtCore import Qt
 from PySide6.QtGui import QPixmap
 from PIL import Image, ImageFilter
-from app_gui import Ui_MainWindow  # the converted file
+from app_gui import Ui_MainWindow
 
-class ImageFilterApp(QMainWindow):
+from filters import filter_factory
+from filters.filter_types import blur_filter
+from filters.filter_types import sepia_filter
+from filters.filter_types import edge_filter
+from filters.filter_types import grayscale_filter
+
+
+class FrontPage(QMainWindow):
     def __init__(self):
         super().__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        # Data
         self.pil_image = None
 
+        self.factory = filter_factory()
+        self.factory.add_filter("blur", blur_filter())
+        self.factory.add_filter("edge", edge_filter())
+        self.factory.add_filter("sepia", sepia_filter())
+        self.factory.add_filter("grayscale", grayscale_filter())
+        
         # Connect buttons
-        self.ui.load_button.clicked.connect(self.load_image)
-        # self.ui.filterButton.clicked.connect(self.apply_filter)
-        # self.ui.saveButton.clicked.connect(self.save_image)
+        self.ui.upload_image.clicked.connect(self.upload_image)
+        self.ui.apply_filter.clicked.connect(self.apply_filter)
+        self.ui.download_image.clicked.connect(self.download_image)
 
-    def load_image(self):
-        file_name, _ = QFileDialog.getOpenFileName(self, "Open Image", "", "Images (*.png *.jpg *.jpeg *.bmp)")
-        if file_name:
-            self.pil_image = Image.open(file_name)
-            self.show_image()
+    def upload_image(self):
+        file_name, _ = QFileDialog.getOpenFileName(
+            self, "Open Image", "", "Images (*.png *.jpg *.jpeg *.bmp)"
+        )
+        if not file_name:
+            return
 
-    def show_image(self):
+        self.pil_image = Image.open(file_name)
+        self.show_image(self.ui.image_preview)
+
+    def show_image(self, label):
         if self.pil_image:
-            qt_image = self.pil_to_qpixmap(self.pil_image)
-            self.ui.image_label.setPixmap(qt_image.scaled(
-                self.ui.image_label.width(), self.ui.image_label.height()
-            ))
-            
+            pixmap = self.pil_to_qpixmap(self.pil_image)
+            scaled = pixmap.scaled(
+                label.width(),
+                label.height(),
+                Qt.KeepAspectRatio,
+                Qt.SmoothTransformation
+            )
+            label.setPixmap(scaled)
+
+    def apply_filter(self):
+        if not self.pil_image:
+            return
+
+        # Example filter — replace with your SDA filters
+        self.pil_image = self.pil_image.filter(ImageFilter.BLUR)
+        self.show_image(self.ui.new_image_preview)
+
+    def download_image(self):
+        if not self.pil_image:
+            return
+
+        file_name, _ = QFileDialog.getSaveFileName(
+            self, "Save Image", "", "PNG (*.png);;JPEG (*.jpg *.jpeg)"
+        )
+        if file_name:
+            self.pil_image.save(file_name)
+
     @staticmethod
     def pil_to_qpixmap(image):
+        from PySide6.QtGui import QImage, QPixmap
         image = image.convert("RGBA")
         data = image.tobytes("raw", "RGBA")
-        from PySide6.QtGui import QImage, QPixmap
         qimage = QImage(data, image.width, image.height, QImage.Format_RGBA8888)
         return QPixmap.fromImage(qimage)
-        
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    window = ImageFilterApp()
+    window = FrontPage()
     window.show()
     sys.exit(app.exec())

@@ -15,26 +15,138 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QLabel, QMainWindow, QMenuBar,
-    QPushButton, QSizePolicy, QStatusBar, QWidget)
+from PySide6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QLabel,
+    QMainWindow, QMenuBar, QPushButton, QSizePolicy,
+    QStatusBar, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(800, 600)
+        MainWindow.resize(936, 684)
+        MainWindow.setMinimumSize(QSize(400, 300))
+        MainWindow.setStyleSheet(u"QLabel {\n"
+"    background-color: #f5f5f5;\n"
+"    border-radius: 10px;\n"
+"    padding: 10px;\n"
+"    color: #666;\n"
+"}\n"
+"")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
-        self.image_label = QLabel(self.centralwidget)
-        self.image_label.setObjectName(u"image_label")
-        self.image_label.setGeometry(QRect(10, 10, 251, 171))
-        self.load_button = QPushButton(self.centralwidget)
-        self.load_button.setObjectName(u"load_button")
-        self.load_button.setGeometry(QRect(10, 210, 75, 24))
+        self.horizontalLayoutWidget = QWidget(self.centralwidget)
+        self.horizontalLayoutWidget.setObjectName(u"horizontalLayoutWidget")
+        self.horizontalLayoutWidget.setGeometry(QRect(50, 410, 761, 61))
+        self.horizontalLayout = QHBoxLayout(self.horizontalLayoutWidget)
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.upload_image = QPushButton(self.horizontalLayoutWidget)
+        self.upload_image.setObjectName(u"upload_image")
+        self.upload_image.setStyleSheet(u"QPushButton {\n"
+"    background-color: #0078ff;\n"
+"    color: white;\n"
+"    padding: 10px 20px;\n"
+"    border-radius: 8px;\n"
+"    font-size: 14px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: #005fcc;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"    background-color: #004799;\n"
+"}\n"
+"")
+
+        self.horizontalLayout.addWidget(self.upload_image)
+
+        self.apply_filter = QPushButton(self.horizontalLayoutWidget)
+        self.apply_filter.setObjectName(u"apply_filter")
+        self.apply_filter.setStyleSheet(u"QPushButton {\n"
+"    background-color: #0078ff;\n"
+"    color: white;\n"
+"    padding: 10px 20px;\n"
+"    border-radius: 8px;\n"
+"    font-size: 14px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: #005fcc;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"    background-color: #004799;\n"
+"}\n"
+"")
+
+        self.horizontalLayout.addWidget(self.apply_filter)
+
+        self.download_image = QPushButton(self.horizontalLayoutWidget)
+        self.download_image.setObjectName(u"download_image")
+        self.download_image.setStyleSheet(u"QPushButton {\n"
+"    background-color: #0078ff;\n"
+"    color: white;\n"
+"    padding: 10px 20px;\n"
+"    border-radius: 8px;\n"
+"    font-size: 14px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: #005fcc;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"    background-color: #004799;\n"
+"}\n"
+"")
+
+        self.horizontalLayout.addWidget(self.download_image)
+
+        self.horizontalLayoutWidget_2 = QWidget(self.centralwidget)
+        self.horizontalLayoutWidget_2.setObjectName(u"horizontalLayoutWidget_2")
+        self.horizontalLayoutWidget_2.setGeometry(QRect(29, 40, 841, 321))
+        self.horizontalLayout_2 = QHBoxLayout(self.horizontalLayoutWidget_2)
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.image_preview = QLabel(self.horizontalLayoutWidget_2)
+        self.image_preview.setObjectName(u"image_preview")
+        self.image_preview.setMinimumSize(QSize(400, 300))
+        font = QFont()
+        font.setPointSize(16)
+        self.image_preview.setFont(font)
+        self.image_preview.setStyleSheet(u"QLabel {\n"
+"    background-color: #f5f5f5;\n"
+"    border-radius: 10px;\n"
+"    padding: 10px;\n"
+"    color: #666;\n"
+"}\n"
+"")
+        self.image_preview.setFrameShape(QFrame.Shape.StyledPanel)
+        self.image_preview.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        self.horizontalLayout_2.addWidget(self.image_preview)
+
+        self.new_image_preview = QLabel(self.horizontalLayoutWidget_2)
+        self.new_image_preview.setObjectName(u"new_image_preview")
+        self.new_image_preview.setMinimumSize(QSize(400, 300))
+        self.new_image_preview.setFont(font)
+        self.new_image_preview.setStyleSheet(u"QLabel {\n"
+"    background-color: #f5f5f5;\n"
+"    border-radius: 10px;\n"
+"    padding: 10px;\n"
+"    color: #666;\n"
+"}\n"
+"")
+        self.new_image_preview.setFrameShape(QFrame.Shape.StyledPanel)
+        self.new_image_preview.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        self.horizontalLayout_2.addWidget(self.new_image_preview)
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 800, 22))
+        self.menubar.setGeometry(QRect(0, 0, 936, 22))
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
@@ -47,7 +159,10 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.image_label.setText(QCoreApplication.translate("MainWindow", u"no image loaded", None))
-        self.load_button.setText(QCoreApplication.translate("MainWindow", u"load image", None))
+        self.upload_image.setText(QCoreApplication.translate("MainWindow", u"upload image", None))
+        self.apply_filter.setText(QCoreApplication.translate("MainWindow", u"apply filter", None))
+        self.download_image.setText(QCoreApplication.translate("MainWindow", u"download image", None))
+        self.image_preview.setText(QCoreApplication.translate("MainWindow", u"original image appears here", None))
+        self.new_image_preview.setText(QCoreApplication.translate("MainWindow", u"new image appears here", None))
     # retranslateUi
 
