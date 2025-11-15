@@ -1,11 +1,11 @@
 # sepia_filter.py
 from PIL import Image
 import numpy as np
-from filters.base_filter import Filter
+from filters.filter_types.base_filter import Filter
 
+#function applies a sepia tone to the image
 class SepiaFilter(Filter):
-    """Applies a sepia tone to the image."""
-
+   
     def apply(self, image: Image.Image) -> Image.Image:
         # Ensure image is RGB
         sepia_image = np.array(image.convert("RGB"), dtype=np.float64)

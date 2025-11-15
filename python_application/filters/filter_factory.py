@@ -4,6 +4,8 @@
 #takes in an input name and returns a filter object
 #wowowow hello this is ibraheem
 
+#need to make this a singelton
+
 class filter_factory:
     def __init__(self):
         self.filter_dict = {}

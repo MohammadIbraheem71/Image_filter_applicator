@@ -1,5 +1,5 @@
 from PIL import Image, ImageFilter
-from filters.base_filter import base_filter
+from filters.filter_types.base_filter import base_filter
 
 class blur_filter(base_filter):
     def apply(self, image: Image.Image) -> Image.Image:

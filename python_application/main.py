@@ -1,9 +1,9 @@
 #testing goes on in here
-from python_application.image_handler import image_handler
-from python_application.filter_factory import filter_factory
-from filters.blur_filter import blur_filter
-from filters.edge_filter import edge_filter
-from filters.grayscale_filter import grayscale_filter
+from image_handler.image_handler import image_handler
+from filters.filter_factory import filter_factory
+from filters.filter_types.blur_filter import blur_filter
+from filters.filter_types.edge_filter import edge_filter
+from filters.filter_types.grayscale_filter import grayscale_filter
 
 filter_fac_obj = filter_factory()
 
