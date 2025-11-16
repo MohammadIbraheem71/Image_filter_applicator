@@ -15,9 +15,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QLabel,
-    QMainWindow, QMenuBar, QPushButton, QSizePolicy,
-    QStatusBar, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QHBoxLayout,
+    QLabel, QLayout, QMainWindow, QMenuBar,
+    QPushButton, QSizePolicy, QStatusBar, QVBoxLayout,
+    QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -78,6 +79,8 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalLayout.setSizeConstraint(QLayout.SizeConstraint.SetDefaultConstraint)
+        self.horizontalLayout.setContentsMargins(0, -1, -1, 30)
         self.upload_image = QPushButton(self.centralwidget)
         self.upload_image.setObjectName(u"upload_image")
         self.upload_image.setStyleSheet(u"QPushButton {\n"
@@ -99,26 +102,20 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addWidget(self.upload_image)
 
-        self.apply_filter = QPushButton(self.centralwidget)
-        self.apply_filter.setObjectName(u"apply_filter")
-        self.apply_filter.setStyleSheet(u"QPushButton {\n"
-"    background-color: #0078ff;\n"
-"    color: white;\n"
-"    padding: 10px 20px;\n"
-"    border-radius: 8px;\n"
-"    font-size: 14px;\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"    background-color: #005fcc;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    background-color: #004799;\n"
-"}\n"
-"")
+        self.filter_dropdown = QComboBox(self.centralwidget)
+        self.filter_dropdown.addItem("")
+        self.filter_dropdown.addItem("")
+        self.filter_dropdown.addItem("")
+        self.filter_dropdown.addItem("")
+        self.filter_dropdown.addItem("")
+        self.filter_dropdown.setObjectName(u"filter_dropdown")
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.filter_dropdown.sizePolicy().hasHeightForWidth())
+        self.filter_dropdown.setSizePolicy(sizePolicy)
 
-        self.horizontalLayout.addWidget(self.apply_filter)
+        self.horizontalLayout.addWidget(self.filter_dropdown)
 
         self.download_image = QPushButton(self.centralwidget)
         self.download_image.setObjectName(u"download_image")
@@ -147,7 +144,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 900, 22))
+        self.menubar.setGeometry(QRect(0, 0, 900, 36))
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
@@ -163,7 +160,12 @@ class Ui_MainWindow(object):
         self.image_preview.setText(QCoreApplication.translate("MainWindow", u"original image appears here", None))
         self.new_image_preview.setText(QCoreApplication.translate("MainWindow", u"new image appears here", None))
         self.upload_image.setText(QCoreApplication.translate("MainWindow", u"upload image", None))
-        self.apply_filter.setText(QCoreApplication.translate("MainWindow", u"apply filter", None))
+        self.filter_dropdown.setItemText(0, QCoreApplication.translate("MainWindow", u"Select Filter...", None))
+        self.filter_dropdown.setItemText(1, QCoreApplication.translate("MainWindow", u"blur", None))
+        self.filter_dropdown.setItemText(2, QCoreApplication.translate("MainWindow", u"edge", None))
+        self.filter_dropdown.setItemText(3, QCoreApplication.translate("MainWindow", u"grayscale", None))
+        self.filter_dropdown.setItemText(4, QCoreApplication.translate("MainWindow", u"sepia", None))
+
         self.download_image.setText(QCoreApplication.translate("MainWindow", u"download image", None))
     # retranslateUi
 
