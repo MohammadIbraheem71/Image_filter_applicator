@@ -17,6 +17,7 @@ from filters.filter_types.blur_filter import blur_filter
 from filters.filter_types.sepia_filter import sepia_filter
 from filters.filter_types.edge_filter import edge_filter
 from filters.filter_types.grayscale_filter import grayscale_filter
+from image_handler.image_handler import image_handler
 
 
 class FrontPage(QMainWindow):
@@ -24,8 +25,11 @@ class FrontPage(QMainWindow):
         super().__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        self.original_image = None
+        self.filtered_image = None
+        
 
-        self.pil_image = None
+        self.handler = image_handler()
 
         self.factory = filter_factory()
         self.factory.add_filter("blur", blur_filter())
@@ -33,24 +37,39 @@ class FrontPage(QMainWindow):
         self.factory.add_filter("sepia", sepia_filter())
         self.factory.add_filter("grayscale", grayscale_filter())
         
+
+        # Set default selected index to placeholder
+        self.ui.filter_dropdown.model().item(0).setEnabled(False)
+        self.ui.filter_dropdown.setCurrentIndex(0)
+        self.ui.filter_dropdown.setEnabled(False) 
+
         # Connect buttons
         self.ui.upload_image.clicked.connect(self.upload_image)
-        self.ui.apply_filter.clicked.connect(self.apply_filter)
+        self.ui.filter_dropdown.currentIndexChanged.connect(self.apply_filter)
         self.ui.download_image.clicked.connect(self.download_image)
+
+        
 
     def upload_image(self):
         file_name, _ = QFileDialog.getOpenFileName(
             self, "Open Image", "", "Images (*.png *.jpg *.jpeg *.bmp)"
         )
+
         if not file_name:
             return
 
-        self.pil_image = Image.open(file_name)
-        self.show_image(self.ui.image_preview)
+        try:
+            self.handler.upload_image(file_name)
+            self.show_image(self.ui.image_preview, self.handler.image)
 
-    def show_image(self, label):
-        if self.pil_image:
-            pixmap = self.pil_to_qpixmap(self.pil_image)
+            # Enable dropdown after image upload
+            self.ui.filter_dropdown.setEnabled(True)
+        except Exception as e:
+            print("Error uploading image:", e)
+
+    def show_image(self, label, pil_image):
+        if pil_image:
+            pixmap = self.pil_to_qpixmap(pil_image)
             scaled = pixmap.scaled(
                 label.width(),
                 label.height(),
@@ -60,22 +79,39 @@ class FrontPage(QMainWindow):
             label.setPixmap(scaled)
 
     def apply_filter(self):
-        if not self.pil_image:
+        if self.handler.image is None:
             return
 
-        # Example filter — replace with your SDA filters
-        self.pil_image = self.pil_image.filter(ImageFilter.BLUR)
-        self.show_image(self.ui.new_image_preview)
+        selected_filter = self.ui.filter_dropdown.currentText()
+        filter_obj = self.factory.get_filter(selected_filter)
+
+        if selected_filter == "Select Filter...":
+            return
+
+        try:
+            self.original_image = self.handler.image.copy()
+            self.filtered_image = filter_obj.apply(self.original_image)
+
+            
+            self.show_image(self.ui.new_image_preview, self.filtered_image)
+        except Exception as e:
+            print("Error applying filter:", e)
+
 
     def download_image(self):
-        if not self.pil_image:
+        if self.filtered_image is None:
             return
 
         file_name, _ = QFileDialog.getSaveFileName(
             self, "Save Image", "", "PNG (*.png);;JPEG (*.jpg *.jpeg)"
         )
         if file_name:
-            self.pil_image.save(file_name)
+            try:
+                self.handler.image = self.filtered_image
+                self.handler.download_image(file_name)
+                self.handler.image = self.original_image
+            except Exception as e:
+                print("Error saving image:", e)
 
     @staticmethod
     def pil_to_qpixmap(image):
@@ -84,6 +120,7 @@ class FrontPage(QMainWindow):
         data = image.tobytes("raw", "RGBA")
         qimage = QImage(data, image.width, image.height, QImage.Format_RGBA8888)
         return QPixmap.fromImage(qimage)
+
 
 
 if __name__ == "__main__":
