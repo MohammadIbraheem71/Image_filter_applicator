@@ -108,6 +108,15 @@
     </item>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="sizeConstraint">
+       <enum>QLayout::SizeConstraint::SetDefaultConstraint</enum>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>30</number>
+      </property>
       <item>
        <widget class="QPushButton" name="upload_image">
         <property name="styleSheet">
@@ -134,28 +143,38 @@ QPushButton:pressed {
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="apply_filter">
-        <property name="styleSheet">
-         <string notr="true">QPushButton {
-    background-color: #0078ff;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-size: 14px;
-}
-
-QPushButton:hover {
-    background-color: #005fcc;
-}
-
-QPushButton:pressed {
-    background-color: #004799;
-}
-</string>
+       <widget class="QComboBox" name="filter_dropdown">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
         </property>
-        <property name="text">
-         <string>apply filter</string>
-        </property>
+        <item>
+         <property name="text">
+          <string>Select Filter...</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>blur</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>edge</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>grayscale</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>sepia</string>
+         </property>
+        </item>
        </widget>
       </item>
       <item>
@@ -193,7 +212,7 @@ QPushButton:pressed {
      <x>0</x>
      <y>0</y>
      <width>900</width>
-     <height>22</height>
+     <height>36</height>
     </rect>
    </property>
   </widget>
