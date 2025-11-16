@@ -1,15 +1,22 @@
 import sys
+import os
+
+# Add project root to sys.path
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(BASE_DIR)
+
+
 from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QPixmap
 from PIL import Image, ImageFilter
 from app_gui import Ui_MainWindow
 
-from filters import filter_factory
-from filters.filter_types import blur_filter
-from filters.filter_types import sepia_filter
-from filters.filter_types import edge_filter
-from filters.filter_types import grayscale_filter
+from filters.filter_factory import filter_factory
+from filters.filter_types.blur_filter import blur_filter
+from filters.filter_types.sepia_filter import sepia_filter
+from filters.filter_types.edge_filter import edge_filter
+from filters.filter_types.grayscale_filter import grayscale_filter
 
 
 class FrontPage(QMainWindow):
