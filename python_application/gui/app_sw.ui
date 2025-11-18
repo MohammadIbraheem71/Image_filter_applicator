@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>813</width>
+    <height>696</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">/* -----------------------------------------
+   GENERAL
+----------------------------------------- */
+QWidget {
+    background-color: #FFEFE6;   /* soft peach background */
+    font-family: &quot;Segoe UI&quot;;
+    font-size: 14px;
+    color: #5A3E36;              /* warm brown text */
+}
+
+/* -----------------------------------------
+   BUTTONS
+----------------------------------------- */
+QPushButton {
+    background-color: #FFD9C7;       /* peach */
+    color: #5A3E36;                  /* warm brown */
+    border: 2px solid #FFCDB8;
+    border-radius: 10px;
+    padding: 8px 16px;
+
+    /* subtle shadow */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+
+QPushButton:hover {
+    background-color: #FFCCBC;       /* slightly darker peach */
+}
+
+QPushButton:pressed {
+    background-color: #F8BAA7;       /* deeper peach when pressed */
+    border: 2px solid #F3A88F;
+}
+
+/* Disabled state */
+QPushButton:disabled {
+    background-color: #F5DAD1;
+    color: #A88E86;
+}
+
+/* -----------------------------------------
+   COMBO BOX
+----------------------------------------- */
+QComboBox {
+    background-color: #FFE3D7;
+    border: 2px solid #FFCDB8;
+    border-radius: 8px;
+    padding: 6px 30px 6px 10px;
+    color: #5A3E36;
+}
+
+/* arrow button */
+QComboBox::drop-down {
+    border: 2px;
+    width: 25px;
+}
+
+QComboBox::down-arrow {
+    image: url(:/icons/arrow_down_peach.png); /* optional */
+    width: 12px;
+    height: 12px;
+}
+
+/* hover */
+QComboBox:hover {
+    background-color: #FFD9C9;
+}
+
+/* pressed */
+QComboBox:pressed {
+    background-color: #F8CAB8;
+}
+
+/* popup list */
+QComboBox QAbstractItemView {
+    background-color: #FFEFE6;
+    border: 1px solid #FFCDB8;
+    selection-background-color: #FFD4C4;
+    selection-color: #5A3E36;
+    outline: 0;
+}
+</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QFrame" name="side_bar">
+      <property name="minimumSize">
+       <size>
+        <width>20</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Shape::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Shadow::Raised</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QStackedWidget" name="windows">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="page_1">
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QLabel" name="og_img_lbl">
+            <property name="styleSheet">
+             <string notr="true">QLabel {
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    padding: 10px;
+    color: #666;
+}
+</string>
+            </property>
+            <property name="text">
+             <string>original image here</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignmentFlag::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="new_img_lbl">
+            <property name="styleSheet">
+             <string notr="true">QLabel {
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    padding: 10px;
+    color: #666;
+}
+</string>
+            </property>
+            <property name="text">
+             <string>new image here</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignmentFlag::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QPushButton" name="upload_btn">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>upload image</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="filter_cbx"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="download_btn">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>download image</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="page_2"/>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
