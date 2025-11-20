@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>813</width>
-    <height>696</height>
+    <width>713</width>
+    <height>559</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -56,25 +56,32 @@ QPushButton:disabled {
 /* -----------------------------------------
    COMBO BOX
 ----------------------------------------- */
+/*
 QComboBox {
     background-color: #FFE3D7;
     border: 2px solid #FFCDB8;
     border-radius: 8px;
-    padding: 6px 30px 6px 10px;
+    padding: 6px 30px 6px 10px;   /* leave space for arrow 
     color: #5A3E36;
 }
 
-/* arrow button */
+
 QComboBox::drop-down {
-    border: 2px;
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
     width: 25px;
+    border-left: 1px solid #FFCDB8;
 }
 
 QComboBox::down-arrow {
-    image: url(:/icons/arrow_down_peach.png); /* optional */
-    width: 12px;
-    height: 12px;
+    width: 0; 
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 7px solid #5A3E36; 
+    margin-right: 5px;
 }
+*/
 
 /* hover */
 QComboBox:hover {
@@ -99,15 +106,18 @@ QComboBox QAbstractItemView {
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <widget class="QFrame" name="side_bar">
+     <widget class="QFrame" name="sidebar">
       <property name="minimumSize">
        <size>
-        <width>20</width>
+        <width>50</width>
         <height>0</height>
        </size>
       </property>
-      <property name="styleSheet">
-       <string notr="true"/>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>16777215</height>
+       </size>
       </property>
       <property name="frameShape">
        <enum>QFrame::Shape::StyledPanel</enum>
@@ -115,6 +125,67 @@ QComboBox QAbstractItemView {
       <property name="frameShadow">
        <enum>QFrame::Shadow::Raised</enum>
       </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Orientation::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="filter_pg_btn">
+         <property name="minimumSize">
+          <size>
+           <width>30</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>30</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>PushButton</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton">
+         <property name="text">
+          <string>PushButton</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_2">
+         <property name="text">
+          <string>PushButton</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Orientation::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
      </widget>
     </item>
     <item>
@@ -122,12 +193,24 @@ QComboBox QAbstractItemView {
       <property name="currentIndex">
        <number>0</number>
       </property>
-      <widget class="QWidget" name="page_1">
+      <widget class="QWidget" name="filter_pg">
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,1">
           <item>
            <widget class="QLabel" name="og_img_lbl">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>200</width>
+              <height>200</height>
+             </size>
+            </property>
             <property name="styleSheet">
              <string notr="true">QLabel {
     background-color: #f5f5f5;
@@ -147,6 +230,18 @@ QComboBox QAbstractItemView {
           </item>
           <item>
            <widget class="QLabel" name="new_img_lbl">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>200</width>
+              <height>200</height>
+             </size>
+            </property>
             <property name="styleSheet">
              <string notr="true">QLabel {
     background-color: #f5f5f5;
