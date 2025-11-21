@@ -44,14 +44,16 @@ function authentication_middleware(req, res, next){
     }
 }
 
-router.post("/", authentication_middleware, upload.single("image"), async(req, res)=>{
+
+//upload an image here
+router.post("/upload", authentication_middleware, upload.single("image"), async(req, res)=>{
     try{
         const result = await cloudinary.uploader.upload(req.file.path);
         fs.unlinkSync(req.file.path);
 
         const statement = db.prepare("INSERT INTO images (user_id, filename, image_url) VALUES (?, ?, ?)")
         statement.run(req.user.id, req.file.originalname, result.secure_url)
-        res.json({ message: "image uploaded sucessfully.", url:result.secure_url});
+        res.status(201).json({ message: "image uploaded sucessfully.", url:result.secure_url});
     }
     catch(err){
         res.status(500).json({ error: err.message});
@@ -75,11 +77,34 @@ router.delete("/:id", authentication_middleware, async (req, res) => {
     await cloudinary.uploader.destroy(publicId);
 
     db.prepare("DELETE FROM images WHERE id = ?").run(req.params.id);
-    res.json({ message: "Deleted successfully" });
+    res.status(200).json({ message: "Deleted successfully" });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
+//this function gets and returns the shared gallery, we dont need to authenticate for that
+router.get("/gallery", async(req, res) => {
+  try{
+    const images = db.prepare("SELECT * FROM images").all();
+
+    return res.status(200).json({
+    sucess: true, 
+    count: images.length,
+    images
+    
+    });
+  
+
+  }
+  catch(err){
+    console.error("error fetching gallery: ", error)
+    return res.status(500).json({
+      sucess: false,
+      message: "failed to load gallery"
+    });
+  }
+  
+});
 
 export default router;

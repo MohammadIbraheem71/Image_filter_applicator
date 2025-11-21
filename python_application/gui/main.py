@@ -17,6 +17,9 @@ from image_handler.image_handler import image_handler
 
 from pages.filter_page import FilterPage
 from pages.page_2 import Page2
+from pages.profile_page import profile_page
+
+from backend_api.client_api import client_api
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -24,6 +27,8 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
+        self.api = client_api("http://localhost:3000")
+        
         # Shared objects
         self.factory = filter_factory()
         self.factory.add_filter("blur", blur_filter())
@@ -32,20 +37,26 @@ class MainWindow(QMainWindow):
         self.factory.add_filter("grayscale", grayscale_filter())
         self.handler = image_handler()
 
-        # Initialize pages using Designer widgets
-        self.filter_page = FilterPage(self.ui.filter_pg, self.factory, self.handler)
-        self.page2 = Page2(self.ui.page_2)
+        # Initialize pages
+        self.filter_page = FilterPage(self.factory, self.handler)  # <-- new FilterPage
+        self.page2 = Page2(self.ui.gallery_pg)  # assuming page2 still uses Designer widget
+        self.profile_page = profile_page(self.ui.profile_pg, self.api)
+
+        # Add filter_page to the main stacked widget
+        self.ui.windows.addWidget(self.filter_page)
 
         # Sidebar button navigation
         self.ui.filter_pg_btn.clicked.connect(
-            lambda: self.ui.windows.setCurrentWidget(self.ui.filter_pg)
+            lambda: self.ui.windows.setCurrentWidget(self.filter_page)
         )
-        self.ui.pushButton.clicked.connect(
-            lambda: self.ui.windows.setCurrentWidget(self.ui.page_2)
+        
+        self.ui.profile_pg_btn.clicked.connect(
+            lambda: self.ui.windows.setCurrentWidget(self.ui.profile_pg)
         )
 
         # Set initial page
-        self.ui.windows.setCurrentWidget(self.ui.filter_pg)
+        self.ui.windows.setCurrentWidget(self.filter_page)
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
