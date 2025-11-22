@@ -7,7 +7,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(BASE_DIR)
 
 from PySide6.QtWidgets import QApplication, QMainWindow
-from app_gui import Ui_MainWindow
+from python_application.gui.ui_py.app_gui import Ui_MainWindow
 from filters.filter_factory import filter_factory
 from filters.filter_types.blur_filter import blur_filter
 from filters.filter_types.sepia_filter import sepia_filter
