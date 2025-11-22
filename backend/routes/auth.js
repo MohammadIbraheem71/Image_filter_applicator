@@ -12,7 +12,7 @@ router.post("/signup", async(req, res) => {
         const hash = await bcrypt.hash(password, 10);
         const statement = db.prepare("INSERT INTO users (email, password_hash) VALUES (?, ?)");
         statement.run(email, hash);
-        res.json({message: "user sucessfully registered."});
+        res.status(201).json({message: "user sucessfully registered."});
     }
     catch (err){
         res.status(400).json({error: "email already registered."});

@@ -64,7 +64,7 @@ class MainWindow(QMainWindow):
         self.ui.windows.setCurrentWidget(self.filter_page)
 
 
-if __name__ == "__main__":
+if __name__ == "__main__": 
     app = QApplication(sys.argv)
     window = MainWindow()
     window.show()

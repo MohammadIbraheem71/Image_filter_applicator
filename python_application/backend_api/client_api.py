@@ -68,3 +68,19 @@ class client_api:
         response.raise_for_status()
         return response.json()
         
+    #this function registers a new user
+    #user has to log in once signed up so the api stores its token
+    def signup(self, username, email, password):
+        url = f"{self.base_url}/routes/auth/signup"
+        response = requests.post(url, json={
+            "email": email,
+            "password": password
+        })
+
+        if response.status_code == 201:  # usually 201 Created
+            data = response.json()
+            print(f"User '{email}' signed up successfully")
+            return True
+        else:
+            print("Signup failed")
+            return False
