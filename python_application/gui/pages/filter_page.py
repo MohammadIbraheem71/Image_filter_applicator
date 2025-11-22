@@ -88,5 +88,7 @@ class FilterPage(QWidget):
     def pil_to_qpixmap(image):
         image = image.convert("RGBA")
         data = image.tobytes("raw", "RGBA")
-        qimage = QPixmap.fromImage(QPixmap.fromImage(QPixmap(QImage(data, image.width, image.height, QImage.Format_RGBA8888))))
-        return QPixmap.fromImage(qimage)
+        qimage = QImage(data, image.width, image.height, QImage.Format_RGBA8888)
+        pixmap = QPixmap.fromImage(qimage)
+        return pixmap
+
