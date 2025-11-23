@@ -19,16 +19,17 @@ class signup_dialog(QDialog):
         self.ui.buttonBox.rejected.connect(self.reject)      # Cancel button
 
     def _on_signup(self):
+        username = self.ui.username_edt.text().strip()
         email = self.ui.email_edt.text().strip()
         password = self.ui.pswrd_edt.text().strip()
 
-        if not email or not password:
-            QMessageBox.warning(self, "Missing Information", "Please enter both email and password.")
+        if not email or not password or not username:
+            QMessageBox.warning(self, "Missing Information", "Please enter username, email and password.")
             return
 
         # Call backend signup (returns True/False)
         try:
-            success = self.api.signup(email=email, password=password)
+            success = self.api.signup(username=username, email=email, password=password)
         except Exception as e:
             QMessageBox.critical(self, "Network Error", f"{e}")
             return
@@ -38,4 +39,4 @@ class signup_dialog(QDialog):
             self.signup_success.emit(email)
             self.accept()  # close dialog
         else:
-            QMessageBox.warning(self, "Signup Failed", "Could not create account. Please try again.")
+            QMessageBox.warning(self, "Signup Failed", "username or email already exists")

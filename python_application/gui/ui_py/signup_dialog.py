@@ -26,6 +26,21 @@ class Ui_signup_dialog(object):
         signup_dialog.resize(313, 189)
         self.verticalLayout = QVBoxLayout(signup_dialog)
         self.verticalLayout.setObjectName(u"verticalLayout")
+        self.horizontalLayout_3 = QHBoxLayout()
+        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
+        self.username_lbl = QLabel(signup_dialog)
+        self.username_lbl.setObjectName(u"username_lbl")
+
+        self.horizontalLayout_3.addWidget(self.username_lbl)
+
+        self.username_edt = QLineEdit(signup_dialog)
+        self.username_edt.setObjectName(u"username_edt")
+
+        self.horizontalLayout_3.addWidget(self.username_edt)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout_3)
+
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.email_lbl = QLabel(signup_dialog)
@@ -73,6 +88,7 @@ class Ui_signup_dialog(object):
 
     def retranslateUi(self, signup_dialog):
         signup_dialog.setWindowTitle(QCoreApplication.translate("signup_dialog", u"Dialog", None))
+        self.username_lbl.setText(QCoreApplication.translate("signup_dialog", u"username:", None))
         self.email_lbl.setText(QCoreApplication.translate("signup_dialog", u"email:", None))
         self.pswrd_lbl.setText(QCoreApplication.translate("signup_dialog", u"password:", None))
     # retranslateUi

@@ -1,0 +1,7 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource prefix="/icons">
+    <file>assets/filter_icon.png</file>
+    <file>assets/gallery_icon.png</file>
+    <file>assets/profile_icon.png</file>
+</qresource>
+</RCC>

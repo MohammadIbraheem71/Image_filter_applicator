@@ -7,15 +7,21 @@ const router = express.Router();
 
 //this is the sign up path
 router.post("/signup", async(req, res) => {
-    const {email, password} = req.body;
+    const {username, email, password} = req.body;
+
+    if (!email || !username || !password) {
+        return res.status(400).json({ error: "email, username, and password are required" });
+    }
+
     try{
         const hash = await bcrypt.hash(password, 10);
-        const statement = db.prepare("INSERT INTO users (email, password_hash) VALUES (?, ?)");
-        statement.run(email, hash);
+        const statement = db.prepare("INSERT INTO users (email, username,  password_hash) VALUES (?, ?, ?)");
+        statement.run(email, username, hash);
         res.status(201).json({message: "user sucessfully registered."});
     }
     catch (err){
-        res.status(400).json({error: "email already registered."});
+        console.log(err)
+        res.status(400).json({error: "email or username already registered."});
     }
 });
 
@@ -34,7 +40,7 @@ router.post("/login", async (req, res) =>{
         return res.status(400).json({error: "invalid password or email."});
     }
 
-    const token = jwt.sign({id: user.id, email:user.email}, process.env.JWT_SECRET);
+    const token = jwt.sign({id: user.id, email:user.email, username: user.username}, process.env.JWT_SECRET);
     res.json({token});
 });
 

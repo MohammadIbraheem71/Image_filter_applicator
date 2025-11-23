@@ -34,19 +34,20 @@ class profile_page(QWidget):
         self.ui.log_in_btn.clicked.connect(self.open_login_dialog)
         self.ui.sign_up_btn.clicked.connect(self.open_signup_dialog)
 
-        # Show auth page initially
-        self.profile_windows.setCurrentWidget(self.auth_page_widget)
+        #if no token is found then we set the current page to be the auth page, as user
+        #needs to log in or sign up
+        if self.api.token == None:
+            self.profile_windows.setCurrentWidget(self.auth_page_widget)
 
-    # -------------------- Dialogs --------------------
-
+   
+    #open the login dialog
     def open_login_dialog(self):
-        """Open modal login dialog."""
         login_dlg = login_dialog(self.api, parent=self)
         login_dlg.login_success.connect(self.on_login_success)
         login_dlg.exec()  # modal
 
+    #open the sign up dialog
     def open_signup_dialog(self):
-        """Open modal signup dialog."""
         signup_dlg = signup_dialog(self.api, parent=self)
         signup_dlg.signup_success.connect(lambda user: print(f"Signup complete for {user}"))
         signup_dlg.exec()  # modal
@@ -58,8 +59,8 @@ class profile_page(QWidget):
         # Switch stacked widget to logged page
         self.profile_windows.setCurrentWidget(self.logged_page_widget)
 
-        # Optionally update the logged page UI
-        self.logged_page.update_user_info(user)
+        #we need to update the logged page to reflect the user's information
+        #self.logged_page.update_user_info(user)
 
         # Emit signal for MainWindow or other pages
         self.user_logged_in.emit(user)

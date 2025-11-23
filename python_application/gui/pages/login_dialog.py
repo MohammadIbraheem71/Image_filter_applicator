@@ -34,8 +34,8 @@ class login_dialog(QDialog):
             QMessageBox.critical(self, "Network Error", f"{e}")
             return
 
-        if not result or not result.get("success"):
-            QMessageBox.warning(self, "Login failed", result.get("message", "Invalid credentials"))
+        if not result:
+            QMessageBox.warning(self, "Login failed", "incorrect email or password")
             return
 
         self.login_success.emit(email)

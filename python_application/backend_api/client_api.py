@@ -73,6 +73,7 @@ class client_api:
     def signup(self, username, email, password):
         url = f"{self.base_url}/routes/auth/signup"
         response = requests.post(url, json={
+            "username": username, 
             "email": email,
             "password": password
         })

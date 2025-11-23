@@ -18,59 +18,94 @@
    GENERAL
 ----------------------------------------- */
 QWidget {
-    background-color: #FFEFE6;   /* soft peach background */
+    background-color: #E6F0FA;   /* soft light blue */
     font-family: &quot;Segoe UI&quot;;
     font-size: 14px;
-    color: #5A3E36;              /* warm brown text */
+    color: #2A3E5C;              /* dark blue text for contrast */
 }
 
 /* -----------------------------------------
-   BUTTONS
+   BUTTONS (GENERAL)
 ----------------------------------------- */
 QPushButton {
-    background-color: #FFD9C7;       /* peach */
-    color: #5A3E36;                  /* warm brown */
-    border: 2px solid #FFCDB8;
+    background-color: #D0E4F7;       /* pale blue */
+    color: #2A3E5C;                  /* dark blue text */
+    border: 2px solid #A3C2E7;       /* subtle border */
     border-radius: 10px;
     padding: 8px 16px;
-
-    /* subtle shadow */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* soft shadow */
 }
 
 QPushButton:hover {
-    background-color: #FFCCBC;       /* slightly darker peach */
+    background-color: #B7D6F2;       /* slightly darker on hover */
 }
 
 QPushButton:pressed {
-    background-color: #F8BAA7;       /* deeper peach when pressed */
-    border: 2px solid #F3A88F;
+    background-color: #A3C2E7;       /* deeper blue when pressed */
+    border: 2px solid #91B3DC;
 }
 
 /* Disabled state */
 QPushButton:disabled {
-    background-color: #F5DAD1;
-    color: #A88E86;
+    background-color: #D9E7F5;
+    color: #A3B9C9;
+}
+
+/* -----------------------------------------
+   SIDEBAR
+----------------------------------------- */
+QFrame#sidebar {
+    background-color: #C6DEF8;       /* slightly darker blue */
+    border: 2px solid #91B3DC; /* subtle outline */
+	border-radius: 15px;
+}
+
+QLabel#logo_gif{
+	background-color: transparent;
+}
+
+/* -----------------------------------------
+   SIDEBAR BUTTONS (ICON ONLY)
+----------------------------------------- */
+QPushButton#filter_pg_btn,
+QPushButton#gallery_pg_btn,
+QPushButton#profile_pg_btn {
+    background-color: transparent;
+    border: none;
+    color: transparent;
+    padding: 0px;
+    margin: 0px;
+}
+
+QPushButton#filter_pg_btn:hover,
+QPushButton#gallery_pg_btn:hover,
+QPushButton#profile_pg_btn:hover {
+    background-color: rgba(41, 128, 185, 0.1); /* soft hover effect */
+    border-radius: 5px;
+}
+
+QPushButton#filter_pg_btn:pressed,
+QPushButton#gallery_pg_btn:pressed,
+QPushButton#profile_pg_btn:pressed {
+    background-color: rgba(41, 128, 185, 0.2); /* subtle press effect */
 }
 
 /* -----------------------------------------
    COMBO BOX
 ----------------------------------------- */
-/*
 QComboBox {
-    background-color: #FFE3D7;
-    border: 2px solid #FFCDB8;
+    background-color: #D0E4F7;
+    border: 2px solid #A3C2E7;
     border-radius: 8px;
-    padding: 6px 30px 6px 10px;   /* leave space for arrow 
-    color: #5A3E36;
+    padding: 6px 30px 6px 10px; /* leave space for arrow */
+    color: #2A3E5C;
 }
-
 
 QComboBox::drop-down {
     subcontrol-origin: padding;
     subcontrol-position: top right;
     width: 25px;
-    border-left: 1px solid #FFCDB8;
+    border-left: 1px solid #A3C2E7;
 }
 
 QComboBox::down-arrow {
@@ -78,27 +113,26 @@ QComboBox::down-arrow {
     height: 0;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-top: 7px solid #5A3E36; 
+    border-top: 7px solid #2A3E5C; 
     margin-right: 5px;
 }
-*/
 
 /* hover */
 QComboBox:hover {
-    background-color: #FFD9C9;
+    background-color: #B7D6F2;
 }
 
 /* pressed */
 QComboBox:pressed {
-    background-color: #F8CAB8;
+    background-color: #A3C2E7;
 }
 
 /* popup list */
 QComboBox QAbstractItemView {
-    background-color: #FFEFE6;
-    border: 1px solid #FFCDB8;
-    selection-background-color: #FFD4C4;
-    selection-color: #5A3E36;
+    background-color: #E6F0FA;
+    border: 1px solid #A3C2E7;
+    selection-background-color: #B7D6F2;
+    selection-color: #2A3E5C;
     outline: 0;
 }
 </string>
@@ -107,15 +141,21 @@ QComboBox QAbstractItemView {
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
      <widget class="QFrame" name="sidebar">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="minimumSize">
        <size>
-        <width>50</width>
+        <width>62</width>
         <height>0</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>16777215</width>
+        <width>62</width>
         <height>16777215</height>
        </size>
       </property>
@@ -126,6 +166,13 @@ QComboBox QAbstractItemView {
        <enum>QFrame::Shadow::Raised</enum>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QLabel" name="logo_gif">
+         <property name="text">
+          <string>logo here</string>
+         </property>
+        </widget>
+       </item>
        <item>
         <spacer name="verticalSpacer_2">
          <property name="orientation">
@@ -141,40 +188,88 @@ QComboBox QAbstractItemView {
        </item>
        <item>
         <widget class="QPushButton" name="filter_pg_btn">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="minimumSize">
           <size>
-           <width>30</width>
+           <width>0</width>
            <height>0</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>30</width>
-           <height>30</height>
+           <width>40</width>
+           <height>40</height>
           </size>
          </property>
          <property name="text">
-          <string>PushButton</string>
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../resources.qrc">
+           <normaloff>:/icons/assets/filter_icon.png</normaloff>:/icons/assets/filter_icon.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>40</width>
+           <height>40</height>
+          </size>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="gallery_pg_btn">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="maximumSize">
+          <size>
+           <width>40</width>
+           <height>40</height>
+          </size>
+         </property>
          <property name="text">
-          <string>gallery</string>
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../resources.qrc">
+           <normaloff>:/icons/assets/gallery_icon.png</normaloff>:/icons/assets/gallery_icon.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>40</width>
+           <height>40</height>
+          </size>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="profile_pg_btn">
+         <property name="maximumSize">
+          <size>
+           <width>40</width>
+           <height>40</height>
+          </size>
+         </property>
          <property name="text">
-          <string>profile</string>
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../resources.qrc">
+           <normaloff>:/icons/assets/profile_icon.png</normaloff>:/icons/assets/profile_icon.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>40</width>
+           <height>40</height>
+          </size>
          </property>
         </widget>
        </item>
@@ -203,6 +298,8 @@ QComboBox QAbstractItemView {
    </layout>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

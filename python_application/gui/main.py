@@ -7,6 +7,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(BASE_DIR)
 
 from PySide6.QtWidgets import QApplication, QMainWindow
+from PySide6.QtGui import QMovie, QIcon   
+from PySide6.QtCore import QSize
+
 from ui_py.app_gui import Ui_MainWindow
 from filters.filter_factory import filter_factory
 from filters.filter_types.blur_filter import blur_filter
@@ -28,6 +31,17 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
 
         self.api = client_api("http://localhost:3000")
+        
+        gif_path = os.path.join(BASE_DIR, "gui", "assets", "logo.gif")
+        # Example path → change it if your GIF is elsewhere
+
+        if os.path.exists(gif_path):
+            self.movie = QMovie(gif_path)
+            self.movie.setScaledSize(QSize(30, 30))
+            self.ui.logo_gif.setMovie(self.movie)
+            self.movie.start()
+        else:
+            print("⚠️ GIF not found at:", gif_path)
         
         # Shared objects
         self.factory = filter_factory()
