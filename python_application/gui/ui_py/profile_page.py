@@ -17,6 +17,7 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QHBoxLayout, QLabel, QPushButton,
     QSizePolicy, QStackedWidget, QWidget)
+import resources_rc
 
 class Ui_profile_pg(object):
     def setupUi(self, profile_pg):
@@ -45,11 +46,19 @@ class Ui_profile_pg(object):
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.sign_up_btn = QPushButton(self.auth_pg)
         self.sign_up_btn.setObjectName(u"sign_up_btn")
+        icon = QIcon()
+        icon.addFile(u":/icons/assets/signup_icon.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.sign_up_btn.setIcon(icon)
+        self.sign_up_btn.setIconSize(QSize(30, 30))
 
         self.horizontalLayout.addWidget(self.sign_up_btn)
 
         self.log_in_btn = QPushButton(self.auth_pg)
         self.log_in_btn.setObjectName(u"log_in_btn")
+        icon1 = QIcon()
+        icon1.addFile(u":/icons/assets/login_icon.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.log_in_btn.setIcon(icon1)
+        self.log_in_btn.setIconSize(QSize(30, 30))
 
         self.horizontalLayout.addWidget(self.log_in_btn)
 

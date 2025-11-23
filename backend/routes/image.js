@@ -52,7 +52,7 @@ router.post("/upload", authentication_middleware, upload.single("image"), async(
         fs.unlinkSync(req.file.path);
 
         const statement = db.prepare("INSERT INTO images (user_id, filename, image_url) VALUES (?, ?, ?)")
-        statement.run(req.user.id, req.file.originalname, result.secure_url)
+        statement.run(req.user.id, req.body.filename, result.secure_url)
         res.status(201).json({ message: "image uploaded sucessfully.", url:result.secure_url});
     }
     catch(err){

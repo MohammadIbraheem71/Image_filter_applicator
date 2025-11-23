@@ -53,7 +53,7 @@ class MainWindow(QMainWindow):
 
         # Initialize pages
         self.filter_page = FilterPage(self.factory, self.handler)  # <-- new FilterPage
-        self.gallery_page = gallery_page() 
+        self.gallery_page = gallery_page(self.api) 
         self.profile_page = profile_page(self.api)
 
         # Add filter_page to the main stacked widget

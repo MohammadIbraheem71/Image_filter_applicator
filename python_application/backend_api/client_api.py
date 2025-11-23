@@ -44,7 +44,7 @@ class client_api:
         
     #function to upload to the shared gallery, uses the get_headers function
     #as authentication is requried for the upload func
-    def upload_image(self, file_path, original_name):
+    def upload_image(self, file_path, filename):
         if not os.path.isfile(file_path):
             raise FileNotFoundError(f"File not found: {file_path}")
 
@@ -56,13 +56,17 @@ class client_api:
         if not mime_type:
             mime_type = "application/octet-stream"
 
-        url = f"{self.base_url}/upload"  # matches your backend route
+        url = f"{self.base_url}/routes/image/upload"  # matches your backend route
 
         with open(file_path, "rb") as f:
             files = {
                 "image": (original_name, f, mime_type)
             }
-            response = requests.post(url, headers=self.get_headers(), files=files)
+            
+            data = {
+                "filename": filename
+            }
+            response = requests.post(url, headers=self.get_headers(), files=files, data = data)
 
         # Raise exception if upload failed
         response.raise_for_status()

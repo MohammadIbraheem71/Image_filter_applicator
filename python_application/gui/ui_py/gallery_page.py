@@ -17,17 +17,23 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QHBoxLayout, QPushButton, QScrollArea,
     QSizePolicy, QSpacerItem, QVBoxLayout, QWidget)
+import resources_rc
 
-class Ui_Form(object):
+class Ui_gallery_pg(object):
     def setupUi(self, gallery_pg):
         if not gallery_pg.objectName():
             gallery_pg.setObjectName(u"gallery_pg")
+        gallery_pg.resize(423, 315)
         self.verticalLayout_3 = QVBoxLayout(gallery_pg)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.horizontalLayout_4 = QHBoxLayout()
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
         self.upld_glry_btn = QPushButton(gallery_pg)
         self.upld_glry_btn.setObjectName(u"upld_glry_btn")
+        icon = QIcon()
+        icon.addFile(u":/icons/assets/upload_icon.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.upld_glry_btn.setIcon(icon)
+        self.upld_glry_btn.setIconSize(QSize(30, 30))
 
         self.horizontalLayout_4.addWidget(self.upld_glry_btn)
 
@@ -43,7 +49,7 @@ class Ui_Form(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 98, 28))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 403, 249))
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
 
         self.verticalLayout_3.addWidget(self.scrollArea)
@@ -55,7 +61,7 @@ class Ui_Form(object):
     # setupUi
 
     def retranslateUi(self, gallery_pg):
-        self.upld_glry_btn.setText(QCoreApplication.translate("Form", u"upload", None))
+        self.upld_glry_btn.setText(QCoreApplication.translate("gallery_pg", u"upload", None))
         pass
     # retranslateUi
 

@@ -2,8 +2,8 @@
 from PySide6.QtWidgets import QWidget, QStackedWidget
 from PySide6.QtCore import Signal
 from ui_py.profile_page import Ui_profile_pg
-from pages.login_dialog import login_dialog
-from pages.signup_dialog import signup_dialog
+from pages.dialog_boxes.login_dialog import login_dialog
+from pages.dialog_boxes.signup_dialog import signup_dialog
 from pages.profile_logged_page import profile_logged_page
 from backend_api.client_api import client_api
 
