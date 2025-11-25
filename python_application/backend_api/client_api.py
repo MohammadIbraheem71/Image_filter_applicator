@@ -82,16 +82,28 @@ class client_api:
     #user has to log in once signed up so the api stores its token
     def signup(self, username, email, password):
         url = f"{self.base_url}/routes/auth/signup"
-        response = requests.post(url, json={
-            "username": username, 
-            "email": email,
-            "password": password
-        })
+        try:
+            response = requests.post(url, json={
+                "username": username, 
+                "email": email,
+                "password": password
+            })
 
-        if response.status_code == 201:  # usually 201 Created
-            data = response.json()
-            print(f"User '{email}' signed up successfully")
-            return True 
-        else:
-            print("Signup failed")
-            return False
+            if response.status_code == 201:  # Success
+                print(f"User '{email}' signed up successfully")
+                return True, None  # success, no error
+            else:
+                # Extract error message from backend
+                try:
+                    data = response.json()
+                    error_msg = data.get("error", "Unknown error")
+                except Exception:
+                    error_msg = response.text or "Unknown error"
+
+                print(f"Signup failed: {error_msg}")
+                return False, error_msg  # failure + error message
+
+        except requests.RequestException as e:
+            print(f"Network error: {e}")
+            return False, str(e)
+

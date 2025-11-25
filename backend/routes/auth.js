@@ -11,8 +11,8 @@ const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
     auth: {
-        user: "sara.rehman700@gmail.com", // your Gmail account
-        pass: "" // Gmail App password (no spaces)
+        user: process.env.EMAIL, // your Gmail account
+        pass: process.env.PASS // Gmail App password (no spaces)
     }
 });
 //Function for sending mail using transporter
@@ -24,6 +24,12 @@ async function sendVerificationEmail(to, token) {
         subject: "Verify your email",
         html: `<p>Click <a href="${url}">here</a> to verify your email.</p>`
     });
+}
+
+function isValidEmail(email) {
+    // Basic regex for standard email format
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
 }
 
 
@@ -38,6 +44,10 @@ router.post("/signup", async (req, res) => {
     try {
         const existing = db.prepare("SELECT * FROM users WHERE email = ? OR username = ?").get(email, username);
         if (existing) return res.status(400).json({ error: "Email or username already registered" });
+
+         if (!isValidEmail(email)) {
+            return res.status(400).json({ error: "Invalid email format" });
+        }
 
         const hash = await bcrypt.hash(password, 10);
 

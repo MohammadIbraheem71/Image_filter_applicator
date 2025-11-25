@@ -29,7 +29,7 @@ class signup_dialog(QDialog):
 
         # Call backend signup (returns True/False)
         try:
-            success = self.api.signup(username=username, email=email, password=password)
+            success, error_msg = self.api.signup(username=username, email=email, password=password)
         except Exception as e:
             QMessageBox.critical(self, "Network Error", f"{e}")
             return
@@ -38,4 +38,4 @@ class signup_dialog(QDialog):
             QMessageBox.information(self, "Verify Email", "Signup successful! Please check your email to verify your account.")
             self.accept()  # Close dialog   
         else:
-            QMessageBox.warning(self, "Signup Failed", "Email or username already exists.")
+            QMessageBox.warning(self, "Signup Failed", f"{error_msg}")
