@@ -35,8 +35,7 @@ class signup_dialog(QDialog):
             return
 
         if success:
-            QMessageBox.information(self, "Account Created", f"Signup successful for {email}.")
-            self.signup_success.emit(email)
-            self.accept()  # close dialog
+            QMessageBox.information(self, "Verify Email", "Signup successful! Please check your email to verify your account.")
+            self.accept()  # Close dialog   
         else:
-            QMessageBox.warning(self, "Signup Failed", "username or email already exists")
+            QMessageBox.warning(self, "Signup Failed", "Email or username already exists.")

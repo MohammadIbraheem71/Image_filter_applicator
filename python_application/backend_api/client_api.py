@@ -25,9 +25,15 @@ class client_api:
             
             return True
         else:
-            print("invalid credentials")
-            
-            return False
+            data = response.json()
+            error_msg = data.get("error", "")
+
+            if "verify your email" in error_msg.lower():
+                print("email not verified")
+                return "unverified"  # special return value for unverified email
+            else:
+                print("invalid credentials")
+                return False  # treat wrong credentials as failure
     
     #get shared gallery function
     def get_gallery(self):
@@ -85,7 +91,7 @@ class client_api:
         if response.status_code == 201:  # usually 201 Created
             data = response.json()
             print(f"User '{email}' signed up successfully")
-            return True
+            return True 
         else:
             print("Signup failed")
             return False

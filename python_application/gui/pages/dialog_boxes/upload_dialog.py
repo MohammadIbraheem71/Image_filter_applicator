@@ -55,5 +55,5 @@ class upload_dialog(QDialog):
             self.accept()  # Close dialog
             
         except Exception as e:
-            self.ui.progress_bar.setVisible(False)
+            # self.ui.progress_bar.setVisible(False)
             QMessageBox.critical(self, "Upload Failed", f"Error: {str(e)}")

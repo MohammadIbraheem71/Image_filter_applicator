@@ -34,8 +34,11 @@ class login_dialog(QDialog):
             QMessageBox.critical(self, "Network Error", f"{e}")
             return
 
-        if not result:
-            QMessageBox.warning(self, "Login failed", "incorrect email or password")
+        if result == "unverified":
+            QMessageBox.warning(self, "Email Not Verified", "Please verify your email before logging in.")
+            return
+        elif not result:
+            QMessageBox.warning(self, "Login failed", "Incorrect email or password.")
             return
 
         self.login_success.emit(email)
