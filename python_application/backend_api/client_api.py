@@ -1,13 +1,18 @@
 import requests
 import mimetypes
 import os
+from PySide6.QtCore import QObject, Signal
 
 #creating an interface to the backend here, uses the backend routs 
-class client_api:
+class client_api(QObject):
+    image_uploaded = Signal()
+
     #base url used to define the url of the backend, u know what i mean excuse my english
     def __init__(self, base_url):
+        super().__init__()
         self.base_url = base_url
         self.token = None
+        self.user_info = None
         
     #verifies the user's log in
     def login(self, email, password):
@@ -22,7 +27,8 @@ class client_api:
             print("user logged in sucessfully")
             data = response.json()
             self.token = data["token"]
-            
+            self.user_info = data["user"]
+
             return True
         else:
             data = response.json()
@@ -73,9 +79,13 @@ class client_api:
                 "filename": filename
             }
             response = requests.post(url, headers=self.get_headers(), files=files, data = data)
+            
 
         # Raise exception if upload failed
         response.raise_for_status()
+
+        self.image_uploaded.emit()
+
         return response.json()
         
     #this function registers a new user
