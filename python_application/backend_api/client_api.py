@@ -87,7 +87,20 @@ class client_api(QObject):
         self.image_uploaded.emit()
 
         return response.json()
-        
+    
+    def request_password_reset(self, email):
+        url = f"{self.base_url}/routes/auth/reset-password-request"
+        resp = requests.post(url, json={"email": email})
+        resp.raise_for_status()
+        return resp.json()
+
+    def reset_password(self, token, new_password):
+        url = f"{self.base_url}/routes/auth/reset-password"
+        resp = requests.post(url, json={"token": token, "newPassword": new_password})
+        resp.raise_for_status()
+        return resp.json()
+
+
     #this function registers a new user
     #user has to log in once signed up so the api stores its token
     def signup(self, username, email, password):

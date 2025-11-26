@@ -6,6 +6,12 @@ import db from "../database.js";
 
 const router = express.Router();
 
+import crypto from "crypto";
+function generateShortToken(length = 6) {
+  // Alphanumeric uppercase only for simplicity
+  return crypto.randomBytes(length).toString("hex").slice(0, length).toUpperCase();
+}
+
 const transporter = nodemailer.createTransport({
     secure: true,
     host: "smtp.gmail.com",
@@ -23,6 +29,22 @@ async function sendVerificationEmail(to, token) {
         to,
         subject: "Verify your email",
         html: `<p>Click <a href="${url}">here</a> to verify your email.</p>`
+    });
+}
+
+//Function for sending resetPassword mail
+async function sendPasswordResetEmail(to, token) {
+    // Plain token 
+    await transporter.sendMail({
+        from: `"Image Filter Application" <${process.env.EMAIL}>`,
+        to,
+        subject: "Reset your password",
+        html: `
+            <p>You requested a password reset.</p>
+            <p>Your reset token is:</p>
+            <h2>${token}</h2>
+            <p>Open your application and enter this token along with your new password.</p>
+        `
     });
 }
 
@@ -108,6 +130,57 @@ router.post("/login", async (req, res) =>{
         }});
     });
 
+
+// Temporary in-memory store for one-time tokens
+const resetTokens = new Map(); // userId -> token
+
+//Request password reset
+router.post("/reset-password-request", (req, res) => {
+  const { email } = req.body;
+  const user = db.prepare("SELECT * FROM users WHERE email = ?").get(email);
+  if (!user) return res.status(404).json({ error: "User not found" });
+
+  const token = generateShortToken(6);
+
+  // Store token in memory
+  resetTokens.set(user.id, token);
+
+  // Send token via email
+  sendPasswordResetEmail(user.email, token);
+
+  res.json({ message: "Reset token sent via email" });
+});
+
+// Reset password using token
+router.post("/reset-password", async (req, res) => {
+  const { token, newPassword } = req.body;
+
+  if (!token || !newPassword)
+    return res.status(400).json({ error: "Token and new password required" });
+
+  // Find userId by token
+  let userId = null;
+  for (const [id, t] of resetTokens.entries()) {
+    if (t === token) {
+      userId = id;
+      break;
+    }
+  }
+
+  if (!userId) return res.status(400).json({ error: "Invalid or expired token" });
+
+  const user = db.prepare("SELECT * FROM users WHERE id = ?").get(userId);
+  if (!user) return res.status(404).json({ error: "User not found" });
+
+  // Hash new password
+  const hash = await bcrypt.hash(newPassword, 10);
+  db.prepare("UPDATE users SET password_hash = ? WHERE id = ?").run(hash, user.id);
+
+  // Remove token (one-time use)
+  resetTokens.delete(user.id);
+
+  res.json({ message: "Password reset successfully!" });
+});
 
 
 export default router;

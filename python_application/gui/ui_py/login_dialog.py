@@ -16,8 +16,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QAbstractButton, QApplication, QDialog, QDialogButtonBox,
-    QHBoxLayout, QLabel, QLineEdit, QSizePolicy,
-    QVBoxLayout, QWidget)
+    QHBoxLayout, QLabel, QLineEdit, QPushButton,
+    QSizePolicy, QSpacerItem, QVBoxLayout, QWidget)
 
 class Ui_login_dialog(object):
     def setupUi(self, login_dialog):
@@ -56,13 +56,33 @@ class Ui_login_dialog(object):
 
         self.verticalLayout.addLayout(self.horizontalLayout_2)
 
+        self.verticalSpacer = QSpacerItem(30, 100, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+
+        self.verticalLayout.addItem(self.verticalSpacer)
+
+        self.horizontalLayout_3 = QHBoxLayout()
+        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
+        self.forgotpass_btn = QPushButton(login_dialog)
+        self.forgotpass_btn.setObjectName(u"forgotpass_btn")
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.forgotpass_btn.sizePolicy().hasHeightForWidth())
+        self.forgotpass_btn.setSizePolicy(sizePolicy)
+        self.forgotpass_btn.setFlat(True)
+
+        self.horizontalLayout_3.addWidget(self.forgotpass_btn)
+
         self.buttonBox = QDialogButtonBox(login_dialog)
         self.buttonBox.setObjectName(u"buttonBox")
         self.buttonBox.setOrientation(Qt.Orientation.Horizontal)
         self.buttonBox.setStandardButtons(QDialogButtonBox.StandardButton.Cancel|QDialogButtonBox.StandardButton.Ok)
         self.buttonBox.setCenterButtons(False)
 
-        self.verticalLayout.addWidget(self.buttonBox)
+        self.horizontalLayout_3.addWidget(self.buttonBox)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout_3)
 
 
         self.retranslateUi(login_dialog)
@@ -74,5 +94,6 @@ class Ui_login_dialog(object):
         login_dialog.setWindowTitle(QCoreApplication.translate("login_dialog", u"Dialog", None))
         self.email_lbl.setText(QCoreApplication.translate("login_dialog", u"email:", None))
         self.pswrd_lbl.setText(QCoreApplication.translate("login_dialog", u"password:", None))
+        self.forgotpass_btn.setText(QCoreApplication.translate("login_dialog", u"Forgot password?", None))
     # retranslateUi
 

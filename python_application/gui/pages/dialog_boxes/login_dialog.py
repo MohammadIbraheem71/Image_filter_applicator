@@ -18,6 +18,7 @@ class login_dialog(QDialog):
         # Connect buttons
         self.ui.buttonBox.accepted.connect(self._on_submit)  # OK
         self.ui.buttonBox.rejected.connect(self.reject)      # Cancel
+        self.ui.forgotpass_btn.clicked.connect(self.open_reset_password_dialog) #forgot password
 
 
     def _on_submit(self):
@@ -44,3 +45,8 @@ class login_dialog(QDialog):
         self.login_success.emit(email)
 
         self.accept()  # closes dialog
+
+    def open_reset_password_dialog(self):
+        from pages.dialog_boxes.resetreq_dialog import resetreq_dialog
+        dlg = resetreq_dialog(self.api, parent=self)
+        dlg.exec()
