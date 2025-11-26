@@ -19,7 +19,7 @@ const transporter = nodemailer.createTransport({
 async function sendVerificationEmail(to, token) {
     const url = `http://localhost:3000/routes/auth/verify-email?token=${token}`;
     await transporter.sendMail({
-        from: `"Image Filter Application" <sara.rehman700@gmail.com>`,
+        from: `"Image Filter Application" <${process.env.EMAIL}>`,
         to,
         subject: "Verify your email",
         html: `<p>Click <a href="${url}">here</a> to verify your email.</p>`

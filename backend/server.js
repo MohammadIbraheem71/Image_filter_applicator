@@ -7,7 +7,9 @@ console.log("Environment variables check:", {
   cloudName: process.env.CLOUDINARY_CLOUD_NAME ? "loaded" : "missing",
   apiKey: process.env.CLOUDINARY_API_KEY ? "loaded" : "missing",
   apiSecret: process.env.CLOUDINARY_API_SECRET ? "loaded" : "missing",
-  jwtSecret: process.env.JWT_SECRET ? "loaded" : "missing"
+  jwtSecret: process.env.JWT_SECRET ? "loaded" : "missing",
+  pass: process.env.PASS ? "loaded" : "missing",
+  email: process.env.EMAIL ? "loaded" : "missing"
 });
 
 import express from "express";
