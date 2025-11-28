@@ -16,8 +16,7 @@ class login_dialog(QDialog):
         self.api = api_client
 
         # Connect buttons
-        self.ui.buttonBox.accepted.connect(self._on_submit)  # OK
-        self.ui.buttonBox.rejected.connect(self.reject)      # Cancel
+        self.ui.login_btn.clicked.connect(self._on_submit)  # OK
         self.ui.forgotpass_btn.clicked.connect(self.open_reset_password_dialog) #forgot password
 
 

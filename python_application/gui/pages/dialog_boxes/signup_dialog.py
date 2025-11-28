@@ -15,8 +15,8 @@ class signup_dialog(QDialog):
         self.api = api_client
 
         # Connect QDialogButtonBox signals
-        self.ui.buttonBox.accepted.connect(self._on_signup)  # OK button
-        self.ui.buttonBox.rejected.connect(self.reject)      # Cancel button
+        self.ui.signup_btn.clicked.connect(self._on_signup)  # OK button
+
 
     def _on_signup(self):
         username = self.ui.username_edt.text().strip()
