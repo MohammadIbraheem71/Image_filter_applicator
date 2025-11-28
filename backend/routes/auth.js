@@ -6,6 +6,11 @@ import db from "../database.js";
 
 const router = express.Router();
 
+console.log("email information:", {
+  email: process.env.EMAIL ? "loaded" : "missing",
+  password: process.env.PASS ? "loaded" : "missing"
+});
+
 import crypto from "crypto";
 function generateShortToken(length = 6) {
   // Alphanumeric uppercase only for simplicity
