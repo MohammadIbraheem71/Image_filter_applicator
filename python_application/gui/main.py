@@ -35,13 +35,13 @@ class MainWindow(QMainWindow):
         gif_path = os.path.join(BASE_DIR, "gui", "assets", "logo.gif")
         # Example path → change it if your GIF is elsewhere
 
-        if os.path.exists(gif_path):
-            self.movie = QMovie(gif_path)
-            self.movie.setScaledSize(QSize(30, 30))
-            self.ui.logo_gif.setMovie(self.movie)
-            self.movie.start()
-        else:
-            print("⚠️ GIF not found at:", gif_path)
+        # if os.path.exists(gif_path):
+        #     self.movie = QMovie(gif_path)
+        #     self.movie.setScaledSize(QSize(30, 30))
+        #     self.ui.logo_gif.setMovie(self.movie)
+        #     self.movie.start()
+        # else:
+        #     print("⚠️ GIF not found at:", gif_path)
         
         # Shared objects
         self.factory = filter_factory()
