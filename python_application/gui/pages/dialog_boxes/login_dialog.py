@@ -35,8 +35,8 @@ class login_dialog(QDialog):
         self.show_pass_btn.setStyleSheet("background: transparent; border: none;")
         self.show_pass_btn.setFixedSize(40,16)
 
-        self.eye_icon = QIcon("assets/eye.png")
-        self.eye_hide_icon = QIcon("assets/eye_hide.png")
+        self.eye_icon = QIcon(":/icons/assets/eye.png")
+        self.eye_hide_icon = QIcon(":/icons/assets/hidden_eye.png")
         self.show_pass_btn.setIcon(self.eye_hide_icon)
         self.show_pass_btn.setIconSize(self.show_pass_btn.size())
 

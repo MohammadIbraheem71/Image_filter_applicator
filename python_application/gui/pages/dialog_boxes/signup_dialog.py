@@ -30,8 +30,8 @@ class signup_dialog(QDialog):
         self.ui.crm_passwrd_edt.textChanged.connect(self.clear_labels)
 
         # ---------------- Password visibility buttons ----------------
-        self.eye_icon = QIcon("assets/eye.png")
-        self.eye_hide_icon = QIcon("assets/eye_hide.png")
+        self.eye_icon = QIcon(":/icons/assets/eye.png")
+        self.eye_hide_icon = QIcon(":/icons/assets/hidden_eye.png")
 
         # Main password field button
         self.show_pass_btn = QPushButton(self.ui.passwrd_edt)
