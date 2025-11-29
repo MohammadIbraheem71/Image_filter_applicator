@@ -1,13 +1,10 @@
-import requests
-import mimetypes
-import os
 from PySide6.QtCore import QObject, Signal
+from backend_api.AuthAPI import AuthAPI
+from backend_api.GalleryAPI import GalleryAPI
 
-#creating an interface to the backend here, uses the backend routs 
 class client_api(QObject):
     image_uploaded = Signal()
 
-    #base url used to define the url of the backend, u know what i mean excuse my english
     def __init__(self, base_url):
         super().__init__()
         self.base_url = base_url
@@ -16,36 +13,6 @@ class client_api(QObject):
         
     #verifies the user's log in
     def login(self, email, password):
-        url = f"{self.base_url}/routes/auth/login"
-        
-        response = requests.post(url, json = {
-            "email": email, 
-            "password" : password
-        })
-        
-        if response.status_code == 200:
-            print("user logged in sucessfully")
-            data = response.json()
-            self.token = data["token"]
-            self.user_info = data["user"]
-
-            return True
-        else:
-            data = response.json()
-            error_msg = data.get("error", "")
-
-            if "verify your email" in error_msg.lower():
-                print("email not verified")
-                return "unverified"  # special return value for unverified email
-            else:
-                print("invalid credentials")
-                return False  # treat wrong credentials as failure
-    
-    #get shared gallery function
-    def get_gallery(self):
-        url = f"{self.base_url}/routes/image/gallery"
-        response = requests.get(url)
-        print(f"{response.json()}")
         return response.json()
     
     #this function is used for authentication
@@ -90,44 +57,14 @@ class client_api(QObject):
         return response.json()
     
     def request_password_reset(self, email):
-        url = f"{self.base_url}/routes/auth/reset-password-request"
-        resp = requests.post(url, json={"email": email})
-        resp.raise_for_status()
-        return resp.json()
+        return self.auth.request_password_reset(email)
 
     def reset_password(self, token, new_password):
-        url = f"{self.base_url}/routes/auth/reset-password"
-        resp = requests.post(url, json={"token": token, "newPassword": new_password})
-        resp.raise_for_status()
-        return resp.json()
+        return self.auth.reset_password(token, new_password)
 
+    # ---------- Gallery methods ----------
+    def get_gallery(self):
+        return self.gallery.get_gallery()
 
-    #this function registers a new user
-    #user has to log in once signed up so the api stores its token
-    def signup(self, username, email, password):
-        url = f"{self.base_url}/routes/auth/signup"
-        try:
-            response = requests.post(url, json={
-                "username": username, 
-                "email": email,
-                "password": password
-            })
-
-            if response.status_code == 201:  # Success
-                print(f"User '{email}' signed up successfully")
-                return True, None  # success, no error
-            else:
-                # Extract error message from backend
-                try:
-                    data = response.json()
-                    error_msg = data.get("error", "Unknown error")
-                except Exception:
-                    error_msg = response.text or "Unknown error"
-
-                print(f"Signup failed: {error_msg}")
-                return False, error_msg  # failure + error message
-
-        except requests.RequestException as e:
-            print(f"Network error: {e}")
-            return False, str(e)
-
+    def upload_image(self, file_path, filename):
+        return self.gallery.upload_image(file_path, filename)
