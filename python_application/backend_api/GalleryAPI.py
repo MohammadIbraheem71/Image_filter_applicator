@@ -16,7 +16,7 @@ class GalleryAPI(QObject):
         return {"Authorization": f"Bearer {self.token}"} if self.token else {}
 
     def get_gallery(self):
-        url = f"{self.base_url}/routes/upload/gallery"
+        url = f"{self.base_url}/routes/image/gallery"
         response = self.http_client.get(url)
         return response.json()
 

@@ -20,17 +20,16 @@ class gallery_page(QWidget):
 
         # Load gallery images
         self.refresh_gallery()
+        
 
     def refresh_gallery(self):
         try:
-            data = self.api.get_gallery()
-            # extract the list of image objects
+            data = self.api.get_gallery()  # fetch from /gallery route
             images_list = data.get("images", [])
             urls = [img["image_url"] for img in images_list]
-            self.loader.load_images(urls)
+            self.loader.load_images(urls)  # load them into grid
         except Exception as e:
             print("Error fetching gallery:", e)
-
 
     def upload_to_gallery(self):
         upload_dlg = upload_dialog(self.api, parent=self)
