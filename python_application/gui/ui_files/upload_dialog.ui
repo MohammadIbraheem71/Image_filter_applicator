@@ -6,92 +6,285 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>491</width>
+    <width>489</width>
     <height>443</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">/* -----------------------------------------
+   UPLOAD DIALOG BACKGROUND WIDGET
+----------------------------------------- */
+QWidget#bg_widget {
+    background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(184, 87, 203, 255), stop:1 rgba(0, 85, 255, 255));
+    border: none;
+}
+
+
+/* -----------------------------------------
+   UPLOAD FORM CARD (Glass Panel)
+----------------------------------------- */
+QWidget#form_widget {
+    background-color: rgba(240, 240, 240, 0.65); /* lighter translucent glass */
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    padding: 20px;
+    backdrop-filter: blur(8px);  /* supported on Mac, ignored on Windows */
+}
+
+/* -----------------------------------------
+   LABELS INSIDE UPLOAD FORM
+----------------------------------------- */
+QWidget#upload_form_widget QLabel {
+    background: transparent;
+    color: #2D2440; 
+    font-weight: 500;
+    font-size: 14px;
+    border: none;
+    padding: 0;
+}
+
+/* -----------------------------------------
+   INPUT FIELDS
+----------------------------------------- */
+QLineEdit#description_edt {
+    background-color: rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 10px;
+    padding: 10px;
+    color: #2D2440;
+    font-size: 14px;
+}
+
+QLineEdit#title_edit:focus,
+QTextEdit#description_edt:focus,
+QLineEdit#tags_edit:focus {
+    background-color: rgba(255, 255, 255, 0.35);
+    border: 1px solid rgba(200, 150, 230, 0.9);
+}
+
+/* -----------------------------------------
+   IMAGE WIDGET (Card-style glassmorphism)
+----------------------------------------- */
+QWidget#img_widget {
+    background-color: rgba(255, 255, 255, 0.10);     /* subtle glass layer */
+    border: 1px solid rgba(255, 255, 255, 0.18);      /* soft edge */
+    border-radius: 14px;
+    padding: 8px;
+
+    /* Optional: smooth transition on hover */
+    transition: background-color 150ms ease,
+                border 150ms ease;
+}
+
+/* Hover effect - stronger glass glow */
+QWidget#img_widget:hover {
+    background-color: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.30);
+}
+
+/* Inside labels (optional cleanup) */
+QWidget#img_widget QLabel {
+    background: transparent;
+    color: #F5F0FF; /* soft white text */
+    border: none;
+}
+
+
+/* -----------------------------------------
+   SELECT IMAGE BUTTON (Glass Style)
+----------------------------------------- */
+QPushButton#select_img_btn {
+    background-color: rgba(255, 255, 255, 0.12);   /* Translucent glass */
+    color: #F5F0FF;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-weight: 600;
+    font-size: 14px;
+    min-height: 36px;
+}
+
+/* Hover - stronger glass glow */
+QPushButton#select_img_btn:hover {
+    background-color: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+/* Pressed - slightly darker */
+QPushButton#select_img_btn:pressed {
+    background-color: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    transform: scale(0.97);
+}
+
+
+/* -----------------------------------------
+   UPLOAD BUTTON
+----------------------------------------- */
+QPushButton#upload_btn {
+    background-color:rgb(168, 85, 247) ;
+	color: rgb(30, 24, 64);
+    color: white;
+    border-radius: 10px;
+    padding: 12px 20px;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+QPushButton#upload_btn:hover {
+    background-color: #C084FC;
+}
+
+QPushButton#upload_btn:pressed {
+    background-color: #9333EA;
+    transform: scale(0.97);
+}
+
+/* -----------------------------------------
+   CANCEL BUTTON
+----------------------------------------- */
+QPushButton#cancel_btn {
+    background-color: rgba(0,0,0,0.25);
+    color: #ffffff;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 14px;
+}
+
+QPushButton#cancel_btn:hover {
+    background-color: rgba(0,0,0,0.38);
+}
+
+QPushButton#cancel_btn:pressed {
+    background-color: rgba(0,0,0,0.50);
+    transform: scale(0.97);
+}
+
+/* -----------------------------------------
+   IMAGE PREVIEW BOX
+----------------------------------------- */
+QLabel#preview_lbl {
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 12px;
+    padding: 5px;
+    min-height: 160px; /* adjust as needed */
+}
+</string>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QLabel" name="preview_lbl">
-     <property name="text">
-      <string>no file selected</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignmentFlag::AlignCenter</set>
-     </property>
+    <widget class="QWidget" name="bg_widget" native="true">
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QWidget" name="img_widget" native="true">
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <widget class="QLabel" name="img_lbl">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Ignored">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>browse an image from your computer</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QWidget" name="form_widget" native="true">
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <item>
+          <widget class="QLabel" name="error_lbl">
+           <property name="styleSheet">
+            <string notr="true">    background-color: rgba(248, 215, 218, 150); /* light red with 150/255 opacity */
+    color: rgb(196, 62, 57);                              /* dark red text */
+    border: 1px solid rgba(196, 62, 57, 200);  /* optional semi-transparent border */
+    border-radius: 4px;
+    padding: 2px 4px;
+</string>
+           </property>
+           <property name="text">
+            <string>text label</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <item>
+            <widget class="QPushButton" name="select_img_btn">
+             <property name="text">
+              <string>select image</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer">
+             <property name="orientation">
+              <enum>Qt::Orientation::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="description_edt">
+           <property name="placeholderText">
+            <string>enter a short description!</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item>
+            <spacer name="horizontalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Orientation::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="upload_btn">
+             <property name="text">
+              <string>all done!</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
     </widget>
-   </item>
-   <item>
-    <layout class="QVBoxLayout" name="verticalLayout_2">
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout">
-       <item>
-        <widget class="QPushButton" name="choose_img_btn">
-         <property name="text">
-          <string>choose image</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="horizontalSpacer">
-         <property name="orientation">
-          <enum>Qt::Orientation::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="QLabel" name="description_lbl">
-         <property name="text">
-          <string>description:</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="description_edt"/>
-       </item>
-      </layout>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <widget class="QPushButton" name="upload_btn">
-       <property name="text">
-        <string>upload</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Orientation::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QPushButton" name="cancel_btn">
-       <property name="text">
-        <string>cancel</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
    </item>
   </layout>
  </widget>

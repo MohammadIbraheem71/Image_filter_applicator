@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QDialog, QFileDialog,QMessageBox
+from PySide6.QtWidgets import QDialog, QFileDialog, QMessageBox
 from PySide6.QtGui import QPixmap
 from PySide6.QtCore import Qt
 from ui_py.upload_dialog import Ui_upload_dialog
@@ -13,11 +13,24 @@ class upload_dialog(QDialog):
         self.api = api
         self.selected_file = None
 
-        # Connect buttons
-        self.ui.choose_img_btn.clicked.connect(self.choose_file)
-        self.ui.upload_btn.clicked.connect(self.upload_file)
-        self.ui.cancel_btn.clicked.connect(self.reject)
+        # Hide error label initially
+        self.ui.error_lbl.setVisible(False)
+        self.ui.error_lbl.setText("")
 
+        # Connect buttons
+        self.ui.select_img_btn.clicked.connect(self.choose_file)
+        self.ui.upload_btn.clicked.connect(self.upload_file)
+
+    # ------------------------------
+    # Show error helper
+    # ------------------------------
+    def show_error(self, text: str):
+        self.ui.error_lbl.setText(text)
+        self.ui.error_lbl.setVisible(True)
+
+    # ------------------------------
+    # File selection
+    # ------------------------------
     def choose_file(self):
         file_path, _ = QFileDialog.getOpenFileName(
             self, "Select Image", "", "Images (*.png *.jpg *.jpeg *.bmp)"
@@ -25,35 +38,53 @@ class upload_dialog(QDialog):
         if file_path:
             self.selected_file = file_path
 
-
-            # Load and display preview
+            # Load preview
             pixmap = QPixmap(file_path)
-            # Scale to fit the label while keeping aspect ratio
             pixmap = pixmap.scaled(
-                self.ui.preview_lbl.width(),
-                self.ui.preview_lbl.height(),
-                Qt.KeepAspectRatio,        # aspect mode
-                Qt.SmoothTransformation    # transformation mode (optional)
+                self.ui.img_lbl.width(),
+                self.ui.img_lbl.height(),
+                Qt.KeepAspectRatio,
+                Qt.SmoothTransformation
             )
-            self.ui.preview_lbl.setPixmap(pixmap)
+            self.ui.img_lbl.setPixmap(pixmap)
 
+            # Clear previous errors
+            self.ui.error_lbl.setVisible(False)
+            self.ui.error_lbl.setText("")
+
+    # ------------------------------
+    # Upload handler
+    # ------------------------------
     def upload_file(self):
         filename = self.ui.description_edt.text().strip()
-        
-        if not self.selected_file or not filename:
-            QMessageBox.warning(self, "Missing", "choose a file and enter a short description!")
+
+        # Validation errors → error_lbl
+        if not self.selected_file:
+            self.show_error("Please choose an image file.")
             return
-        
-        print(f"filename: {filename}")
+
+        if not filename:
+            self.show_error("Please enter a short description.")
+            return
+
         try:
-            self.api.upload_image(self.selected_file, filename)
-            
-            
-             # SUCCESS POPUP
+            result = self.api.upload_image(self.selected_file, filename)
+
+            # If API returned unauthorized
+            if isinstance(result, dict) and result.get("status") == "unauthorized":
+                self.show_error("Unauthorized. Please login again.")
+                return
+
+            # SUCCESS popup
             QMessageBox.information(self, "Upload Successful",
-                                    "image uploaded successfully!")
-            self.accept()  # Close dialog
-            
+                                    "Image uploaded successfully!")
+            self.accept()
+
         except Exception as e:
-            # self.ui.progress_bar.setVisible(False)
-            QMessageBox.critical(self, "Upload Failed", f"Error: {str(e)}")
+            # Try to extract HTTP status code if available
+            words = str(e).strip().split(' ')
+
+            if '401' in words or '403' in words:
+                self.show_error("Unauthorized. Please login.")
+            else:
+                self.show_error(f"Upload failed: {str(e)}")

@@ -33,6 +33,7 @@ class GalleryAPI(QObject):
             data = {"filename": filename}
             response = self.http_client.post(url, headers=self.get_headers(), files=files, data=data)
 
+        print(f"{response}")
         response.raise_for_status()
         self.image_uploaded.emit()
         return response.json()

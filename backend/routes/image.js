@@ -83,38 +83,29 @@ router.delete("/:id", authentication_middleware, async (req, res) => {
   }
 });
 
-// GET: fetch all images from Cloudinary
-router.get("/gallery", async (req, res) => {
-  try {
-    const result = await cloudinary.api.resources({
-      type: "upload",
-      resource_type: "image",
-      max_results: 200,   // increase if needed
-    });
+//this function gets and returns the shared gallery, we dont need to authenticate for that
+router.get("/gallery", async(req, res) => {
+  try{
+    const images = db.prepare("SELECT * FROM images").all();
 
-    // Extract the secure URLs
-    const images = result.resources.map(img => ({
-      public_id: img.public_id,
-      image_url: img.secure_url
-    }));
-
-    res.status(200).json({
-      success: true,
+    return res.status(200).json({
+      sucess: true, 
       count: images.length,
       images
+    
     });
+  
 
-    console.log("Images fetched:", images.map(i => i.public_id));
-
-  } catch (error) {
-    console.error("Cloudinary gallery error:", error);
-    res.status(500).json({
-      success: false,
+  }
+  catch(err){
+    console.error("error fetching gallery: ", error)
+    return res.status(500).json({
+      sucess: false,
       message: "failed to load gallery"
     });
   }
+  
 });
-
 
 
 export default router;
