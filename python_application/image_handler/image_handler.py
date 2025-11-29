@@ -6,7 +6,9 @@ from image_handler.ImageLoader import ImageLoader
 from image_handler.ImageSaver import ImageSaver
 from image_handler.FilterApplier import FilterApplier
 
-# Optional unified handler if you want one interface:
+ #SRP fixed
+ #Responsibilites separated by adding ImageLoader, ImageSaver and FilterApplier classes
+
 class image_handler:
     def __init__(self):
         self.image = None
