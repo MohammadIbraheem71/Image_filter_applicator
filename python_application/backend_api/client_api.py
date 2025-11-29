@@ -2,6 +2,7 @@ from PySide6.QtCore import QObject, Signal
 from backend_api.AuthAPI import AuthAPI
 from backend_api.GalleryAPI import GalleryAPI
 
+
 class client_api(QObject):
     image_uploaded = Signal()
 
