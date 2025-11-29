@@ -10,7 +10,7 @@
     <height>315</height>
    </rect>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_3">
+  <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_4">
      <item>
@@ -46,17 +46,24 @@
     </layout>
    </item>
    <item>
-    <widget class="QScrollArea" name="scrollArea">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>gallery here</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QScrollArea" name="gallery_scroll_area">
      <property name="widgetResizable">
       <bool>true</bool>
      </property>
-     <widget class="QWidget" name="scrollAreaWidgetContents">
+     <widget class="QWidget" name="image_grid">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
         <width>403</width>
-        <height>249</height>
+        <height>227</height>
        </rect>
       </property>
      </widget>

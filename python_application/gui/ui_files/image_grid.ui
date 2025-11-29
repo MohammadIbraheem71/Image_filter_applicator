@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>image_gallery_grid</class>
+ <widget class="QWidget" name="image_gallery_grid">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>567</width>
+    <height>399</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget#image_gallery_grid {
+    background-color: rgba(20, 20, 20, 0.7);  /* dark translucent background */
+    border-radius: 15px;                      /* rounded corners */
+    padding: 10px;                             /* inner padding for layout */
+
+    /* Optional subtle border for glass effect */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    /* Optional shadow effect (works if using QGraphicsDropShadowEffect) */
+    /* box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); */
+}
+
+QScrollArea#gallery_scroll_area {
+    background-color: rgba(20, 20, 20, 0.5); /* semi-transparent dark */
+    border: 20px;                             /* remove default frame */
+    border-radius: 35px;                      /* match grid corners */
+}</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QScrollArea" name="gallery_scroll_area">
+     <property name="horizontalScrollBarPolicy">
+      <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+     </property>
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <widget class="QWidget" name="grid_container">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>549</width>
+        <height>381</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <property name="spacing">
+        <number>10</number>
+       </property>
+       <property name="leftMargin">
+        <number>10</number>
+       </property>
+       <property name="topMargin">
+        <number>10</number>
+       </property>
+       <property name="rightMargin">
+        <number>10</number>
+       </property>
+       <property name="bottomMargin">
+        <number>10</number>
+       </property>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

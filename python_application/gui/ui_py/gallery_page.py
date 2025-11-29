@@ -15,8 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QHBoxLayout, QPushButton, QScrollArea,
-    QSizePolicy, QSpacerItem, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QGridLayout, QHBoxLayout, QLabel,
+    QPushButton, QScrollArea, QSizePolicy, QSpacerItem,
+    QWidget)
 import resources_rc
 
 class Ui_gallery_pg(object):
@@ -24,8 +25,8 @@ class Ui_gallery_pg(object):
         if not gallery_pg.objectName():
             gallery_pg.setObjectName(u"gallery_pg")
         gallery_pg.resize(423, 315)
-        self.verticalLayout_3 = QVBoxLayout(gallery_pg)
-        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.gridLayout = QGridLayout(gallery_pg)
+        self.gridLayout.setObjectName(u"gridLayout")
         self.horizontalLayout_4 = QHBoxLayout()
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
         self.upld_glry_btn = QPushButton(gallery_pg)
@@ -42,17 +43,22 @@ class Ui_gallery_pg(object):
         self.horizontalLayout_4.addItem(self.horizontalSpacer)
 
 
-        self.verticalLayout_3.addLayout(self.horizontalLayout_4)
+        self.gridLayout.addLayout(self.horizontalLayout_4, 0, 0, 1, 1)
 
-        self.scrollArea = QScrollArea(gallery_pg)
-        self.scrollArea.setObjectName(u"scrollArea")
-        self.scrollArea.setWidgetResizable(True)
-        self.scrollAreaWidgetContents = QWidget()
-        self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 403, 249))
-        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
+        self.label = QLabel(gallery_pg)
+        self.label.setObjectName(u"label")
 
-        self.verticalLayout_3.addWidget(self.scrollArea)
+        self.gridLayout.addWidget(self.label, 1, 0, 1, 1)
+
+        self.gallery_scroll_area = QScrollArea(gallery_pg)
+        self.gallery_scroll_area.setObjectName(u"gallery_scroll_area")
+        self.gallery_scroll_area.setWidgetResizable(True)
+        self.image_grid = QWidget()
+        self.image_grid.setObjectName(u"image_grid")
+        self.image_grid.setGeometry(QRect(0, 0, 403, 227))
+        self.gallery_scroll_area.setWidget(self.image_grid)
+
+        self.gridLayout.addWidget(self.gallery_scroll_area, 2, 0, 1, 1)
 
 
         self.retranslateUi(gallery_pg)
@@ -62,6 +68,7 @@ class Ui_gallery_pg(object):
 
     def retranslateUi(self, gallery_pg):
         self.upld_glry_btn.setText(QCoreApplication.translate("gallery_pg", u"upload", None))
+        self.label.setText(QCoreApplication.translate("gallery_pg", u"gallery here", None))
         pass
     # retranslateUi
 

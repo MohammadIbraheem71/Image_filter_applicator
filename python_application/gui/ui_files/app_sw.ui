@@ -473,6 +473,46 @@ QProgressBar::chunk {
     background-color: rgba(220, 180, 230, 0.8);
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(200, 150, 230, 0.5);
+}
+
+/*side bar stuff here change it if needed*/
+/* -----------------------------------------
+   SCROLL AREA - Sidebar-style Glass
+----------------------------------------- */
+QScrollArea{
+    background-color: rgba(255, 255, 255, 0.08);  /* Very translucent like sidebar */
+    border: 1px solid rgba(200, 160, 220, 0.3);   /* Subtle glass border */
+    border-radius: 10px;                           /* Rounded corners to match sidebar */
+    padding: 10px;                                 /* Inner padding */
+}
+
+QScrollArea{
+    background-color: transparent;                /* Keep the inner container transparent */
+    border-radius: 10px;                           /* Match outer radius */
+}
+
+/* Optional: Scrollbars in sidebar style */
+QScrollBar:vertical {
+    background: rgba(255, 255, 255, 0.2);
+    width: 10px;
+    border-radius: 5px;
+}
+
+QScrollBar::handle:vertical {
+    background: rgba(220, 180, 230, 0.5);
+    border-radius: 5px;
+    min-height: 30px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: rgba(220, 180, 230, 0.8);
+    box-shadow: 0 0 10px rgba(200, 150, 230, 0.6);
+}
+
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical {
+    height: 0px;
+    background: none;
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">

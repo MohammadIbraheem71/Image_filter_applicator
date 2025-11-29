@@ -22,7 +22,7 @@ class login_dialog(QDialog):
 
     def _on_submit(self):
         email = self.ui.email_edt.text().strip()
-        password = self.ui.pswrd_edt.text().strip()
+        password = self.ui.passwrd_edt.text().strip()
 
         if not email or not password:
             QMessageBox.warning(self, "Missing", "Enter email and password.")

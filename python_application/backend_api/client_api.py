@@ -43,8 +43,9 @@ class client_api(QObject):
     
     #get shared gallery function
     def get_gallery(self):
-        url = f"{self.base_url}/routes/upload/gallery"
+        url = f"{self.base_url}/routes/image/gallery"
         response = requests.get(url)
+        print(f"{response.json()}")
         return response.json()
     
     #this function is used for authentication
