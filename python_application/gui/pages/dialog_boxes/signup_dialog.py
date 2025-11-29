@@ -21,7 +21,7 @@ class signup_dialog(QDialog):
     def _on_signup(self):
         username = self.ui.username_edt.text().strip()
         email = self.ui.email_edt.text().strip()
-        password = self.ui.pswrd_edt.text().strip()
+        password = self.ui.passwrd_edt.text().strip()
 
         if not email or not password or not username:
             QMessageBox.warning(self, "Missing Information", "Please enter username, email and password.")

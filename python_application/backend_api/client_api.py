@@ -25,6 +25,15 @@ class client_api(QObject):
     def token(self, value):
         self.auth.token = value
         self.gallery.token = value  # keep gallery in sync
+    
+    # user_info passthrough
+    @property
+    def user_info(self):
+        return self.auth.user_info
+    
+    @user_info.setter
+    def user_info(self, value):
+        self.auth.user_info = value
 
     # ---------- Auth methods ----------
     def login(self, email, password):
