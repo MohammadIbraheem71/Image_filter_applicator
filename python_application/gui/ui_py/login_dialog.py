@@ -16,8 +16,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QDialog, QHBoxLayout, QLabel,
-    QLineEdit, QPushButton, QSizePolicy, QSpacerItem,
-    QVBoxLayout, QWidget)
+    QLayout, QLineEdit, QPushButton, QSizePolicy,
+    QSpacerItem, QVBoxLayout, QWidget)
 import resources_rc
 
 class Ui_login_dialog(object):
@@ -131,6 +131,7 @@ class Ui_login_dialog(object):
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.bg_widget = QWidget(login_dialog)
         self.bg_widget.setObjectName(u"bg_widget")
+        self.bg_widget.setMinimumSize(QSize(0, 80))
         self.horizontalLayout_2 = QHBoxLayout(self.bg_widget)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
@@ -175,19 +176,58 @@ class Ui_login_dialog(object):
 
         self.verticalLayout.addWidget(self.email_edt)
 
+        self.horizontalLayout_4 = QHBoxLayout()
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.horizontalLayout_4.setSizeConstraint(QLayout.SizeConstraint.SetDefaultConstraint)
+        self.horizontalLayout_4.setContentsMargins(0, -1, -1, -1)
         self.passwrd_edt = QLineEdit(self.form_widget)
         self.passwrd_edt.setObjectName(u"passwrd_edt")
         sizePolicy2.setHeightForWidth(self.passwrd_edt.sizePolicy().hasHeightForWidth())
         self.passwrd_edt.setSizePolicy(sizePolicy2)
         self.passwrd_edt.setMinimumSize(QSize(250, 0))
         self.passwrd_edt.setMaximumSize(QSize(250, 16777215))
+        self.passwrd_edt.setEchoMode(QLineEdit.EchoMode.Password)
 
-        self.verticalLayout.addWidget(self.passwrd_edt)
+        self.horizontalLayout_4.addWidget(self.passwrd_edt)
 
-        self.forgotpass_btn = QPushButton(self.form_widget)
-        self.forgotpass_btn.setObjectName(u"forgotpass_btn")
 
-        self.verticalLayout.addWidget(self.forgotpass_btn)
+        self.verticalLayout.addLayout(self.horizontalLayout_4)
+
+        self.error_lbl = QLabel(self.form_widget)
+        self.error_lbl.setObjectName(u"error_lbl")
+        sizePolicy3 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.error_lbl.sizePolicy().hasHeightForWidth())
+        self.error_lbl.setSizePolicy(sizePolicy3)
+        self.error_lbl.setMinimumSize(QSize(0, 30))
+        self.error_lbl.setMaximumSize(QSize(16777214, 16777215))
+        font = QFont()
+        font.setWeight(QFont.Medium)
+        self.error_lbl.setFont(font)
+        self.error_lbl.setStyleSheet(u"    background-color: rgba(248, 215, 218, 150); /* light red with 150/255 opacity */\n"
+"    color: rgb(196, 62, 57);                              /* dark red text */\n"
+"    border: 1px solid rgba(196, 62, 57, 200);  /* optional semi-transparent border */\n"
+"    border-radius: 4px;\n"
+"    padding: 2px 4px;\n"
+"\n"
+"")
+        self.error_lbl.setWordWrap(True)
+
+        self.verticalLayout.addWidget(self.error_lbl)
+
+        self.success_lbl = QLabel(self.form_widget)
+        self.success_lbl.setObjectName(u"success_lbl")
+        self.success_lbl.setMinimumSize(QSize(0, 30))
+        self.success_lbl.setStyleSheet(u"background-color: rgba(198, 239, 206, 150); /* light green with 150/255 opacity */\n"
+"color: rgb(0, 97, 0);                        /* dark green text */\n"
+"border: 1px solid rgba(0, 97, 0, 200);      /* optional semi-transparent border */\n"
+"border-radius: 4px;\n"
+"padding: 2px 4px;\n"
+"")
+        self.success_lbl.setWordWrap(True)
+
+        self.verticalLayout.addWidget(self.success_lbl)
 
         self.login_btn = QPushButton(self.form_widget)
         self.login_btn.setObjectName(u"login_btn")
@@ -195,6 +235,27 @@ class Ui_login_dialog(object):
         self.login_btn.setMaximumSize(QSize(250, 16777215))
 
         self.verticalLayout.addWidget(self.login_btn)
+
+        self.forgotpass_btn = QPushButton(self.form_widget)
+        self.forgotpass_btn.setObjectName(u"forgotpass_btn")
+        sizePolicy2.setHeightForWidth(self.forgotpass_btn.sizePolicy().hasHeightForWidth())
+        self.forgotpass_btn.setSizePolicy(sizePolicy2)
+        self.forgotpass_btn.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
+        self.forgotpass_btn.setStyleSheet(u"QPushButton {\n"
+"        color: #0d6efd;             /* Blue text */\n"
+"        background-color: transparent;\n"
+"        border: none;\n"
+"        text-decoration: underline; /* Underlined like a link */\n"
+"        font-weight: bold;\n"
+"    }\n"
+"    QPushButton:hover {\n"
+"        color: #0b5ed7;             /* Darker blue on hover */\n"
+"    }\n"
+"    QPushButton:pressed {\n"
+"        color: #0a58ca;             /* Even darker on click */\n"
+"    }")
+
+        self.verticalLayout.addWidget(self.forgotpass_btn)
 
         self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
@@ -217,7 +278,9 @@ class Ui_login_dialog(object):
         self.login_lbl.setText(QCoreApplication.translate("login_dialog", u"login", None))
         self.email_edt.setPlaceholderText(QCoreApplication.translate("login_dialog", u"email", None))
         self.passwrd_edt.setPlaceholderText(QCoreApplication.translate("login_dialog", u"password", None))
-        self.forgotpass_btn.setText(QCoreApplication.translate("login_dialog", u"forgot password?", None))
+        self.error_lbl.setText(QCoreApplication.translate("login_dialog", u"TextLabel", None))
+        self.success_lbl.setText(QCoreApplication.translate("login_dialog", u"TextLabel", None))
         self.login_btn.setText(QCoreApplication.translate("login_dialog", u"login", None))
+        self.forgotpass_btn.setText(QCoreApplication.translate("login_dialog", u"Forgot password?", None))
     # retranslateUi
 

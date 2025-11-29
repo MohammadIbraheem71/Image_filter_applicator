@@ -160,6 +160,7 @@ class Ui_signup_dialog(object):
         self.passwrd_edt.setSizePolicy(sizePolicy)
         self.passwrd_edt.setMinimumSize(QSize(250, 0))
         self.passwrd_edt.setMaximumSize(QSize(250, 16777215))
+        self.passwrd_edt.setEchoMode(QLineEdit.EchoMode.Password)
 
         self.verticalLayout.addWidget(self.passwrd_edt)
 
@@ -169,8 +170,35 @@ class Ui_signup_dialog(object):
         self.crm_passwrd_edt.setSizePolicy(sizePolicy)
         self.crm_passwrd_edt.setMinimumSize(QSize(25, 0))
         self.crm_passwrd_edt.setMaximumSize(QSize(250, 16777215))
+        self.crm_passwrd_edt.setEchoMode(QLineEdit.EchoMode.Password)
 
         self.verticalLayout.addWidget(self.crm_passwrd_edt)
+
+        self.error_lbl = QLabel(self.form_widget)
+        self.error_lbl.setObjectName(u"error_lbl")
+        self.error_lbl.setMinimumSize(QSize(0, 30))
+        self.error_lbl.setStyleSheet(u"    background-color: rgba(248, 215, 218, 150); /* light red with 150/255 opacity */\n"
+"    color: rgb(196, 62, 57);                              /* dark red text */\n"
+"    border: 1px solid rgba(196, 62, 57, 200);  /* optional semi-transparent border */\n"
+"    border-radius: 4px;\n"
+"    padding: 2px 4px;\n"
+"")
+        self.error_lbl.setWordWrap(True)
+
+        self.verticalLayout.addWidget(self.error_lbl)
+
+        self.success_lbl = QLabel(self.form_widget)
+        self.success_lbl.setObjectName(u"success_lbl")
+        self.success_lbl.setMinimumSize(QSize(0, 30))
+        self.success_lbl.setStyleSheet(u"background-color: rgba(198, 239, 206, 150); /* light green with 150/255 opacity */\n"
+"color: rgb(0, 97, 0);                        /* dark green text */\n"
+"border: 1px solid rgba(0, 97, 0, 200);      /* optional semi-transparent border */\n"
+"border-radius: 4px;\n"
+"padding: 2px 4px;\n"
+"")
+        self.success_lbl.setWordWrap(True)
+
+        self.verticalLayout.addWidget(self.success_lbl)
 
         self.signup_btn = QPushButton(self.form_widget)
         self.signup_btn.setObjectName(u"signup_btn")
@@ -206,6 +234,8 @@ class Ui_signup_dialog(object):
         self.email_edt.setPlaceholderText(QCoreApplication.translate("signup_dialog", u"email", None))
         self.passwrd_edt.setPlaceholderText(QCoreApplication.translate("signup_dialog", u"password", None))
         self.crm_passwrd_edt.setPlaceholderText(QCoreApplication.translate("signup_dialog", u"confirm password", None))
+        self.error_lbl.setText(QCoreApplication.translate("signup_dialog", u"TextLabel", None))
+        self.success_lbl.setText(QCoreApplication.translate("signup_dialog", u"TextLabel", None))
         self.signup_btn.setText(QCoreApplication.translate("signup_dialog", u"sign up", None))
     # retranslateUi
 

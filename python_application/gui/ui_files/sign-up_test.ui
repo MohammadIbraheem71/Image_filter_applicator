@@ -233,6 +233,9 @@ QPushButton#signup_btn:pressed {
              <height>16777215</height>
             </size>
            </property>
+           <property name="echoMode">
+            <enum>QLineEdit::EchoMode::Password</enum>
+           </property>
            <property name="placeholderText">
             <string>password</string>
            </property>
@@ -258,8 +261,59 @@ QPushButton#signup_btn:pressed {
              <height>16777215</height>
             </size>
            </property>
+           <property name="echoMode">
+            <enum>QLineEdit::EchoMode::Password</enum>
+           </property>
            <property name="placeholderText">
             <string>confirm password</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="error_lbl">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">    background-color: rgba(248, 215, 218, 150); /* light red with 150/255 opacity */
+    color: rgb(196, 62, 57);                              /* dark red text */
+    border: 1px solid rgba(196, 62, 57, 200);  /* optional semi-transparent border */
+    border-radius: 4px;
+    padding: 2px 4px;
+</string>
+           </property>
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="success_lbl">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgba(198, 239, 206, 150); /* light green with 150/255 opacity */
+color: rgb(0, 97, 0);                        /* dark green text */
+border: 1px solid rgba(0, 97, 0, 200);      /* optional semi-transparent border */
+border-radius: 4px;
+padding: 2px 4px;
+</string>
+           </property>
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
            </property>
           </widget>
          </item>

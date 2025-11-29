@@ -13,7 +13,7 @@ console.log("Creating tables if they don't exist...");
 
 // Use IF NOT EXISTS so running multiple times is safe
 db.exec(`
-C-- -------------------------
+-- -------------------------
 -- Users table
 -- -------------------------
 CREATE TABLE IF NOT EXISTS users (
