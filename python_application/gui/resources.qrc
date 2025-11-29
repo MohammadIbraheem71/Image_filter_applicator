@@ -1,11 +1,12 @@
 <RCC>
   <qresource prefix="/icons">
-    <file>assets/filter_icon.png</file>
-    <file>assets/gallery_icon.png</file>
-    <file>assets/profile_icon.png</file>
-    <file>assets/signup_icon.png</file>
-    <file>assets/login_icon.png</file>
-    <file>assets/upload_icon.png</file>
+    <file>assets/cloud-upload-alt.png</file>
+    <file>assets/entrance.png</file>
+    <file>assets/globe.png</file>
+    <file>assets/paintbrush-pencil.png</file>
+    <file>assets/picture.png</file>
+    <file>assets/leave.png</file>
+    <file>assets/user.png</file>
     <file>assets/manhattn_sunset_crp.png</file>
     <file>assets/sunset_2.jpg</file>
     <file>assets/eye.png</file>

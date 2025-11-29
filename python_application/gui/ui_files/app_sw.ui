@@ -582,7 +582,7 @@ QScrollBar::sub-line:vertical {
          </property>
          <property name="icon">
           <iconset resource="../resources.qrc">
-           <normaloff>:/icons/assets/filter_icon.png</normaloff>:/icons/assets/filter_icon.png</iconset>
+           <normaloff>:/icons/assets/paintbrush-pencil.png</normaloff>:/icons/assets/paintbrush-pencil.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -611,7 +611,7 @@ QScrollBar::sub-line:vertical {
          </property>
          <property name="icon">
           <iconset resource="../resources.qrc">
-           <normaloff>:/icons/assets/gallery_icon.png</normaloff>:/icons/assets/gallery_icon.png</iconset>
+           <normaloff>:/icons/assets/picture.png</normaloff>:/icons/assets/picture.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -634,7 +634,7 @@ QScrollBar::sub-line:vertical {
          </property>
          <property name="icon">
           <iconset resource="../resources.qrc">
-           <normaloff>:/icons/assets/profile_icon.png</normaloff>:/icons/assets/profile_icon.png</iconset>
+           <normaloff>:/icons/assets/user.png</normaloff>:/icons/assets/user.png</iconset>
          </property>
          <property name="iconSize">
           <size>

@@ -570,7 +570,7 @@ class Ui_MainWindow(object):
         self.filter_pg_btn.setMinimumSize(QSize(0, 36))
         self.filter_pg_btn.setMaximumSize(QSize(40, 40))
         icon = QIcon()
-        icon.addFile(u":/icons/assets/filter_icon.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon.addFile(u":/icons/assets/paintbrush-pencil.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.filter_pg_btn.setIcon(icon)
         self.filter_pg_btn.setIconSize(QSize(28, 28))
 
@@ -582,7 +582,7 @@ class Ui_MainWindow(object):
         self.gallery_pg_btn.setSizePolicy(sizePolicy1)
         self.gallery_pg_btn.setMaximumSize(QSize(40, 40))
         icon1 = QIcon()
-        icon1.addFile(u":/icons/assets/gallery_icon.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon1.addFile(u":/icons/assets/picture.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.gallery_pg_btn.setIcon(icon1)
         self.gallery_pg_btn.setIconSize(QSize(28, 28))
 
@@ -592,7 +592,7 @@ class Ui_MainWindow(object):
         self.profile_pg_btn.setObjectName(u"profile_pg_btn")
         self.profile_pg_btn.setMaximumSize(QSize(40, 40))
         icon2 = QIcon()
-        icon2.addFile(u":/icons/assets/profile_icon.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon2.addFile(u":/icons/assets/user.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.profile_pg_btn.setIcon(icon2)
         self.profile_pg_btn.setIconSize(QSize(28, 28))
 

@@ -157,7 +157,7 @@ class Ui_profile_pg(object):
         self.logout_btn = QPushButton(self.logged_pg)
         self.logout_btn.setObjectName(u"logout_btn")
         icon = QIcon()
-        icon.addFile(u":/icons/assets/login_icon.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon.addFile(u":/icons/assets/leave.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.logout_btn.setIcon(icon)
         self.logout_btn.setIconSize(QSize(30, 30))
 
@@ -176,7 +176,7 @@ class Ui_profile_pg(object):
         self.sign_up_btn = QPushButton(self.auth_pg)
         self.sign_up_btn.setObjectName(u"sign_up_btn")
         icon1 = QIcon()
-        icon1.addFile(u":/icons/assets/signup_icon.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon1.addFile(u":/icons/assets/globe.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.sign_up_btn.setIcon(icon1)
         self.sign_up_btn.setIconSize(QSize(30, 30))
 
@@ -184,7 +184,9 @@ class Ui_profile_pg(object):
 
         self.log_in_btn = QPushButton(self.auth_pg)
         self.log_in_btn.setObjectName(u"log_in_btn")
-        self.log_in_btn.setIcon(icon)
+        icon2 = QIcon()
+        icon2.addFile(u":/icons/assets/entrance.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.log_in_btn.setIcon(icon2)
         self.log_in_btn.setIconSize(QSize(30, 30))
 
         self.horizontalLayout.addWidget(self.log_in_btn)

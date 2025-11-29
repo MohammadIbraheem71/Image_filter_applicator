@@ -214,7 +214,7 @@
            </property>
            <property name="icon">
             <iconset resource="../resources.qrc">
-             <normaloff>:/icons/assets/login_icon.png</normaloff>:/icons/assets/login_icon.png</iconset>
+             <normaloff>:/icons/assets/leave.png</normaloff>:/icons/assets/leave.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -239,7 +239,7 @@
            </property>
            <property name="icon">
             <iconset resource="../resources.qrc">
-             <normaloff>:/icons/assets/signup_icon.png</normaloff>:/icons/assets/signup_icon.png</iconset>
+             <normaloff>:/icons/assets/globe.png</normaloff>:/icons/assets/globe.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -256,7 +256,7 @@
            </property>
            <property name="icon">
             <iconset resource="../resources.qrc">
-             <normaloff>:/icons/assets/login_icon.png</normaloff>:/icons/assets/login_icon.png</iconset>
+             <normaloff>:/icons/assets/entrance.png</normaloff>:/icons/assets/entrance.png</iconset>
            </property>
            <property name="iconSize">
             <size>

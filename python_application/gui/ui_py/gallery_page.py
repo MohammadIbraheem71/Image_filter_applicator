@@ -15,8 +15,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QGridLayout, QHBoxLayout, QLabel,
-    QPushButton, QScrollArea, QSizePolicy, QSpacerItem,
+from PySide6.QtWidgets import (QApplication, QHBoxLayout, QLabel, QPushButton,
+    QScrollArea, QSizePolicy, QSpacerItem, QVBoxLayout,
     QWidget)
 import resources_rc
 
@@ -25,14 +25,14 @@ class Ui_gallery_pg(object):
         if not gallery_pg.objectName():
             gallery_pg.setObjectName(u"gallery_pg")
         gallery_pg.resize(423, 315)
-        self.gridLayout = QGridLayout(gallery_pg)
-        self.gridLayout.setObjectName(u"gridLayout")
+        self.verticalLayout = QVBoxLayout(gallery_pg)
+        self.verticalLayout.setObjectName(u"verticalLayout")
         self.horizontalLayout_4 = QHBoxLayout()
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
         self.upld_glry_btn = QPushButton(gallery_pg)
         self.upld_glry_btn.setObjectName(u"upld_glry_btn")
         icon = QIcon()
-        icon.addFile(u":/icons/assets/upload_icon.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon.addFile(u":/icons/assets/cloud-upload-alt.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.upld_glry_btn.setIcon(icon)
         self.upld_glry_btn.setIconSize(QSize(30, 30))
 
@@ -43,12 +43,12 @@ class Ui_gallery_pg(object):
         self.horizontalLayout_4.addItem(self.horizontalSpacer)
 
 
-        self.gridLayout.addLayout(self.horizontalLayout_4, 0, 0, 1, 1)
+        self.verticalLayout.addLayout(self.horizontalLayout_4)
 
         self.label = QLabel(gallery_pg)
         self.label.setObjectName(u"label")
 
-        self.gridLayout.addWidget(self.label, 1, 0, 1, 1)
+        self.verticalLayout.addWidget(self.label)
 
         self.gallery_scroll_area = QScrollArea(gallery_pg)
         self.gallery_scroll_area.setObjectName(u"gallery_scroll_area")
@@ -58,7 +58,7 @@ class Ui_gallery_pg(object):
         self.image_grid.setGeometry(QRect(0, 0, 403, 227))
         self.gallery_scroll_area.setWidget(self.image_grid)
 
-        self.gridLayout.addWidget(self.gallery_scroll_area, 2, 0, 1, 1)
+        self.verticalLayout.addWidget(self.gallery_scroll_area)
 
 
         self.retranslateUi(gallery_pg)

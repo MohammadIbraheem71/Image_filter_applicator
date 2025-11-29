@@ -20,7 +20,7 @@
        </property>
        <property name="icon">
         <iconset resource="../resources.qrc">
-         <normaloff>:/icons/assets/upload_icon.png</normaloff>:/icons/assets/upload_icon.png</iconset>
+         <normaloff>:/icons/assets/cloud-upload-alt.png</normaloff>:/icons/assets/cloud-upload-alt.png</iconset>
        </property>
        <property name="iconSize">
         <size>
