@@ -5,6 +5,8 @@ from PySide6.QtCore import QObject, Signal
 
 class GalleryAPI(QObject):
     image_uploaded = Signal()
+    image_liked = Signal()   # new signal
+    image_unliked = Signal() 
 
     def __init__(self, base_url, token=None, http_client=requests):
         super().__init__()
@@ -19,6 +21,39 @@ class GalleryAPI(QObject):
         url = f"{self.base_url}/routes/image/gallery"
         response = self.http_client.get(url)
         return response.json()
+    
+    def like_image(self, image_id: int):
+        url = f"{self.base_url}/routes/image/like"
+        response = self.http_client.post(url, json={"image_id": image_id}, headers=self.get_headers())
+        try:
+            data = response.json()
+        except Exception:
+            print("Response is not JSON. You might need to sign in.")
+            return {"success": False, "message": "Invalid response"}
+
+        if data.get("success"):
+            self.image_liked.emit()
+        else:
+            if data.get("message") in ["no token provided.", "invalid token."]:
+                print("You need to sign in")
+        return data
+
+    def unlike_image(self, image_id: int):
+        url = f"{self.base_url}/routes/image/unlike"
+        response = self.http_client.post(url, json={"image_id": image_id}, headers=self.get_headers())
+        try:
+            data = response.json()
+        except Exception:
+            print("Response is not JSON. You might need to sign in.")
+            return {"success": False, "message": "Invalid response"}
+
+        if data.get("success"):
+            self.image_unliked.emit()
+        else:
+            if data.get("message") in ["no token provided.", "invalid token."]:
+                print("You need to sign in")
+        return data
+
 
     def upload_image(self, file_path, filename):
         if not os.path.isfile(file_path):
@@ -37,3 +72,5 @@ class GalleryAPI(QObject):
         response.raise_for_status()
         self.image_uploaded.emit()
         return response.json()
+    
+    

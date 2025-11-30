@@ -13,10 +13,11 @@ class gallery_page(QWidget):
         self.ui.setupUi(self)
         self.api = api
 
-        self.loader = image_loader(self.ui.image_grid, columns=2)
+        self.loader = image_loader(self.ui.image_grid, columns=2, api=self.api)
 
         # Connect signals
         self.ui.upld_glry_btn.clicked.connect(self.upload_to_gallery)
+        
 
         # Load gallery images
         self.refresh_gallery()
@@ -25,9 +26,9 @@ class gallery_page(QWidget):
     def refresh_gallery(self):
         try:
             data = self.api.get_gallery()  # fetch from /gallery route
-            images_list = data.get("images", [])
-            urls = [img["image_url"] for img in images_list]
-            self.loader.load_images(urls)  # load them into grid
+            images_list = data.get("images", [])  # make sure this matches backend JSON
+            # Pass the list of dicts directly, not just URLs
+            self.loader.load_images(images_list)
         except Exception as e:
             print("Error fetching gallery:", e)
 

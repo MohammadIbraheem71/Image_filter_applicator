@@ -7,19 +7,23 @@ from io import BytesIO
 from PIL import Image
 from ui_py.widgets.image_widget import Ui_image_widget
 
+
 class image_widget(QWidget):
     """
     A QWidget that loads an image from a URL, scales it to cover the available 
     space (cropping if necessary), and displays it with rounded top corners. 
     Assumes widget size is fixed, so resizing logic is omitted.
     """
-    def __init__(self, url: str, likes: int = 0):
+    def __init__(self, url, likes=0, image_id=None, api=None):
         super().__init__()
         self.ui = Ui_image_widget()
         self.ui.setupUi(self)
+        
+        self.image_id = image_id
+        self.api = api
+        
         self.likes = likes
         self.original_pixmap = None  # Store original pixmap
-        
         # --- Layout Fixes (Crucial for initial sizing) ---
         # 1. Ensure the QLabel expands
         #size_policy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
@@ -37,8 +41,51 @@ class image_widget(QWidget):
         # We handle scaling manually in update_image_display
         self.ui.img_lbl.setScaledContents(False) 
         
+        self.ui.like_btn.clicked.connect(self.toggle_like)
+        self.ui.like_btn2.clicked.connect(self.toggle_like)
+        self.ui.like_count.setText(str(self.likes))
+
+        # Set initial like button state
+        if not self.api or not self.api.user_info:
+            self.ui.like_btn2.setVisible(False)
+        else:
+            # User logged in → show based on whether they liked the image
+            if self.likes > 0:  # assuming likes reflect if this user liked it
+                self.ui.like_btn.setVisible(False)
+                self.ui.like_btn2.setVisible(True)
+            else:
+                self.ui.like_btn.setVisible(True)
+                self.ui.like_btn2.setVisible(False)
+
         self.load_image(url)
-    
+
+    def toggle_like(self):
+        if not self.api or not self.image_id:
+            print("API or image ID missing")
+            return
+
+        try:
+            # Try liking first
+            res = self.api.like_image(self.image_id)
+            
+            if res.get("success"):
+                self.ui.like_btn.setVisible(False)
+                self.ui.like_btn2.setVisible(True)
+                self.likes += 1
+                self.ui.like_count.setText(str(self.likes))
+                return
+
+            # If already liked → try unlike
+            res = self.api.unlike_image(self.image_id)
+            if res.get("success"):
+                self.ui.like_btn.setVisible(True)
+                self.ui.like_btn2.setVisible(False)
+                self.likes -= 1
+                self.ui.like_count.setText(str(self.likes))
+
+        except Exception as e:
+            print("Error while liking:", e)
+
     def load_image(self, url: str):
         """Load image from URL and store the original QPixmap."""
         try:
@@ -132,6 +179,7 @@ class image_widget(QWidget):
         painter.end()
         
         return final_pixmap
+    
     
     @staticmethod
     def pil_to_qpixmap(image: Image.Image) -> QPixmap:

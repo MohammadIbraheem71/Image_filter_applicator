@@ -10,6 +10,8 @@ from backend_api.GalleryAPI import GalleryAPI
 
 class client_api(QObject):
     image_uploaded = Signal()
+    image_liked = Signal()   # new signal
+    image_unliked = Signal() 
 
     def __init__(self, base_url):
         super().__init__()
@@ -21,6 +23,8 @@ class client_api(QObject):
 
         # Connect signals
         self.gallery.image_uploaded.connect(self.image_uploaded.emit)
+        self.gallery.image_liked.connect(self.image_liked.emit)
+        self.gallery.image_unliked.connect(self.image_unliked.emit)
 
     # ----------- token property for backward compatibility -----------
     @property
@@ -64,3 +68,9 @@ class client_api(QObject):
 
     def upload_image(self, file_path, filename):
         return self.gallery.upload_image(file_path, filename)
+    
+    def like_image(self, image_id):
+        return self.gallery.like_image(image_id)
+
+    def unlike_image(self, image_id):
+        return self.gallery.unlike_image(image_id)

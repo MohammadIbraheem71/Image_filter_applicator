@@ -107,5 +107,51 @@ router.get("/gallery", async(req, res) => {
   
 });
 
+//like route
+router.post("/like", authentication_middleware, (req, res) => {
+    const userId = req.user.id;
+    const { image_id } = req.body;
+
+    if (!image_id) return res.status(400).json({ success: false, message: "Missing image_id" });
+
+    try {
+        const stmt = db.prepare(`
+            INSERT INTO image_likes (user_id, image_id) 
+            VALUES (?, ?)
+        `);
+        stmt.run(userId, image_id);
+
+        return res.json({ success: true, message: "Liked" });
+    } catch (err) {
+        if (err.message.includes("UNIQUE")) {
+            return res.status(400).json({ success: false, message: "Already liked" });
+        }
+        console.error("Like error:", err);
+        return res.status(500).json({ success: false, message: "Server error" });
+    }
+});
+
+//unlike route
+router.post("/unlike", authentication_middleware, (req, res) => {
+    const userId = req.user.id;
+    const { image_id } = req.body;
+
+    if (!image_id) return res.status(400).json({ success: false, message: "Missing image_id" });
+
+    try {
+        const stmt = db.prepare(`
+            DELETE FROM image_likes 
+            WHERE user_id = ? AND image_id = ?
+        `);
+        stmt.run(userId, image_id);
+
+        return res.json({ success: true, message: "Unliked" });
+    } catch (err) {
+        console.error("Unlike error:", err);
+        return res.status(500).json({ success: false, message: "Server error" });
+    }
+});
+
+
 
 export default router;

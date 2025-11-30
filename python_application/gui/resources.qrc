@@ -1,5 +1,8 @@
 <RCC>
   <qresource prefix="/icons">
+    <file>assets/magnify.png</file>
+    <file>assets/heartred.png</file>
+    <file>assets/heart.png</file>
     <file>assets/cloud-upload-alt.png</file>
     <file>assets/entrance.png</file>
     <file>assets/globe.png</file>

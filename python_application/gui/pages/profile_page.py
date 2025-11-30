@@ -37,6 +37,8 @@ class profile_page(QWidget):
         self.ui.sign_up_btn.clicked.connect(self.open_signup_dialog)
         self.ui.logout_btn.clicked.connect(self.logout_user)
         self.api.image_uploaded.connect(self.load_user_profile)
+        self.api.image_liked.connect(self.load_user_profile)
+        self.api.image_unliked.connect(self.load_user_profile)
 
         #if no token is found then we set the current page to be the auth page, as user
         #needs to log in or sign up
