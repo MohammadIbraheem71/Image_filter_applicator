@@ -16,7 +16,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QHBoxLayout, QLabel, QLayout,
-    QPushButton, QSizePolicy, QVBoxLayout, QWidget)
+    QPushButton, QSizePolicy, QSpacerItem, QVBoxLayout,
+    QWidget)
 import resources_rc
 
 class Ui_image_widget(object):
@@ -76,27 +77,20 @@ class Ui_image_widget(object):
         sizePolicy1.setVerticalStretch(0)
         sizePolicy1.setHeightForWidth(self.img_lbl.sizePolicy().hasHeightForWidth())
         self.img_lbl.setSizePolicy(sizePolicy1)
-        self.img_lbl.setMinimumSize(QSize(250, 110))
+        self.img_lbl.setMinimumSize(QSize(263, 120))
         self.img_lbl.setMaximumSize(QSize(263, 120))
         self.img_lbl.setScaledContents(False)
 
         self.verticalLayout_2.addWidget(self.img_lbl)
 
         self.horizontalLayout = QHBoxLayout()
-#ifndef Q_OS_MAC
-        self.horizontalLayout.setSpacing(-1)
-#endif
+        self.horizontalLayout.setSpacing(6)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setSizeConstraint(QLayout.SizeConstraint.SetDefaultConstraint)
         self.horizontalLayout.setContentsMargins(0, 0, 10, 0)
-        self.img_info = QLabel(self.sub_widget)
-        self.img_info.setObjectName(u"img_info")
-        sizePolicy1.setHeightForWidth(self.img_info.sizePolicy().hasHeightForWidth())
-        self.img_info.setSizePolicy(sizePolicy1)
-        self.img_info.setMinimumSize(QSize(0, 20))
-        self.img_info.setMaximumSize(QSize(200, 400))
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.horizontalLayout.addWidget(self.img_info)
+        self.horizontalLayout.addItem(self.horizontalSpacer)
 
         self.magnify_btn = QPushButton(self.sub_widget)
         self.magnify_btn.setObjectName(u"magnify_btn")
@@ -110,9 +104,9 @@ class Ui_image_widget(object):
 "}\n"
 "")
         icon = QIcon()
-        icon.addFile(u"assets/magnify.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon.addFile(u":/icons/assets/magnify.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.magnify_btn.setIcon(icon)
-        self.magnify_btn.setIconSize(QSize(40, 40))
+        self.magnify_btn.setIconSize(QSize(30, 30))
 
         self.horizontalLayout.addWidget(self.magnify_btn)
 
@@ -129,28 +123,28 @@ class Ui_image_widget(object):
 "}\n"
 "")
         icon1 = QIcon()
-        icon1.addFile(u"assets/heart.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon1.addFile(u":/icons/assets/heart.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.like_btn.setIcon(icon1)
         self.like_btn.setIconSize(QSize(30, 30))
 
         self.horizontalLayout.addWidget(self.like_btn)
 
-        self.like_btn2 = QPushButton(self.sub_widget)
-        self.like_btn2.setObjectName(u"like_btn2")
-        sizePolicy1.setHeightForWidth(self.like_btn2.sizePolicy().hasHeightForWidth())
-        self.like_btn2.setSizePolicy(sizePolicy1)
-        self.like_btn2.setStyleSheet(u"QPushButton {\n"
+        self.liked_btn = QPushButton(self.sub_widget)
+        self.liked_btn.setObjectName(u"liked_btn")
+        sizePolicy1.setHeightForWidth(self.liked_btn.sizePolicy().hasHeightForWidth())
+        self.liked_btn.setSizePolicy(sizePolicy1)
+        self.liked_btn.setStyleSheet(u"QPushButton {\n"
 "    background-color: transparent;\n"
 "    border: none;\n"
 "    font-size: 22px;          /* normal size */\n"
 "    color: #888;              /* grey color */\n"
 "}")
         icon2 = QIcon()
-        icon2.addFile(u"assets/heartred.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.like_btn2.setIcon(icon2)
-        self.like_btn2.setIconSize(QSize(30, 30))
+        icon2.addFile(u":/icons/assets/heartred.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.liked_btn.setIcon(icon2)
+        self.liked_btn.setIconSize(QSize(30, 30))
 
-        self.horizontalLayout.addWidget(self.like_btn2)
+        self.horizontalLayout.addWidget(self.liked_btn)
 
         self.like_count = QLabel(self.sub_widget)
         self.like_count.setObjectName(u"like_count")
@@ -179,10 +173,9 @@ class Ui_image_widget(object):
     def retranslateUi(self, image_widget):
         image_widget.setWindowTitle(QCoreApplication.translate("image_widget", u"Form", None))
         self.img_lbl.setText(QCoreApplication.translate("image_widget", u"image here", None))
-        self.img_info.setText(QCoreApplication.translate("image_widget", u"TextLabel", None))
         self.magnify_btn.setText("")
         self.like_btn.setText("")
-        self.like_btn2.setText("")
+        self.liked_btn.setText("")
         self.like_count.setText(QCoreApplication.translate("image_widget", u"0", None))
     # retranslateUi
 

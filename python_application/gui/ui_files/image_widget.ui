@@ -80,8 +80,8 @@ QWidget#sub_widget QWidget#img_info {
         </property>
         <property name="minimumSize">
          <size>
-          <width>250</width>
-          <height>110</height>
+          <width>263</width>
+          <height>120</height>
          </size>
         </property>
         <property name="maximumSize">
@@ -101,7 +101,7 @@ QWidget#sub_widget QWidget#img_info {
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <property name="spacing">
-         <number>-1</number>
+         <number>6</number>
         </property>
         <property name="sizeConstraint">
          <enum>QLayout::SizeConstraint::SetDefaultConstraint</enum>
@@ -119,29 +119,17 @@ QWidget#sub_widget QWidget#img_info {
          <number>0</number>
         </property>
         <item>
-         <widget class="QLabel" name="img_info">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Orientation::Horizontal</enum>
           </property>
-          <property name="minimumSize">
+          <property name="sizeHint" stdset="0">
            <size>
-            <width>0</width>
+            <width>40</width>
             <height>20</height>
            </size>
           </property>
-          <property name="maximumSize">
-           <size>
-            <width>200</width>
-            <height>400</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>TextLabel</string>
-          </property>
-         </widget>
+         </spacer>
         </item>
         <item>
          <widget class="QPushButton" name="magnify_btn">
@@ -165,12 +153,12 @@ QWidget#sub_widget QWidget#img_info {
           </property>
           <property name="icon">
            <iconset resource="../resources.qrc">
-            <normaloff>assets/magnify.png</normaloff>assets/magnify.png</iconset>
+            <normaloff>:/icons/assets/magnify.png</normaloff>:/icons/assets/magnify.png</iconset>
           </property>
           <property name="iconSize">
            <size>
-            <width>40</width>
-            <height>40</height>
+            <width>30</width>
+            <height>30</height>
            </size>
           </property>
          </widget>
@@ -202,8 +190,8 @@ QWidget#sub_widget QWidget#img_info {
            <string/>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>assets/heart.png</normaloff>assets/heart.png</iconset>
+           <iconset resource="../resources.qrc">
+            <normaloff>:/icons/assets/heart.png</normaloff>:/icons/assets/heart.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -214,7 +202,7 @@ QWidget#sub_widget QWidget#img_info {
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="like_btn2">
+         <widget class="QPushButton" name="liked_btn">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -233,8 +221,8 @@ QWidget#sub_widget QWidget#img_info {
            <string/>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>assets/heartred.png</normaloff>assets/heartred.png</iconset>
+           <iconset resource="../resources.qrc">
+            <normaloff>:/icons/assets/heartred.png</normaloff>:/icons/assets/heartred.png</iconset>
           </property>
           <property name="iconSize">
            <size>

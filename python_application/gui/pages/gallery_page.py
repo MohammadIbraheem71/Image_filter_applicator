@@ -28,12 +28,12 @@ class gallery_page(QWidget):
             data = self.api.get_gallery()  # fetch from /gallery route
             images_list = data.get("images", [])  # make sure this matches backend JSON
             # Pass the list of dicts directly, not just URLs
-            self.loader.load_images(images_list)
+            self.loader.load_images()
         except Exception as e:
             print("Error fetching gallery:", e)
 
     def upload_to_gallery(self):
-        upload_dlg = upload_dialog(self.api, parent=self)
+        upload_dlg = upload_dialog(api=self.api, parent=self)
         if upload_dlg.exec():
             # Refresh gallery after successful upload
             self.refresh_gallery()

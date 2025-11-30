@@ -1,93 +1,121 @@
 from PySide6.QtWidgets import QWidget, QLabel, QSizePolicy, QVBoxLayout 
-from PySide6.QtCore import Qt, QRectF
-# Removed QResizeEvent import
+from PySide6.QtCore import Qt, QRectF, QThreadPool
 from PySide6.QtGui import QPixmap, QImage, QPainter, QPainterPath
 import requests
 from io import BytesIO
 from PIL import Image
+
 from ui_py.widgets.image_widget import Ui_image_widget
+from utils.image_worker import image_worker
 
-
+#this widget houses the image, and related buttons.
 class image_widget(QWidget):
-    """
-    A QWidget that loads an image from a URL, scales it to cover the available 
-    space (cropping if necessary), and displays it with rounded top corners. 
-    Assumes widget size is fixed, so resizing logic is omitted.
-    """
-    def __init__(self, url, likes=0, image_id=None, api=None):
+    def __init__(self, url, likes=0, image_id=None, api=None, liked_by_user=False):
         super().__init__()
         self.ui = Ui_image_widget()
         self.ui.setupUi(self)
         
+        self.thread_pool = QThreadPool.globalInstance()
+
         self.image_id = image_id
         self.api = api
-        
+        self.liked_by_user = liked_by_user
         self.likes = likes
-        self.original_pixmap = None  # Store original pixmap
-        # --- Layout Fixes (Crucial for initial sizing) ---
-        # 1. Ensure the QLabel expands
-        #size_policy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        #self.ui.img_lbl.setSizePolicy(size_policy)
+        self.original_pixmap = None  
         
-        # 2. Ensure the parent layout allocates more height to the image
-        parent_layout = self.layout()
-        if parent_layout and isinstance(parent_layout, QVBoxLayout):
-            # Assuming the image label is index 0 and the info widget is index 1
-            parent_layout.setStretch(0, 3) 
-            parent_layout.setStretch(1, 1)
-        # ------------------------------
+        # # 2. Ensure the parent layout allocates more height to the image
+        # parent_layout = self.layout()
+        # if parent_layout and isinstance(parent_layout, QVBoxLayout):
+        #     # Assuming the image label is index 0 and the info widget is index 1
+        #     parent_layout.setStretch(0, 3) 
+        #     parent_layout.setStretch(1, 1)
+        # # ------------------------------
 
         # --- IMPORTANT: Ensure setScaledContents is OFF! ---
         # We handle scaling manually in update_image_display
         self.ui.img_lbl.setScaledContents(False) 
         
+        #here we initialize the like button state
+        self._update_like_button_state()
+
         self.ui.like_btn.clicked.connect(self.toggle_like)
-        self.ui.like_btn2.clicked.connect(self.toggle_like)
+        self.ui.liked_btn.clicked.connect(self.toggle_like)
         self.ui.like_count.setText(str(self.likes))
 
-        # Set initial like button state
-        if not self.api or not self.api.user_info:
-            self.ui.like_btn2.setVisible(False)
-        else:
-            # User logged in → show based on whether they liked the image
-            if self.likes > 0:  # assuming likes reflect if this user liked it
-                self.ui.like_btn.setVisible(False)
-                self.ui.like_btn2.setVisible(True)
+
+        self.load_image_async(url)
+
+    #this function disables the like button for guest users
+    def disable_like_button(self):
+        self.ui.like_btn.setEnabled(False)
+        self.ui.liked_btn.setEnabled(False)
+        self.ui.liked_btn.setVisible(False)
+    #this button sets the initial like button state based on the input
+    #wether the user has already liked the image or not
+    def _update_like_button_state(self):
+            if not self.api or not self.api.token:
+                # User not signed in → disable like button
+                self.ui.like_btn.setEnabled(False)
+                self.ui.liked_btn.setEnabled(False)
             else:
-                self.ui.like_btn.setVisible(True)
-                self.ui.like_btn2.setVisible(False)
+                # Signed in → toggle buttons based on liked_by_user
+                if self.liked_by_user:
+                    self.ui.like_btn.setVisible(False)
+                    self.ui.liked_btn.setVisible(True)
+                else:
+                    self.ui.like_btn.setVisible(True)
+                    self.ui.liked_btn.setVisible(False)
 
-        self.load_image(url)
-
+    #this handles the like and unlike logic 
     def toggle_like(self):
         if not self.api or not self.image_id:
-            print("API or image ID missing")
+            print("API instance or image ID missing")
             return
 
         try:
-            # Try liking first
-            res = self.api.like_image(self.image_id)
-            
-            if res.get("success"):
-                self.ui.like_btn.setVisible(False)
-                self.ui.like_btn2.setVisible(True)
-                self.likes += 1
-                self.ui.like_count.setText(str(self.likes))
-                return
+            if self.ui.like_btn.isVisible():
+                # Attempt to like
+                res = self.api.like_image(self.image_id)
+                if res.get("success"):
+                    self.likes += 1
+                    self.liked_by_user = True
+                    self.ui.like_btn.setVisible(False)
+                    self.ui.liked_btn.setVisible(True)
+            else:
+                # Attempt to unlike
+                res = self.api.unlike_image(self.image_id)
+                if res.get("success"):
+                    self.likes -= 1
+                    self.liked_by_user = False
+                    self.ui.like_btn.setVisible(True)
+                    self.ui.liked_btn.setVisible(False)
 
-            # If already liked → try unlike
-            res = self.api.unlike_image(self.image_id)
-            if res.get("success"):
-                self.ui.like_btn.setVisible(True)
-                self.ui.like_btn2.setVisible(False)
-                self.likes -= 1
-                self.ui.like_count.setText(str(self.likes))
+            self.ui.like_count.setText(str(self.likes))
 
         except Exception as e:
-            print("Error while liking:", e)
+            print(f"Error toggling like: {e}")
 
+    #this is the async image loading function
+    #hopefully it does not block the main thread
+    def load_image_async(self, url):
+        worker = image_worker(url)
+        worker.signals.finished.connect(self.on_image_fetched)
+        worker.signals.error.connect(self.on_image_error)
+        self.thread_pool.start(worker)
+
+    #once the thread is done working, it calls this function, this displays the image
+    def on_image_fetched(self, pil_image):
+        pixmap = self.pil_to_qpixmap(pil_image)
+        self.original_pixmap = pixmap
+        self.update_image_display()
+
+    #called by the thread in case of error
+    def on_image_error(self, error):
+        print(f"Failed to load image (something went wrong with the threading part): {error}")
+        self.ui.img_lbl.setText("Image failed to load")
+
+    #this function loads the image
     def load_image(self, url: str):
-        """Load image from URL and store the original QPixmap."""
         try:
             response = requests.get(url)
             response.raise_for_status()
@@ -103,8 +131,9 @@ class image_widget(QWidget):
             print(f"Failed to load image from {url}: {e}")
             self.ui.img_lbl.setText("Image failed to load")
     
-    # --- resizeEvent removed as requested, assuming static widget size ---
     
+    #do not tinker with these functions, these only display the images
+    #took a lot of time to get right, please pangay mat lena
     def update_image_display(self):
         """
         Performs the 3 steps: 
@@ -147,6 +176,8 @@ class image_widget(QWidget):
             lbl.setAlignment(Qt.AlignCenter) 
             
     
+    #dont bother with this function either, took a lot of time to get right
+    #please pangay mat lena
     def _clip_and_round_pixmap(self, source_pixmap: QPixmap, target_w: int, target_h: int, draw_x: int, draw_y: int, radius: int) -> QPixmap:
         """
         Creates a final pixmap (target_w x target_h) with rounded top corners, 

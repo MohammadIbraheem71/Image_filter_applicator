@@ -43,13 +43,13 @@ QPushButton {
 QPushButton:hover {
     background-color: rgba(255, 255, 255, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 8px 24px rgba(180, 120, 220, 0.6);
+    /*box-shadow: 0 8px 24px rgba(180, 120, 220, 0.6);*/
 }
 
 QPushButton:pressed {
     background-color: rgba(255, 255, 255, 0.15);
     transform: scale(0.98);
-    box-shadow: 0 4px 12px rgba(200, 150, 220, 0.3);
+   /* box-shadow: 0 4px 12px rgba(200, 150, 220, 0.3);*/
 }
 
 /* Disabled state */
@@ -73,7 +73,7 @@ QPushButton[secondary=&quot;true&quot;] {
 QPushButton[secondary=&quot;true&quot;]:hover {
     background-color: rgba(255, 255, 255, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.35);
-    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2);
+    /*box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2);*/
 }
 
 /* -----------------------------------------
@@ -113,9 +113,9 @@ QPushButton#filter_pg_btn:hover,
 QPushButton#gallery_pg_btn:hover,
 QPushButton#profile_pg_btn:hover {
     background-color: rgba(220, 180, 240, 0.3);
-    box-shadow: 0 0 20px rgba(200, 150, 230, 0.6),
+    /*box-shadow: 0 0 20px rgba(200, 150, 230, 0.6),
                 0 0 40px rgba(200, 150, 230, 0.4),
-                inset 0 0 20px rgba(255, 255, 255, 0.2);
+                inset 0 0 20px rgba(255, 255, 255, 0.2);*/
     border: 1px solid rgba(230, 190, 250, 0.5);
 }
 
@@ -133,7 +133,7 @@ QPushButton#gallery_pg_btn[active=&quot;true&quot;],
 QPushButton#profile_pg_btn[active=&quot;true&quot;] {
     font-weight: 700;
     background-color: rgba(220, 180, 240, 0.4);
-    box-shadow: 0 0 15px rgba(200, 150, 230, 0.5);
+    /*box-shadow: 0 0 15px rgba(200, 150, 230, 0.5);*/
 }
 
 /* -----------------------------------------
@@ -153,12 +153,12 @@ QComboBox {
 QComboBox:hover {
     border: 1px solid rgba(220, 180, 230, 0.6);
     background-color: rgba(255, 255, 255, 0.7);
-    box-shadow: 0 4px 16px rgba(220, 180, 230, 0.3);
+    /*box-shadow: 0 4px 16px rgba(220, 180, 230, 0.3);*/
 }
 
 QComboBox:focus {
     border: 1px solid rgba(220, 180, 230, 0.8);
-    box-shadow: 0 0 20px rgba(220, 180, 230, 0.4);
+    /*box-shadow: 0 0 20px rgba(220, 180, 230, 0.4);*/
 }
 
 QComboBox::drop-down {
@@ -195,7 +195,7 @@ QComboBox QAbstractItemView::item {
 
 QComboBox QAbstractItemView::item:hover {
     background-color: rgba(220, 180, 240, 0.3);
-    box-shadow: 0 0 12px rgba(220, 180, 230, 0.4);
+    /*box-shadow: 0 0 12px rgba(220, 180, 230, 0.4);*/
 }
 
 /* -----------------------------------------
@@ -213,7 +213,7 @@ QLineEdit, QTextEdit {
 QLineEdit:focus, QTextEdit:focus {
     background-color: rgba(255, 255, 255, 0.7);
     border: 1px solid rgba(220, 180, 230, 0.8);
-    box-shadow: 0 0 20px rgba(220, 180, 230, 0.4);
+    /*box-shadow: 0 0 20px rgba(220, 180, 230, 0.4);*/
     outline: none;
 }
 
@@ -239,7 +239,7 @@ QScrollBar::handle:vertical {
 
 QScrollBar::handle:vertical:hover {
     background: rgba(220, 180, 230, 0.8);
-    box-shadow: 0 0 10px rgba(200, 150, 230, 0.6);
+    /*box-shadow: 0 0 10px rgba(200, 150, 230, 0.6);*/
 }
 
 QScrollBar::add-line:vertical, 
@@ -298,7 +298,7 @@ QFrame[card=&quot;true&quot;] {
     background-color: rgba(255, 255, 255, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(200, 150, 230, 0.2);
+    /*box-shadow: 0 8px 32px rgba(200, 150, 230, 0.2);*/
 }
 
 /* -----------------------------------------
@@ -360,7 +360,7 @@ QTabBar::tab {
 QTabBar::tab:hover {
     color: #2D2440;
     background-color: rgba(220, 180, 240, 0.2);
-    box-shadow: 0 0 15px rgba(200, 150, 230, 0.4);
+    /*box-shadow: 0 0 15px rgba(200, 150, 230, 0.4);*/
 }
 
 QTabBar::tab:selected {
@@ -387,14 +387,14 @@ QCheckBox::indicator, QRadioButton::indicator {
 
 QCheckBox::indicator:hover, QRadioButton::indicator:hover {
     border: 2px solid rgba(220, 180, 230, 0.8);
-    box-shadow: 0 0 12px rgba(200, 150, 230, 0.5);
+    /*box-shadow: 0 0 12px rgba(200, 150, 230, 0.5);*/
 }
 
 QCheckBox::indicator:checked {
     background-color: rgba(220, 180, 230, 0.8);
     border: 2px solid rgba(200, 150, 230, 0.9);
     image: url(:/icons/check_white.svg);
-    box-shadow: 0 0 15px rgba(200, 150, 230, 0.6);
+    /*box-shadow: 0 0 15px rgba(200, 150, 230, 0.6);*/
 }
 
 QRadioButton::indicator {
@@ -404,7 +404,7 @@ QRadioButton::indicator {
 QRadioButton::indicator:checked {
     background-color: rgba(220, 180, 230, 0.8);
     border: 5px solid rgba(255, 255, 255, 0.9);
-    box-shadow: 0 0 15px rgba(200, 150, 230, 0.6);
+    /*box-shadow: 0 0 15px rgba(200, 150, 230, 0.6);*/
 }
 
 /* -----------------------------------------
@@ -417,7 +417,7 @@ QToolTip {
     border-radius: 8px;
     padding: 8px 12px;
     font-size: 12px;
-    box-shadow: 0 4px 16px rgba(200, 150, 230, 0.3);
+    /*box-shadow: 0 4px 16px rgba(200, 150, 230, 0.3);*/
 }
 
 /* -----------------------------------------
@@ -438,7 +438,7 @@ QMenu::item {
 
 QMenu::item:selected {
     background-color: rgba(220, 180, 240, 0.4);
-    box-shadow: 0 0 12px rgba(200, 150, 230, 0.4);
+    /*box-shadow: 0 0 12px rgba(200, 150, 230, 0.4);*/
 }
 
 QMenu::separator {
@@ -472,7 +472,7 @@ QProgressBar {
 QProgressBar::chunk {
     background-color: rgba(220, 180, 230, 0.8);
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(200, 150, 230, 0.5);
+    /*box-shadow: 0 0 10px rgba(200, 150, 230, 0.5);*/
 }
 
 /*side bar stuff here change it if needed*/
@@ -506,7 +506,7 @@ QScrollBar::handle:vertical {
 
 QScrollBar::handle:vertical:hover {
     background: rgba(220, 180, 230, 0.8);
-    box-shadow: 0 0 10px rgba(200, 150, 230, 0.6);
+    /*box-shadow: 0 0 10px rgba(200, 150, 230, 0.6);*/
 }
 
 QScrollBar::add-line:vertical,

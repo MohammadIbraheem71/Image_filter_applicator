@@ -67,7 +67,7 @@ class MainWindow(QMainWindow):
         )
 
         self.ui.gallery_pg_btn.clicked.connect(
-            lambda: self.ui.windows.setCurrentWidget(self.gallery_page)
+           self.show_gallery_page
         )
         
         self.ui.profile_pg_btn.clicked.connect(
@@ -77,6 +77,14 @@ class MainWindow(QMainWindow):
         # Set initial page
         self.ui.windows.setCurrentWidget(self.filter_page)
 
+    #reload the gallery whenever we click on it, so it stays updated
+    def show_gallery_page(self):
+        """Reload the gallery before showing it."""
+        try:
+            self.gallery_page.refresh_gallery()  # Make sure gallery_page has this method
+        except AttributeError:
+            print("gallery_page does not have reload_gallery() method")
+        self.ui.windows.setCurrentWidget(self.gallery_page)
 
 if __name__ == "__main__": 
     app = QApplication(sys.argv)

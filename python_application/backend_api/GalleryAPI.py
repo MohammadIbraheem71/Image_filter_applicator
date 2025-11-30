@@ -17,10 +17,28 @@ class GalleryAPI(QObject):
     def get_headers(self):
         return {"Authorization": f"Bearer {self.token}"} if self.token else {}
 
+    #function to get gallery
     def get_gallery(self):
         url = f"{self.base_url}/routes/image/gallery"
-        response = self.http_client.get(url)
-        return response.json()
+        headers = self.get_headers()  # includes token if logged in
+        
+        try:
+            response = self.http_client.get(url, headers=headers)
+            data = response.json()
+        except Exception as e:
+            print("Failed to fetch gallery:", e)
+            return {"success": False, "message": "Network or parsing error"}
+
+        if not data.get("success"):
+            print(f"{data}")
+            return data 
+
+        images = data.get("images", [])
+        # Now each image dict contains:
+        # - likes: total likes
+        # - liked_by_user: True/False if current user liked it
+
+        return {"success": True, "images": images}
     
     def like_image(self, image_id: int):
         url = f"{self.base_url}/routes/image/like"

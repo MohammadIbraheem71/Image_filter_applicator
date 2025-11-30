@@ -84,28 +84,61 @@ router.delete("/:id", authentication_middleware, async (req, res) => {
 });
 
 //this function gets and returns the shared gallery, we dont need to authenticate for that
-router.get("/gallery", async(req, res) => {
-  try{
+//gets the shared gallery
+router.get("/gallery", async (req, res) => {
+  try {
+    // Check if user is logged in
+    let userId = null;
+    const header = req.headers.authorization;
+    if (header) {
+      try {
+        const token = header.split(" ")[1];
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        userId = decoded.id;
+      } catch (err) {
+        // Invalid token, treat as guest
+        userId = null;
+      }
+    }
+
+    // Get all images
     const images = db.prepare("SELECT * FROM images").all();
 
-    return res.status(200).json({
-      sucess: true, 
-      count: images.length,
-      images
-    
-    });
-  
+    // Add likes and liked_by_user
+    const imagesWithLikes = images.map((img) => {
+      const likesRow = db
+        .prepare("SELECT COUNT(*) AS likes FROM image_likes WHERE image_id = ?")
+        .get(img.id);
 
-  }
-  catch(err){
-    console.error("error fetching gallery: ", error)
+      let likedByUser = false;
+      if (userId) {
+        const likedRow = db
+          .prepare("SELECT 1 FROM image_likes WHERE image_id = ? AND user_id = ?")
+          .get(img.id, userId);
+        likedByUser = !!likedRow;
+      }
+
+      return {
+        ...img,
+        likes: likesRow.likes,
+        liked_by_user: likedByUser,
+      };
+    });
+
+    return res.status(200).json({
+      success: true,
+      count: imagesWithLikes.length,
+      images: imagesWithLikes,
+    });
+  } catch (error) {
+    console.error("Error fetching gallery:", error);
     return res.status(500).json({
-      sucess: false,
-      message: "failed to load gallery"
+      success: false,
+      message: "Failed to load gallery",
     });
   }
-  
 });
+
 
 //like route
 router.post("/like", authentication_middleware, (req, res) => {
