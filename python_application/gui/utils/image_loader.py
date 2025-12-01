@@ -1,11 +1,13 @@
 # utils/image_loader.py
 from PySide6.QtWidgets import QWidget, QGridLayout
 from pages.widgets.image_widget import image_widget
-
+from PySide6.QtCore import Qt, QRectF, QThreadPool, Signal
 #this class is responsible for loading image_widgets into the layout grid for the gallery or 
 #any other scroll area
 #an api object is passed in to manage the loading from db
 class image_loader:
+
+    img_magnify_requested = Signal(int)
 
     def __init__(self, container_widget: QWidget, columns: int = 3, api=None):
         self.container = container_widget
@@ -64,6 +66,7 @@ class image_loader:
             # Disable like button if user is not authenticated
             if not getattr(self.api, "token", None):
                 img_card.disable_like_button()
+
 
             self.layout.addWidget(img_card, row, col)
             col += 1

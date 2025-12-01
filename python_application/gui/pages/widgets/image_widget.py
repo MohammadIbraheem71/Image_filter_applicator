@@ -1,5 +1,5 @@
 from PySide6.QtWidgets import QWidget, QLabel, QSizePolicy, QVBoxLayout 
-from PySide6.QtCore import Qt, QRectF, QThreadPool
+from PySide6.QtCore import Qt, QRectF, QThreadPool, Signal
 from PySide6.QtGui import QPixmap, QImage, QPainter, QPainterPath
 import requests
 from io import BytesIO
@@ -7,9 +7,11 @@ from PIL import Image
 
 from ui_py.widgets.image_widget import Ui_image_widget
 from utils.image_worker import image_worker
-
+from utils.event_bus import event_bus
 #this widget houses the image, and related buttons.
+
 class image_widget(QWidget):
+
     def __init__(self, url, likes=0, image_id=None, api=None, liked_by_user=False):
         super().__init__()
         self.ui = Ui_image_widget()
@@ -42,9 +44,18 @@ class image_widget(QWidget):
         self.ui.liked_btn.clicked.connect(self.toggle_like)
         self.ui.like_count.setText(str(self.likes))
 
+        self.ui.magnify_btn.clicked.connect(self.emit_magnify_signal)
 
         self.load_image_async(url)
 
+        if self.api.token == None:
+            self.disable_like_button()
+
+    #this function emits the magnify signal, emits the image id as a signal
+    def emit_magnify_signal(self):
+        event_bus.emit(event_name="request_magnify", payload={ "image_id" : self.image_id})
+
+        
     #this function disables the like button for guest users
     def disable_like_button(self):
         self.ui.like_btn.setEnabled(False)

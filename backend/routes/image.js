@@ -140,6 +140,74 @@ router.get("/gallery", async (req, res) => {
 });
 
 
+//this function searches for a singular image by its image id
+//we dont use authentication middleware here because here authentication is optional
+//not compulsory
+router.get("/get_single_img/:id", async (req, res) => {
+  try {
+    const imageId = req.params.id;
+
+    // --- Check logged-in status (optional) ---
+    let userId = null;
+    const header = req.headers.authorization;
+    if (header) {
+      try {
+        const token = header.split(" ")[1];
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        userId = decoded.id;
+      } catch {
+        userId = null; // guest
+      }
+    }
+
+    // --- Fetch image from DB ---
+    const image = db.prepare("SELECT * FROM images WHERE id = ?").get(imageId);
+
+    if (!image) {
+      return res.status(404).json({ 
+        success: false, 
+        message: "Image not found" 
+      });
+    }
+
+    // --- Count likes ---
+    const likesData = db
+      .prepare("SELECT COUNT(*) AS likes FROM image_likes WHERE image_id = ?")
+      .get(imageId);
+
+    // --- Determine if user liked it ---
+    let likedByUser = false;
+    if (userId) {
+      const likedRow = db
+        .prepare("SELECT 1 FROM image_likes WHERE image_id = ? AND user_id = ?")
+        .get(imageId, userId);
+      likedByUser = !!likedRow;
+    }
+
+    // --- OPTIONAL: Get uploader info ---
+    const uploader = db
+      .prepare("SELECT username FROM users WHERE id = ?")
+      .get(image.user_id);
+
+    return res.status(200).json({
+      success: true,
+      image: {
+        ...image,
+        likes: likesData.likes,
+        liked_by_user: likedByUser,
+        uploader: uploader ? uploader.username : null,
+      },
+    });
+  } catch (error) {
+    console.error("Error fetching image by ID:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch image",
+    });
+  }
+});
+
+
 //like route
 router.post("/like", authentication_middleware, (req, res) => {
     const userId = req.user.id;

@@ -15,8 +15,8 @@ class gallery_page(QWidget):
 
         self.loader = image_loader(self.ui.image_grid, columns=2, api=self.api)
 
-        # Connect signals
-        self.ui.upld_glry_btn.clicked.connect(self.upload_to_gallery)
+        
+
         
 
         # Load gallery images
@@ -37,3 +37,23 @@ class gallery_page(QWidget):
         if upload_dlg.exec():
             # Refresh gallery after successful upload
             self.refresh_gallery()
+
+    def open_magnified_view(self, image_id: int):
+        """
+        Slot called when the magnify button is clicked in any image_widget.
+        image_id is forwarded by the image_loader.
+        You can fetch the full image data here and open the magnified view.
+        """
+        # Example:
+        data = self.api.get_image(image_id)
+        if not data.get("success"):
+            print("Failed to fetch image details:", data.get("message"))
+            return
+
+        image_data = data.get("image")  # the full image info from backend
+
+        # Here, you would switch the stacked widget to the magnified view and populate it
+        # For example:
+        # self.parent().stacked_widget.setCurrentWidget(self.magnified_view)
+        # self.magnified_view.set_image(image_data)
+        print(f"Open magnified view for image ID: {image_id}")

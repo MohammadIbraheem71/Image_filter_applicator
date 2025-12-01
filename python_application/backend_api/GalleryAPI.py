@@ -40,6 +40,38 @@ class GalleryAPI(QObject):
 
         return {"success": True, "images": images}
     
+    #this fetches a single image and its meta data, given the image id
+    def get_image(self, image_id: int):
+        url = f"{self.base_url}/routes/image/{image_id}"
+        headers = self.get_headers()  # token included if logged in
+
+        try:
+            response = self.http_client.get(url, headers=headers)
+        except Exception as e:
+            print(f"Network error while fetching image {image_id}:", e)
+            return {"success": False, "message": "Network error"}
+
+        try:
+            data = response.json()
+        except Exception:
+            print("Invalid JSON received from server.")
+            return {"success": False, "message": "Invalid server response"}
+
+        if not data.get("success"):
+            print(f"Error fetching image: {data}")
+            return data
+        
+        # Expected backend structure:
+        # {
+        #   "success": true,
+        #   "image": { ...full metadata... }
+        # }
+
+        return {
+            "success": True,
+            "image": data.get("image")
+        }
+
     def like_image(self, image_id: int):
         url = f"{self.base_url}/routes/image/like"
         response = self.http_client.post(url, json={"image_id": image_id}, headers=self.get_headers())

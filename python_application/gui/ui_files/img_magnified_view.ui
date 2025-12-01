@@ -75,9 +75,7 @@ QWidget#info_widget:hover {
 /* -----------------------------------------
    INFO LABELS
 ----------------------------------------- */
-QLabel#uploaded_by_lbl,
-QLabel#uploaded_at_lbl,
-QLabel#like_counter_lbl {
+QLabel {
     color: #F5F0FF;
     font-weight: 500;
     font-size: 14px;
@@ -87,7 +85,7 @@ QLabel#like_counter_lbl {
 /* -----------------------------------------
    LIKE BUTTON
 ----------------------------------------- */
-QPushButton#like_btn {
+QPushButton {
     background-color: rgba(255, 255, 255, 0.12);
     color: #F5F0FF;
     border: 1px solid rgba(255, 255, 255, 0.25);
@@ -99,32 +97,13 @@ QPushButton#like_btn {
     min-height: 36px;
 }
 
-QPushButton#like_btn:hover {
+QPushButton:hover {
     background-color: rgba(255, 255, 255, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.4);
     box-shadow: 0 6px 16px rgba(180, 150, 220, 0.4);
 }
 
-/* -----------------------------------------
-   DOWNLOAD BUTTON
------------------------------------------ */
-QPushButton#download_btn {
-    background-color: rgba(255, 255, 255, 0.12);
-    color: #F5F0FF;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 6px;
-    padding: 6px 12px;
-    font-weight: 600;
-    font-size: 14px;
-    transition: all 0.2s ease;
-    min-height: 36px;
-}
 
-QPushButton#download_btn:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 6px 16px rgba(180, 150, 220, 0.4);
-}
 </string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout" stretch="3,1">
@@ -134,7 +113,7 @@ QPushButton#download_btn:hover {
       <item>
        <widget class="QLabel" name="image_lbl">
         <property name="text">
-         <string>TextLabel</string>
+         <string>loading image..</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -162,11 +141,35 @@ QPushButton#download_btn:hover {
        </widget>
       </item>
       <item>
+       <widget class="QLabel" name="description_lbl">
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
          <widget class="QLabel" name="like_counter_lbl">
           <property name="text">
            <string>likes</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="liked_btn">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../resources.qrc">
+            <normaloff>:/icons/assets/heartred.png</normaloff>:/icons/assets/heartred.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>30</width>
+            <height>30</height>
+           </size>
           </property>
          </widget>
         </item>
@@ -179,7 +182,17 @@ QPushButton#download_btn:hover {
            </sizepolicy>
           </property>
           <property name="text">
-           <string>like</string>
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../resources.qrc">
+            <normaloff>:/icons/assets/heart.png</normaloff>:/icons/assets/heart.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>30</width>
+            <height>30</height>
+           </size>
           </property>
          </widget>
         </item>
@@ -188,7 +201,17 @@ QPushButton#download_btn:hover {
       <item>
        <widget class="QPushButton" name="download_btn">
         <property name="text">
-         <string>download</string>
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../resources.qrc">
+          <normaloff>:/icons/assets/downloads.png</normaloff>:/icons/assets/downloads.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
         </property>
        </widget>
       </item>
@@ -197,6 +220,8 @@ QPushButton#download_btn:hover {
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
