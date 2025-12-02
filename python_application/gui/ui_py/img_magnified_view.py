@@ -124,11 +124,12 @@ class Ui_img_magnified_view(object):
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.image_lbl = QLabel(self.img_widget)
         self.image_lbl.setObjectName(u"image_lbl")
-        sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.image_lbl.sizePolicy().hasHeightForWidth())
         self.image_lbl.setSizePolicy(sizePolicy)
+        self.image_lbl.setMinimumSize(QSize(0, 0))
         self.image_lbl.setScaledContents(False)
         self.image_lbl.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
@@ -139,20 +140,53 @@ class Ui_img_magnified_view(object):
 
         self.info_widget = QWidget(img_magnified_view)
         self.info_widget.setObjectName(u"info_widget")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Preferred)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.info_widget.sizePolicy().hasHeightForWidth())
+        self.info_widget.setSizePolicy(sizePolicy1)
+        self.info_widget.setMinimumSize(QSize(220, 0))
         self.verticalLayout_2 = QVBoxLayout(self.info_widget)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.uploaded_by_lbl = QLabel(self.info_widget)
         self.uploaded_by_lbl.setObjectName(u"uploaded_by_lbl")
+        font = QFont()
+        font.setWeight(QFont.Medium)
+        self.uploaded_by_lbl.setFont(font)
+        self.uploaded_by_lbl.setStyleSheet(u"background-color: rgba(255, 255, 255, 0.12);  /* translucent */\n"
+"    border-top-left-radius: 16px;\n"
+"    border-bottom-left-radius: 16px;\n"
+"    border-top-right-radius: 16px;\n"
+"    border-bottom-right-radius: 16px;\n"
+"    border: 1px solid rgba(255, 255, 255, 0.2);\n"
+"    padding: 8px;")
+        self.uploaded_by_lbl.setWordWrap(True)
 
         self.verticalLayout_2.addWidget(self.uploaded_by_lbl)
 
         self.uploaded_at_lbl = QLabel(self.info_widget)
         self.uploaded_at_lbl.setObjectName(u"uploaded_at_lbl")
+        self.uploaded_at_lbl.setStyleSheet(u"background-color: rgba(255, 255, 255, 0.12);  /* translucent */\n"
+"    border-top-left-radius: 16px;\n"
+"    border-bottom-left-radius: 16px;\n"
+"    border-top-right-radius: 16px;\n"
+"    border-bottom-right-radius: 16px;\n"
+"    border: 1px solid rgba(255, 255, 255, 0.2);\n"
+"    padding: 8px;")
+        self.uploaded_at_lbl.setWordWrap(True)
 
         self.verticalLayout_2.addWidget(self.uploaded_at_lbl)
 
         self.description_lbl = QLabel(self.info_widget)
         self.description_lbl.setObjectName(u"description_lbl")
+        self.description_lbl.setStyleSheet(u"background-color: rgba(255, 255, 255, 0.12);  /* translucent */\n"
+"    border-top-left-radius: 16px;\n"
+"    border-bottom-left-radius: 16px;\n"
+"    border-top-right-radius: 16px;\n"
+"    border-bottom-right-radius: 16px;\n"
+"    border: 1px solid rgba(255, 255, 255, 0.2);\n"
+"    padding: 8px;")
+        self.description_lbl.setWordWrap(True)
 
         self.verticalLayout_2.addWidget(self.description_lbl)
 
@@ -160,6 +194,15 @@ class Ui_img_magnified_view(object):
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.like_counter_lbl = QLabel(self.info_widget)
         self.like_counter_lbl.setObjectName(u"like_counter_lbl")
+        self.like_counter_lbl.setStyleSheet(u"background-color: rgba(255, 255, 255, 0.12);  /* translucent */\n"
+"    border-top-left-radius: 16px;\n"
+"    border-bottom-left-radius: 16px;\n"
+"    border-top-right-radius: 16px;\n"
+"    border-bottom-right-radius: 16px;\n"
+"    border: 1px solid rgba(255, 255, 255, 0.2);\n"
+"    padding: 8px;")
+        self.like_counter_lbl.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.like_counter_lbl.setWordWrap(True)
 
         self.horizontalLayout_2.addWidget(self.like_counter_lbl)
 
@@ -174,11 +217,11 @@ class Ui_img_magnified_view(object):
 
         self.like_btn = QPushButton(self.info_widget)
         self.like_btn.setObjectName(u"like_btn")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.like_btn.sizePolicy().hasHeightForWidth())
-        self.like_btn.setSizePolicy(sizePolicy1)
+        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.like_btn.sizePolicy().hasHeightForWidth())
+        self.like_btn.setSizePolicy(sizePolicy2)
         icon1 = QIcon()
         icon1.addFile(u":/icons/assets/heart.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.like_btn.setIcon(icon1)
