@@ -42,7 +42,7 @@ class GalleryAPI(QObject):
     
     #this fetches a single image and its meta data, given the image id
     def get_image(self, image_id: int):
-        url = f"{self.base_url}/routes/image/{image_id}"
+        url = f"{self.base_url}/routes/image/get_single_img/{image_id}"
         headers = self.get_headers()  # token included if logged in
 
         try:

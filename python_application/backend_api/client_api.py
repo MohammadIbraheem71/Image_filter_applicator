@@ -74,3 +74,6 @@ class client_api(QObject):
 
     def unlike_image(self, image_id):
         return self.gallery.unlike_image(image_id)
+    
+    def get_image(self, image_id):
+        return self.gallery.get_image(image_id)

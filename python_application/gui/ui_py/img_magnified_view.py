@@ -45,18 +45,17 @@ class Ui_img_magnified_view(object):
 "    border-bottom-right-radius: 0px;\n"
 "    border: 1px solid rgba(255, 255, 255, 0.2);\n"
 "    padding: 8px;\n"
-"    transition: all 0.2s ease;\n"
+"  \n"
 "}\n"
 "\n"
 "QWidget#img_widget:hover {\n"
 "    background-color: rgba(255, 255, 255, 0.2);\n"
 "    border: 1px solid rgba(255, 255, 255, 0.35);\n"
-"    box-shadow: 0 8px 24px r"
-                        "gba(180, 150, 220, 0.4);\n"
 "}\n"
 "\n"
 "/* -----------------------------------------\n"
-"   IMAGE LABEL\n"
+""
+                        "   IMAGE LABEL\n"
 "----------------------------------------- */\n"
 "QLabel#img_lbl {\n"
 "    border-radius: 12px;\n"
@@ -74,24 +73,24 @@ class Ui_img_magnified_view(object):
 "    border-bottom-right-radius: 16px;\n"
 "    border: 1px solid rgba(255, 255, 255, 0.2);\n"
 "    padding: 12px;\n"
-"    transition: all 0.2s ease;\n"
+"  \n"
 "}\n"
 "\n"
 "QWidget#info_widget:hover {\n"
 "    background-color: rgba(255, 255, 255, 0.2);\n"
 "    border: 1px solid rgba(255, 255, 255, 0.35);\n"
-"    box-shadow: 0 8px 24px rgba(180, 150, 220, 0.4);\n"
+"    \n"
 "}\n"
 "\n"
 "/* -----------------------------------------\n"
-"   "
-                        "INFO LABELS\n"
+"   INFO LABELS\n"
 "----------------------------------------- */\n"
 "QLabel {\n"
 "    color: #F5F0FF;\n"
 "    font-weight: 500;\n"
 "    font-size: 14px;\n"
-"    padding: 2px 0;\n"
+"    padding:"
+                        " 2px 0;\n"
 "}\n"
 "\n"
 "/* -----------------------------------------\n"
@@ -105,14 +104,14 @@ class Ui_img_magnified_view(object):
 "    padding: 6px 12px;\n"
 "    font-weight: 600;\n"
 "    font-size: 14px;\n"
-"    transition: all 0.2s ease;\n"
+"   \n"
 "    min-height: 36px;\n"
 "}\n"
 "\n"
 "QPushButton:hover {\n"
 "    background-color: rgba(255, 255, 255, 0.2);\n"
 "    border: 1px solid rgba(255, 255, 255, 0.4);\n"
-"    box-shadow: 0 6px 16px rgba(180, 150, 220, 0.4);\n"
+" \n"
 "}\n"
 "\n"
 "\n"
@@ -125,6 +124,12 @@ class Ui_img_magnified_view(object):
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.image_lbl = QLabel(self.img_widget)
         self.image_lbl.setObjectName(u"image_lbl")
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.image_lbl.sizePolicy().hasHeightForWidth())
+        self.image_lbl.setSizePolicy(sizePolicy)
+        self.image_lbl.setScaledContents(False)
         self.image_lbl.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.verticalLayout.addWidget(self.image_lbl)
@@ -169,11 +174,11 @@ class Ui_img_magnified_view(object):
 
         self.like_btn = QPushButton(self.info_widget)
         self.like_btn.setObjectName(u"like_btn")
-        sizePolicy = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.like_btn.sizePolicy().hasHeightForWidth())
-        self.like_btn.setSizePolicy(sizePolicy)
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.like_btn.sizePolicy().hasHeightForWidth())
+        self.like_btn.setSizePolicy(sizePolicy1)
         icon1 = QIcon()
         icon1.addFile(u":/icons/assets/heart.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.like_btn.setIcon(icon1)

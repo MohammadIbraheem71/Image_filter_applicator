@@ -113,11 +113,11 @@ class MainWindow(QMainWindow):
             self.magnify_page = img_magnified_view_widget(
                 api=self.api,
                 image_id=img_data.get("id"),
-                url=img_data.get("image_url"),
+                image_url=img_data.get("image_url"),
                 likes=img_data.get("likes", 0),
                 liked_by_user=img_data.get("liked_by_user", False),
-                uploaded_by=img_data.get("user_id"),  # or username if you return it
-                uploaded_at=img_data.get("created_at"),
+                uploaded_by=img_data.get("uploader"),  # or username if you return it
+                uploaded_at=img_data.get("uploaded_at"),
                 description=img_data.get("filename")  # adjust according to your schema
             )
 

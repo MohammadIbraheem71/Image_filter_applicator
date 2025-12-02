@@ -42,6 +42,10 @@ class img_magnified_view_widget(QWidget):
         self.ui.like_btn.clicked.connect(self.toggle_like)
         self.ui.liked_btn.clicked.connect(self.toggle_like)
 
+        self.original_pixmap = None
+
+        print(f"mag view height = {self.ui.image_lbl.height()}, width = {self.ui.image_lbl.width()}")
+
 
     #this function loads the image,might need some tinkering
     #NEED TO MAKE THIS NON BLOCKING MULTI THREADING
@@ -59,16 +63,42 @@ class img_magnified_view_widget(QWidget):
             )
             pixmap = QPixmap.fromImage(qimg)
 
-            self.ui.image_lbl.setPixmap(pixmap.scaled(
-                self.ui.image_lbl.width(),
-                self.ui.image_lbl.height(),
-                Qt.KeepAspectRatio,
-                Qt.SmoothTransformation
-            ))
+            # store full-resolution original
+            self.original_pixmap = pixmap
+
+            # set initial scaled version
+            self.update_scaled_image()
 
         except Exception as e:
             print(f"Failed to load magnified image: {e}")
             self.ui.image_lbl.setText("Failed to load image")
+
+
+    # -----------------------------
+    #    SCALING (Aspect Ratio)
+    # -----------------------------
+    def resizeEvent(self, event):
+        super().resizeEvent(event)
+        self.update_scaled_image()
+
+
+    #rescaling the image on the go
+    def update_scaled_image(self):
+        if not self.original_pixmap:
+            return
+
+        lbl = self.ui.image_lbl
+
+        print(f"mag view height = {lbl.height()}, width = {lbl.width()}")
+
+        scaled = self.original_pixmap.scaled(
+            lbl.width(),
+            lbl.height(),
+            Qt.KeepAspectRatio,
+            Qt.SmoothTransformation
+        )
+
+        lbl.setPixmap(scaled)
 
     #this manages the like state of the button
     def _update_like_button_state(self):
@@ -76,6 +106,7 @@ class img_magnified_view_widget(QWidget):
             # Guest user → disable like buttons
             self.ui.like_btn.setEnabled(False)
             self.ui.liked_btn.setEnabled(False)
+            self.ui.liked_btn.setVisible(False)
             return
 
         if self.liked_by_user:
