@@ -5,6 +5,9 @@ from backend_api.client_api import client_api
 from pages.dialog_boxes.upload_dialog import upload_dialog
 from pages.gallery_grid import gallery_grid
 from utils.image_loader import image_loader
+from pages.widgets.image_widget import image_widget
+from pages.widgets.image_widget_trash import image_widget_trash
+
 
 class gallery_page(QWidget):
     def __init__(self, api: client_api):
@@ -13,12 +16,7 @@ class gallery_page(QWidget):
         self.ui.setupUi(self)
         self.api = api
 
-        self.loader = image_loader(self.ui.image_grid, columns=2, api=self.api)
-
-        
-
-        
-
+        self.loader = image_loader(self.ui.image_grid, columns=2, api=self.api, widget_cls=image_widget_trash)
         # Load gallery images
         self.refresh_gallery()
         

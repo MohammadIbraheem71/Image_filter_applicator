@@ -2,12 +2,13 @@
 
 from PySide6.QtWidgets import QWidget
 from PySide6.QtGui import QPixmap, QImage
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QThreadPool
 from ui_py.img_magnified_view import Ui_img_magnified_view
 import requests
 from io import BytesIO
 from PIL import Image
 
+from utils.image_worker import image_worker
 
 #this class handles the like and unlike logic as well, similar to how the image widget handled it
 class img_magnified_view_widget(QWidget):
@@ -25,6 +26,8 @@ class img_magnified_view_widget(QWidget):
         self.likes = likes
         self.liked_by_user = liked_by_user
 
+        self.thread_pool = QThreadPool.globalInstance()
+
         #we fill out the labels here 
         self.ui.uploaded_by_lbl.setText(f"Uploaded by: {uploaded_by}")
         self.ui.uploaded_at_lbl.setText(f"Uploaded at: {uploaded_at}")
@@ -33,7 +36,7 @@ class img_magnified_view_widget(QWidget):
 
         #if a url is provided we load the image
         if self.image_url:
-            self.load_image(self.image_url)
+            self.load_image_async(self.image_url)
 
         #similar to the image widget class
         self._update_like_button_state()
@@ -45,6 +48,8 @@ class img_magnified_view_widget(QWidget):
         self.original_pixmap = None
 
         print(f"mag view height = {self.ui.image_lbl.height()}, width = {self.ui.image_lbl.width()}")
+
+        
 
 
     #this function loads the image,might need some tinkering
@@ -73,10 +78,27 @@ class img_magnified_view_widget(QWidget):
             print(f"Failed to load magnified image: {e}")
             self.ui.image_lbl.setText("Failed to load image")
 
+    #async loader function, uses the thread that we created
+    def load_image_async(self, url):
+        worker = image_worker(url)
+        worker.signals.finished.connect(self.on_image_fetched)
+        worker.signals.error.connect(self.on_image_error)
+        self.thread_pool.start(worker)
 
-    # -----------------------------
-    #    SCALING (Aspect Ratio)
-    # -----------------------------
+
+    #this is called when the thread finishes working. displays the image
+    def on_image_fetched(self, pil_image):
+        pixmap = self.pil_to_qpixmap(pil_image)
+        self.original_pixmap = pixmap
+        self.update_scaled_image()
+
+    def on_image_error(self, error):
+        print(f"Failed to load image (something went wrong with the threading part): {error}")
+        self.ui.img_lbl.setText("Image failed to load")
+
+   
+    #yaar ye theek krna hai pata nahi kese kaam kare ga ye
+    #bhai ye pata nahi kese chal para hai
     def resizeEvent(self, event):
         super().resizeEvent(event)
         self.update_scaled_image()
@@ -145,3 +167,10 @@ class img_magnified_view_widget(QWidget):
 
         except Exception as e:
             print("Error toggling like:", e)
+
+    @staticmethod
+    def pil_to_qpixmap(image: Image.Image) -> QPixmap:
+        """Convert a PIL Image to QPixmap."""
+        data = image.tobytes("raw", "RGBA")
+        qimage = QImage(data, image.width, image.height, QImage.Format_RGBA8888)
+        return QPixmap.fromImage(qimage)

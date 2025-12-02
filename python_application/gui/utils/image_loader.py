@@ -5,21 +5,29 @@ from PySide6.QtCore import Qt, QRectF, QThreadPool, Signal
 #this class is responsible for loading image_widgets into the layout grid for the gallery or 
 #any other scroll area
 #an api object is passed in to manage the loading from db
+#standard image loader
 class image_loader:
 
-    img_magnify_requested = Signal(int)
-
-    def __init__(self, container_widget: QWidget, columns: int = 3, api=None):
+    def __init__(self, container_widget: QWidget, columns: int = 3, api=None, widget_cls = None):
         self.container = container_widget
         self.layout = self.container.layout()
         self.container.setLayout(self.layout)
         self.columns = columns
         self.api = api 
 
+        self.widget_cls = widget_cls or self.default_widget_class()
+
+
         if self.layout is None:
             self.layout = QGridLayout()
             self.container.setLayout(self.layout)
 
+    #if no widget is provided, then load the widget without trash
+    def default_widget_class(self):
+        print("using the default image_widget")
+        from pages.widgets.image_widget import image_widget
+        return image_widget
+    
     #utility function to clear all previous images
     def clear_layout(self):
         
@@ -55,7 +63,7 @@ class image_loader:
             liked_by_user = item.get("liked_by_user", False)
 
             # Create the image widget with like state
-            img_card = image_widget(
+            img_card = self.widget_cls(
                 url=image_url,
                 likes=likes,
                 image_id=image_id,

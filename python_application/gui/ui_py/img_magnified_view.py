@@ -129,7 +129,7 @@ class Ui_img_magnified_view(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.image_lbl.sizePolicy().hasHeightForWidth())
         self.image_lbl.setSizePolicy(sizePolicy)
-        self.image_lbl.setMinimumSize(QSize(0, 0))
+        self.image_lbl.setMinimumSize(QSize(330, 380))
         self.image_lbl.setScaledContents(False)
         self.image_lbl.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
