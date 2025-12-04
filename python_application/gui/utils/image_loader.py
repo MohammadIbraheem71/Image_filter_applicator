@@ -36,24 +36,14 @@ class image_loader:
             if item.widget():
                 item.widget().deleteLater()
 
-    #this function is responsible for the loading of the images from the client api
-    def load_images(self):
-        if not self.api:
-            raise RuntimeError("API instance not provided.")
+    #this function is responsible for the loading of the images
+    #the images are now passed in as a parameter
+    def load_images(self, images): 
+        if images is None:
+            print("No images provided to load.")
+            return
 
         self.clear_layout()
-
-        try:
-            gallery_data = self.api.get_gallery()
-        except Exception as e:
-            print("Failed to fetch gallery:", e)
-            return
-
-        if not gallery_data.get("success"):
-            print("Error from API:", gallery_data.get("message"))
-            return
-
-        images = gallery_data.get("images", [])
 
         row, col = 0, 0
         for item in images:
@@ -62,21 +52,22 @@ class image_loader:
             likes = item.get("likes", 0)
             liked_by_user = item.get("liked_by_user", False)
 
-            # Create the image widget with like state
+            # Create widget
             img_card = self.widget_cls(
                 url=image_url,
                 likes=likes,
                 image_id=image_id,
                 api=self.api,
-                liked_by_user=liked_by_user  # new param for initial state
+                liked_by_user=liked_by_user
             )
 
-            # Disable like button if user is not authenticated
+            # Disable like button if user not signed in
             if not getattr(self.api, "token", None):
                 img_card.disable_like_button()
 
-
+            # Add to layout
             self.layout.addWidget(img_card, row, col)
+
             col += 1
             if col >= self.columns:
                 col = 0

@@ -16,9 +16,11 @@ class gallery_page(QWidget):
         self.ui.setupUi(self)
         self.api = api
 
-        self.loader = image_loader(self.ui.image_grid, columns=2, api=self.api, widget_cls=image_widget_trash)
+        self.loader = image_loader(self.ui.image_grid, columns=2, api=self.api, widget_cls=image_widget)
         # Load gallery images
         self.refresh_gallery()
+
+        self.ui.upld_glry_btn.clicked.connect(self.upload_to_gallery)
         
 
     def refresh_gallery(self):
@@ -26,7 +28,7 @@ class gallery_page(QWidget):
             data = self.api.get_gallery()  # fetch from /gallery route
             images_list = data.get("images", [])  # make sure this matches backend JSON
             # Pass the list of dicts directly, not just URLs
-            self.loader.load_images()
+            self.loader.load_images(images=images_list)
         except Exception as e:
             print("Error fetching gallery:", e)
 
@@ -37,11 +39,6 @@ class gallery_page(QWidget):
             self.refresh_gallery()
 
     def open_magnified_view(self, image_id: int):
-        """
-        Slot called when the magnify button is clicked in any image_widget.
-        image_id is forwarded by the image_loader.
-        You can fetch the full image data here and open the magnified view.
-        """
         # Example:
         data = self.api.get_image(image_id)
         if not data.get("success"):

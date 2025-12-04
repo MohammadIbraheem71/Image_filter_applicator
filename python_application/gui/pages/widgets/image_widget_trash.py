@@ -1,6 +1,6 @@
 from ui_py.widgets.image_widget_trash import Ui_image_widget_trash
 from .image_widget_base import image_widget_base
-
+from utils.event_bus import event_bus
 
 class image_widget_trash(image_widget_base):
     """Image widget with trash button that uses shared functionality from base class"""
@@ -16,16 +16,8 @@ class image_widget_trash(image_widget_base):
         self.setup_widget()
         
         # Setup trash-specific functionality
-        self.setup_trash_button()
+        self.ui.trash_btn.clicked.connect(self.emit_delete_signal)
     
-    def setup_trash_button(self):
-        """Connect the trash button signal"""
-        self.ui.trash_btn.clicked.connect(self.handle_trash)
-    
-    def handle_trash(self):
-        """Handle trash button click"""
-        print(f"Trash clicked for image {self.image_id}")
-        
-        # Delete the image here
-        # e.g., self.api.delete_image(self.image_id)
-        # or emit an event: event_bus.emit(event_name="delete_image", payload={"image_id": self.image_id})
+    #this emits a delete signal whenver the delete button is clicked, listened to by the profile page to delete the image
+    def emit_delete_signal(self):
+        event_bus.emit(event_name="request_delete", payload={"image_id": self.image_id})

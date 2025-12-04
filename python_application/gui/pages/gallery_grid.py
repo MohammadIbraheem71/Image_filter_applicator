@@ -3,6 +3,7 @@ from PySide6.QtGui import QPixmap
 from PySide6.QtCore import Qt
 from ui_py.image_grid import Ui_image_gallery_grid
 
+#this doesnt seem to be used anywhere yet
 
 class gallery_grid(QWidget, Ui_image_gallery_grid):
     def __init__(self, parent=None):

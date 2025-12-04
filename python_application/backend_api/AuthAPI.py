@@ -8,7 +8,7 @@ class AuthAPI:
     def __init__(self, base_url, http_client=requests):
         self.base_url = base_url
         self.token = None
-        self.user_info = None
+        self. user_info = None
         self.http_client = http_client
 
     def login(self, email, password):

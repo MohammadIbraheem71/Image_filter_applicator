@@ -74,7 +74,7 @@ class MainWindow(QMainWindow):
         )
         
         self.ui.profile_pg_btn.clicked.connect(
-            lambda: self.ui.windows.setCurrentWidget(self.profile_page)
+            self.show_profile_page
         )
 
         # Set initial page
@@ -91,6 +91,15 @@ class MainWindow(QMainWindow):
         except AttributeError:
             print("gallery_page does not have reload_gallery() method")
         self.ui.windows.setCurrentWidget(self.gallery_page)
+
+    #this displays the profile page
+    def show_profile_page(self):
+        try:
+            self.profile_page.refresh_gallery() 
+        except AttributeError:
+            print("profile page does not have a reload glallery method")
+        self.ui.windows.setCurrentWidget(self.profile_page)
+
 
     #this function displays the new magnified page
     def open_magnified_image_view(self, payload):

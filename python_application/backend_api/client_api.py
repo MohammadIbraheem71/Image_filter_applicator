@@ -12,7 +12,7 @@ class client_api(QObject):
     image_uploaded = Signal()
     image_liked = Signal()   # new signal
     image_unliked = Signal() 
-
+    image_deleted = Signal()
     def __init__(self, base_url):
         super().__init__()
         self.base_url = base_url
@@ -25,7 +25,7 @@ class client_api(QObject):
         self.gallery.image_uploaded.connect(self.image_uploaded.emit)
         self.gallery.image_liked.connect(self.image_liked.emit)
         self.gallery.image_unliked.connect(self.image_unliked.emit)
-
+        self.gallery.image_deleted.connect(self.image_deleted.emit)
     # ----------- token property for backward compatibility -----------
     @property
     def token(self):
@@ -77,3 +77,9 @@ class client_api(QObject):
     
     def get_image(self, image_id):
         return self.gallery.get_image(image_id)
+    
+    def get_user_gallery(self):
+        return self.gallery.get_user_gallery()
+    
+    def delete_user_image(self, image_id):
+        return self.gallery.delete_image(image_id=image_id)
