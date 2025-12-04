@@ -37,6 +37,7 @@ class gallery_page(QWidget):
         if upload_dlg.exec():
             # Refresh gallery after successful upload
             self.refresh_gallery()
+            
 
     def open_magnified_view(self, image_id: int):
         # Example:

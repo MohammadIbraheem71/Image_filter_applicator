@@ -44,12 +44,38 @@ class img_magnified_view_widget(QWidget):
 
         self.ui.like_btn.clicked.connect(self.toggle_like)
         self.ui.liked_btn.clicked.connect(self.toggle_like)
+        self.ui.download_btn.clicked.connect(self.download_image)
 
         self.original_pixmap = None
 
         print(f"mag view height = {self.ui.image_lbl.height()}, width = {self.ui.image_lbl.width()}")
 
         
+    def download_image(self):
+        if not self.original_pixmap:
+            print("Image not downloaded yet — fetching again...")
+            self.load_image_async(self.image_url)
+            return
+
+        try:
+            from PySide6.QtWidgets import QFileDialog
+
+            save_path, _ = QFileDialog.getSaveFileName(
+                self,
+                "Save Image",
+                "image.png",
+                "PNG Image (*.png);;JPEG Image (*.jpg *.jpeg);;All Files (*)"
+            )
+
+            if not save_path:
+                return  # user cancelled
+
+            # Save pixmap to file
+            self.original_pixmap.save(save_path)
+            print(f"Image saved to: {save_path}")
+
+        except Exception as e:
+            print(f"Error saving image: {e}")
 
 
     #this function loads the image,might need some tinkering
@@ -94,7 +120,7 @@ class img_magnified_view_widget(QWidget):
 
     def on_image_error(self, error):
         print(f"Failed to load image (something went wrong with the threading part): {error}")
-        self.ui.img_lbl.setText("Image failed to load")
+        self.ui.image_lbl.setText("Image failed to load")
 
    
     #yaar ye theek krna hai pata nahi kese kaam kare ga ye

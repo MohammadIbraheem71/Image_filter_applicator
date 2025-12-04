@@ -13,20 +13,28 @@ class upload_dialog(QDialog):
         self.api = api
         self.selected_file = None
 
-        # Hide error label initially
+        # Hide error and success label initially
         self.ui.error_lbl.setVisible(False)
         self.ui.error_lbl.setText("")
+        self.ui.success_lbl.setVisible(False)
+        self.ui.success_lbl.setText("")
 
         # Connect buttons
         self.ui.select_img_btn.clicked.connect(self.choose_file)
         self.ui.upload_btn.clicked.connect(self.upload_file)
 
     # ------------------------------
-    # Show error helper
+    # Show error and success helper
     # ------------------------------
     def show_error(self, text: str):
         self.ui.error_lbl.setText(text)
         self.ui.error_lbl.setVisible(True)
+
+    def show_success(self, text: str):
+        """Display success message inline."""
+        self.ui.success_lbl.setText(text)
+        self.ui.success_lbl.setVisible(True)
+        self.ui.error_lbl.setVisible(False)
 
     # ------------------------------
     # File selection
@@ -76,9 +84,7 @@ class upload_dialog(QDialog):
                 return
 
             # SUCCESS popup
-            QMessageBox.information(self, "Upload Successful",
-                                    "Image uploaded successfully!")
-            self.accept()
+            self.show_success("Image uploaded successfully!")
 
         except Exception as e:
             # Try to extract HTTP status code if available

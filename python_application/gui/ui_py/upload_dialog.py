@@ -205,6 +205,11 @@ class Ui_upload_dialog(object):
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.img_lbl = QLabel(self.img_widget)
         self.img_lbl.setObjectName(u"img_lbl")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Ignored)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.img_lbl.sizePolicy().hasHeightForWidth())
+        self.img_lbl.setSizePolicy(sizePolicy1)
         self.img_lbl.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.verticalLayout_3.addWidget(self.img_lbl)
@@ -226,6 +231,17 @@ class Ui_upload_dialog(object):
 "")
 
         self.verticalLayout_4.addWidget(self.error_lbl)
+
+        self.success_lbl = QLabel(self.form_widget)
+        self.success_lbl.setObjectName(u"success_lbl")
+        self.success_lbl.setStyleSheet(u"background-color: rgba(198, 239, 206, 150); /* light green with 150/255 opacity */\n"
+"color: rgb(0, 97, 0);                        /* dark green text */\n"
+"border: 1px solid rgba(0, 97, 0, 200);      /* optional semi-transparent border */\n"
+"border-radius: 4px;\n"
+"padding: 2px 4px;\n"
+"")
+
+        self.verticalLayout_4.addWidget(self.success_lbl)
 
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
@@ -276,6 +292,7 @@ class Ui_upload_dialog(object):
         upload_dialog.setWindowTitle(QCoreApplication.translate("upload_dialog", u"Dialog", None))
         self.img_lbl.setText(QCoreApplication.translate("upload_dialog", u"browse an image from your computer", None))
         self.error_lbl.setText(QCoreApplication.translate("upload_dialog", u"text label", None))
+        self.success_lbl.setText(QCoreApplication.translate("upload_dialog", u"TextLabel", None))
         self.select_img_btn.setText(QCoreApplication.translate("upload_dialog", u"select image", None))
         self.description_edt.setPlaceholderText(QCoreApplication.translate("upload_dialog", u"enter a short description!", None))
         self.upload_btn.setText(QCoreApplication.translate("upload_dialog", u"all done!", None))

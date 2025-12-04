@@ -50,7 +50,7 @@ class signup_dialog(QDialog):
         button.setFlat(True)
         button.setStyleSheet("background: transparent; border: none;")
         button.setFixedSize(40,16)
-        button.setIcon(self.eye_icon)
+        button.setIcon(self.eye_hide_icon)
         button.setIconSize(button.size())
         line_edit.setEchoMode(QLineEdit.Password)
         line_edit.setStyleSheet("padding-right: 10px;")
