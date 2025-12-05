@@ -323,7 +323,7 @@ router.post("/unlike", authentication_middleware, (req, res) => {
             DELETE FROM image_likes 
             WHERE user_id = ? AND image_id = ?
         `);
-        stmt.run(userId, image_id);
+        const result = stmt.run(userId, image_id);
         
         if (result.changes === 0) {
             console.log(`Unlike failed: No like found for User ID ${userId}, Image ID ${image_id}`);

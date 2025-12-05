@@ -47,8 +47,9 @@ CREATE TABLE IF NOT EXISTS image_likes (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     UNIQUE(user_id, image_id),  -- prevents double-likes
     FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (image_id) REFERENCES images(id)
+    FOREIGN KEY (image_id) REFERENCES images(id) ON DELETE CASCADE
 );
+
 
 -- -------------------------
 -- Trigger: Increment likes after like
