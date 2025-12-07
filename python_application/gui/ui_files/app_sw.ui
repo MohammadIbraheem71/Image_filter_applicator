@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>PhotoEz</class>
+ <widget class="QMainWindow" name="PhotoEz">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>PhotoEz</string>
   </property>
   <property name="styleSheet">
    <string notr="true">/* -----------------------------------------
@@ -513,7 +513,19 @@ QScrollBar::add-line:vertical,
 QScrollBar::sub-line:vertical {
     height: 0px;
     background: none;
-}</string>
+}
+
+/*tool tip stylesheet here*/
+QToolTip {
+    background-color: #2a2a2a;
+    color: #ffffff;
+    border: 1px solid #1f1f1f;
+    border-radius: 4px;
+    padding: 6px;
+}
+
+
+</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
@@ -577,6 +589,9 @@ QScrollBar::sub-line:vertical {
            <height>40</height>
           </size>
          </property>
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;filters&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
          <property name="text">
           <string/>
          </property>
@@ -606,6 +621,9 @@ QScrollBar::sub-line:vertical {
            <height>40</height>
           </size>
          </property>
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;gallery&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
          <property name="text">
           <string/>
          </property>
@@ -628,6 +646,9 @@ QScrollBar::sub-line:vertical {
            <width>40</width>
            <height>40</height>
           </size>
+         </property>
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;profile&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="text">
           <string/>

@@ -20,12 +20,12 @@ from PySide6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QMainWindow,
     QVBoxLayout, QWidget)
 import resources_rc
 
-class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
-        if not MainWindow.objectName():
-            MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(785, 559)
-        MainWindow.setStyleSheet(u"/* -----------------------------------------\n"
+class Ui_PhotoEz(object):
+    def setupUi(self, PhotoEz):
+        if not PhotoEz.objectName():
+            PhotoEz.setObjectName(u"PhotoEz")
+        PhotoEz.resize(785, 559)
+        PhotoEz.setStyleSheet(u"/* -----------------------------------------\n"
 "   GENERAL - Modern Glassmorphism UI\n"
 "----------------------------------------- */\n"
 "QWidget {\n"
@@ -538,8 +538,21 @@ class Ui_MainWindow(object):
 "QScrollBar::sub-line:vertical {\n"
 "    height: 0px;\n"
 "    background: none;\n"
-"}")
-        self.centralwidget = QWidget(MainWindow)
+"}\n"
+"\n"
+"/*tool tip stylesheet here*/\n"
+""
+                        "QToolTip {\n"
+"    background-color: #2a2a2a;\n"
+"    color: #ffffff;\n"
+"    border: 1px solid #1f1f1f;\n"
+"    border-radius: 4px;\n"
+"    padding: 6px;\n"
+"}\n"
+"\n"
+"\n"
+"")
+        self.centralwidget = QWidget(PhotoEz)
         self.centralwidget.setObjectName(u"centralwidget")
         self.horizontalLayout = QHBoxLayout(self.centralwidget)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
@@ -616,17 +629,26 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addWidget(self.windows)
 
-        MainWindow.setCentralWidget(self.centralwidget)
+        PhotoEz.setCentralWidget(self.centralwidget)
 
-        self.retranslateUi(MainWindow)
+        self.retranslateUi(PhotoEz)
 
-        QMetaObject.connectSlotsByName(MainWindow)
+        QMetaObject.connectSlotsByName(PhotoEz)
     # setupUi
 
-    def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
+    def retranslateUi(self, PhotoEz):
+        PhotoEz.setWindowTitle(QCoreApplication.translate("PhotoEz", u"PhotoEz", None))
+#if QT_CONFIG(tooltip)
+        self.filter_pg_btn.setToolTip(QCoreApplication.translate("PhotoEz", u"<html><head/><body><p>filters</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
         self.filter_pg_btn.setText("")
+#if QT_CONFIG(tooltip)
+        self.gallery_pg_btn.setToolTip(QCoreApplication.translate("PhotoEz", u"<html><head/><body><p>gallery</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
         self.gallery_pg_btn.setText("")
+#if QT_CONFIG(tooltip)
+        self.profile_pg_btn.setToolTip(QCoreApplication.translate("PhotoEz", u"<html><head/><body><p>profile</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
         self.profile_pg_btn.setText("")
     # retranslateUi
 

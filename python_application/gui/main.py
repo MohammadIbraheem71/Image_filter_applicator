@@ -10,7 +10,7 @@ from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtGui import QMovie, QIcon   
 from PySide6.QtCore import QSize
 
-from ui_py.app_gui import Ui_MainWindow
+from ui_py.app_gui import Ui_PhotoEz
 from filters.filter_factory import filter_factory
 from filters.filter_types.blur_filter import blur_filter
 from filters.filter_types.sepia_filter import sepia_filter
@@ -29,7 +29,7 @@ from utils.event_listner import event_listner
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.ui = Ui_MainWindow()
+        self.ui = Ui_PhotoEz()
         self.ui.setupUi(self)
 
         self.api = client_api("http://localhost:3000")
