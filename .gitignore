@@ -55,6 +55,7 @@ yarn.lock
 
 python_application/test_images/
 
+.keras
 
 # Uploads/Media (uncomment if you don't want to track uploaded images)
 # uploads/
