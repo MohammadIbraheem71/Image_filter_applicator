@@ -16,5 +16,6 @@
     <file>assets/hidden_eye.png</file>
     <file>assets/downloads.png</file>
     <file>assets/trash.png</file>
+    <file>assets/bucket.png</file>
   </qresource>
 </RCC>

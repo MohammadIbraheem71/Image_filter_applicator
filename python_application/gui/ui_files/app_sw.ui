@@ -98,6 +98,7 @@ QLabel#logo_gif {
 ----------------------------------------- */
 QPushButton#filter_pg_btn,
 QPushButton#gallery_pg_btn,
+QPushButton#pseudoclr_pg_btn,
 QPushButton#profile_pg_btn {
     background-color: transparent;
     border: none;
@@ -111,6 +112,7 @@ QPushButton#profile_pg_btn {
 
 QPushButton#filter_pg_btn:hover,
 QPushButton#gallery_pg_btn:hover,
+QPushButton#pseudoclr_pg_btn:hover,
 QPushButton#profile_pg_btn:hover {
     background-color: rgba(220, 180, 240, 0.3);
     /*box-shadow: 0 0 20px rgba(200, 150, 230, 0.6),
@@ -121,6 +123,7 @@ QPushButton#profile_pg_btn:hover {
 
 QPushButton#filter_pg_btn,
 QPushButton#gallery_pg_btn,
+QPushButton#pseudoclr_pg_btn,
 QPushButton#profile_pg_btn {
     padding: 0px;                  /* Remove padding offsets */
     text-align: center;            /* Center icon */
@@ -568,6 +571,23 @@ QToolTip {
           </size>
          </property>
         </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pseudoclr_pg_btn">
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;pseudocolor&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../resources.qrc">
+           <normaloff>:/icons/assets/bucket.png</normaloff>:/icons/assets/bucket.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>28</width>
+           <height>28</height>
+          </size>
+         </property>
+        </widget>
        </item>
        <item>
         <widget class="QPushButton" name="filter_pg_btn">

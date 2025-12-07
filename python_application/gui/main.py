@@ -9,6 +9,7 @@ sys.path.append(BASE_DIR)
 from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtGui import QMovie, QIcon   
 from PySide6.QtCore import QSize
+from tensorflow import keras
 
 from ui_py.app_gui import Ui_PhotoEz
 from filters.filter_factory import filter_factory
@@ -22,9 +23,14 @@ from pages.filter_page import FilterPage
 from pages.gallery_page import gallery_page
 from pages.profile_page import profile_page
 from pages.img_magnified_view import img_magnified_view_widget
+from pages.pseudocolor_page import pseudocolor_page
+
 from backend_api.client_api import client_api
 
 from utils.event_listner import event_listner
+
+
+
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -45,6 +51,7 @@ class MainWindow(QMainWindow):
         # else:
         #     print("⚠️ GIF not found at:", gif_path)
         
+
         # Shared objects
         self.factory = filter_factory()
         self.factory.add_filter("blur", blur_filter())
@@ -58,12 +65,14 @@ class MainWindow(QMainWindow):
         self.gallery_page = gallery_page(self.api) 
         self.profile_page = profile_page(self.api)
         self.magnify_page = None
+        self.pseudocolor_page = pseudocolor_page()
 
         # Add filter_page to the main stacked widget
         self.ui.windows.addWidget(self.filter_page)
         self.ui.windows.addWidget(self.gallery_page)
         self.ui.windows.addWidget(self.profile_page)
-
+        self.ui.windows.addWidget(self.pseudocolor_page)
+        
         # Sidebar button navigation
         self.ui.filter_pg_btn.clicked.connect(
             lambda: self.ui.windows.setCurrentWidget(self.filter_page)
@@ -77,6 +86,9 @@ class MainWindow(QMainWindow):
             self.show_profile_page
         )
 
+        self.ui.pseudoclr_pg_btn.clicked.connect(
+            self.show_pseudocolor_page
+        )
         # Set initial page
         self.ui.windows.setCurrentWidget(self.filter_page)
 
@@ -91,6 +103,9 @@ class MainWindow(QMainWindow):
         except AttributeError:
             print("gallery_page does not have reload_gallery() method")
         self.ui.windows.setCurrentWidget(self.gallery_page)
+
+    def show_pseudocolor_page(self):
+        self.ui.windows.setCurrentWidget(self.pseudocolor_page)
 
     #this displays the profile page
     def show_profile_page(self):

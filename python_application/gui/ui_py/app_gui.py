@@ -111,20 +111,22 @@ class Ui_PhotoEz(object):
 "----------------------------------------- */\n"
 "QPushButton#filter_pg_btn,\n"
 "QPushButton#gallery_pg_btn,\n"
+"QPushButton#pseudoclr_pg_btn,\n"
 "QPushButton#profile_pg_btn {\n"
 "    background-color: transparent;\n"
 "    border: none;\n"
 "    color: #2D2440;\n"
 "    padding: 14px 16px;\n"
 "    border-radius: 14px;\n"
-"    text-align: left;\n"
+"    text-align: "
+                        "left;\n"
 "    font-weight: 500;\n"
-""
-                        "    font-size: 15px;\n"
+"    font-size: 15px;\n"
 "}\n"
 "\n"
 "QPushButton#filter_pg_btn:hover,\n"
 "QPushButton#gallery_pg_btn:hover,\n"
+"QPushButton#pseudoclr_pg_btn:hover,\n"
 "QPushButton#profile_pg_btn:hover {\n"
 "    background-color: rgba(220, 180, 240, 0.3);\n"
 "    /*box-shadow: 0 0 20px rgba(200, 150, 230, 0.6),\n"
@@ -135,6 +137,7 @@ class Ui_PhotoEz(object):
 "\n"
 "QPushButton#filter_pg_btn,\n"
 "QPushButton#gallery_pg_btn,\n"
+"QPushButton#pseudoclr_pg_btn,\n"
 "QPushButton#profile_pg_btn {\n"
 "    padding: 0px;                  /* Remove padding offsets */\n"
 "    text-align: center;            /* Center icon */\n"
@@ -144,11 +147,11 @@ class Ui_PhotoEz(object):
 "/* Active/selected state */\n"
 "QPushButton#filter_pg_btn[active=\"true\"],\n"
 "QPushButton#gallery_pg_btn[active=\"true\"],\n"
-"QPushButton#profile_pg_btn[active=\"true\"] {\n"
+"QPushButton#profile_pg_btn[active=\"true\""
+                        "] {\n"
 "    font-weight: 700;\n"
 "    background-color: rgba(220, 180, 240, 0.4);\n"
-"    /*box-shadow: 0 0 1"
-                        "5px rgba(200, 150, 230, 0.5);*/\n"
+"    /*box-shadow: 0 0 15px rgba(200, 150, 230, 0.5);*/\n"
 "}\n"
 "\n"
 "/* -----------------------------------------\n"
@@ -179,11 +182,11 @@ class Ui_PhotoEz(object):
 "QComboBox::drop-down {\n"
 "    subcontrol-origin: padding;\n"
 "    subcontrol-position: top right;\n"
-"    width: 32px;\n"
+"    width:"
+                        " 32px;\n"
 "    border-left: none;\n"
 "    border-top-right-radius: 12px;\n"
-"    border-bottom-right-radius: "
-                        "12px;\n"
+"    border-bottom-right-radius: 12px;\n"
 "}\n"
 "\n"
 "QComboBox::down-arrow {\n"
@@ -216,11 +219,11 @@ class Ui_PhotoEz(object):
 "\n"
 "/* -----------------------------------------\n"
 "   INPUT FIELDS (Glassmorphism)\n"
-"----------------------------------------- */\n"
+"----------------------------------------- "
+                        "*/\n"
 "QLineEdit, QTextEdit {\n"
 "    background-color: rgba(255, 255, 255, 0.5);\n"
-"    border: 1px solid r"
-                        "gba(255, 255, 255, 0.4);\n"
+"    border: 1px solid rgba(255, 255, 255, 0.4);\n"
 "    border-radius: 12px;\n"
 "    padding: 11px 14px;\n"
 "    color: #2D2440;\n"
@@ -254,10 +257,10 @@ class Ui_PhotoEz(object):
 "    min-height: 30px;\n"
 "}\n"
 "\n"
-"QScrollBar::handle:vertical:hover {\n"
+"QS"
+                        "crollBar::handle:vertical:hover {\n"
 "    background: rgba(220, 180, 230, 0.8);\n"
-"    /*box-shadow: 0 0 10p"
-                        "x rgba(200, 150, 230, 0.6);*/\n"
+"    /*box-shadow: 0 0 10px rgba(200, 150, 230, 0.6);*/\n"
 "}\n"
 "\n"
 "QScrollBar::add-line:vertical, \n"
@@ -291,10 +294,10 @@ class Ui_PhotoEz(object):
 "    background-color: rgba(255, 255, 255, 0.4);\n"
 "    gridline-color: rgba(220, 180, 230, 0.2);\n"
 "    color: #2D2440;\n"
-"    border: 1px solid rgba(255, 255, 255, 0.4);\n"
+"    border: 1px solid rgb"
+                        "a(255, 255, 255, 0.4);\n"
 "    border-radius: 12px;\n"
-"    selection-background-color: rgba(220, 180, 240, 0"
-                        ".3);\n"
+"    selection-background-color: rgba(220, 180, 240, 0.3);\n"
 "    selection-color: #2D2440;\n"
 "}\n"
 "\n"
@@ -324,11 +327,11 @@ class Ui_PhotoEz(object):
 "   SIDEBAR (Rounded Glass Panel)\n"
 "----------------------------------------- */\n"
 "QFrame#sidebar {\n"
-"    background-color: rgba(255, 255, 255, 0.08);\n"
+"    backgroun"
+                        "d-color: rgba(255, 255, 255, 0.08);\n"
 "    border-right: 1px solid rgba(200, 160, 220, 0.3);\n"
 "\n"
-"    bo"
-                        "rder-radius: 10px;     /* Round the corners */\n"
+"    border-radius: 10px;     /* Round the corners */\n"
 "    margin: 6px;            /* Push away from window so radius is visible */\n"
 "    padding: 20px 1px;\n"
 "}\n"
@@ -360,11 +363,11 @@ class Ui_PhotoEz(object):
 "\n"
 "/* -----------------------------------------\n"
 "   TABS (Glassmorphism)\n"
-"----------------------------------------- */\n"
+"-----------------------------"
+                        "------------ */\n"
 "QTabWidget::pane {\n"
 "    border: none;\n"
-"    background-color: rgba(255, 255, 255, 0."
-                        "4);\n"
+"    background-color: rgba(255, 255, 255, 0.4);\n"
 "    border-radius: 12px;\n"
 "}\n"
 "\n"
@@ -399,11 +402,11 @@ class Ui_PhotoEz(object):
 "}\n"
 "\n"
 "QCheckBox::indicator, QRadioButton::indicator {\n"
-"    width: 20px;\n"
+""
+                        "    width: 20px;\n"
 "    height: 20px;\n"
 "    border-radius: 5px;\n"
-"    border: 2px solid rgba(220, 180"
-                        ", 230, 0.5);\n"
+"    border: 2px solid rgba(220, 180, 230, 0.5);\n"
 "    background-color: rgba(255, 255, 255, 0.5);\n"
 "}\n"
 "\n"
@@ -432,11 +435,11 @@ class Ui_PhotoEz(object):
 "/* -----------------------------------------\n"
 "   TOOLTIPS\n"
 "----------------------------------------- */\n"
-"QToolTip {\n"
+"QTo"
+                        "olTip {\n"
 "    background-color: rgba(240, 235, 250, 0.95);\n"
 "    color: #2D2440;\n"
-"    border: 1px s"
-                        "olid rgba(220, 180, 230, 0.5);\n"
+"    border: 1px solid rgba(220, 180, 230, 0.5);\n"
 "    border-radius: 8px;\n"
 "    padding: 8px 12px;\n"
 "    font-size: 12px;\n"
@@ -470,12 +473,12 @@ class Ui_PhotoEz(object):
 "    margin: 6px 10px;\n"
 "}\n"
 "\n"
-"/* -----------------------------------------\n"
+"/* ---------------------------------"
+                        "--------\n"
 "   DIALOGS & MESSAGE BOXES\n"
 "----------------------------------------- */\n"
 "QDialog {\n"
-""
-                        "    background-color: rgba(240, 230, 250, 0.95);\n"
+"    background-color: rgba(240, 230, 250, 0.95);\n"
 "}\n"
 "\n"
 "QMessageBox {\n"
@@ -504,10 +507,10 @@ class Ui_PhotoEz(object):
 "   SCROLL AREA - Sidebar-style Glass\n"
 "----------------------------------------- */\n"
 "QScrollArea{\n"
-"    background-color: rgba(255, 255, 255, 0.08);  /* Very translucent like sidebar */\n"
+"    background-color: rgba(255, 255, 255, 0.08);  /* Very tran"
+                        "slucent like sidebar */\n"
 "    border: 1px solid rgba(200, 160, 220, 0.3);   /* Subtle glass border */\n"
-""
-                        "    border-radius: 10px;                           /* Rounded corners to match sidebar */\n"
+"    border-radius: 10px;                           /* Rounded corners to match sidebar */\n"
 "    padding: 10px;                                 /* Inner padding */\n"
 "}\n"
 "\n"
@@ -535,14 +538,14 @@ class Ui_PhotoEz(object):
 "}\n"
 "\n"
 "QScrollBar::add-line:vertical,\n"
-"QScrollBar::sub-line:vertical {\n"
+"QScrollBar::sub-"
+                        "line:vertical {\n"
 "    height: 0px;\n"
 "    background: none;\n"
 "}\n"
 "\n"
 "/*tool tip stylesheet here*/\n"
-""
-                        "QToolTip {\n"
+"QToolTip {\n"
 "    background-color: #2a2a2a;\n"
 "    color: #ffffff;\n"
 "    border: 1px solid #1f1f1f;\n"
@@ -573,6 +576,15 @@ class Ui_PhotoEz(object):
 
         self.verticalLayout_2.addItem(self.verticalSpacer_2)
 
+        self.pseudoclr_pg_btn = QPushButton(self.sidebar)
+        self.pseudoclr_pg_btn.setObjectName(u"pseudoclr_pg_btn")
+        icon = QIcon()
+        icon.addFile(u":/icons/assets/bucket.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.pseudoclr_pg_btn.setIcon(icon)
+        self.pseudoclr_pg_btn.setIconSize(QSize(28, 28))
+
+        self.verticalLayout_2.addWidget(self.pseudoclr_pg_btn)
+
         self.filter_pg_btn = QPushButton(self.sidebar)
         self.filter_pg_btn.setObjectName(u"filter_pg_btn")
         sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
@@ -582,9 +594,9 @@ class Ui_PhotoEz(object):
         self.filter_pg_btn.setSizePolicy(sizePolicy1)
         self.filter_pg_btn.setMinimumSize(QSize(0, 36))
         self.filter_pg_btn.setMaximumSize(QSize(40, 40))
-        icon = QIcon()
-        icon.addFile(u":/icons/assets/paintbrush-pencil.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.filter_pg_btn.setIcon(icon)
+        icon1 = QIcon()
+        icon1.addFile(u":/icons/assets/paintbrush-pencil.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.filter_pg_btn.setIcon(icon1)
         self.filter_pg_btn.setIconSize(QSize(28, 28))
 
         self.verticalLayout_2.addWidget(self.filter_pg_btn)
@@ -594,9 +606,9 @@ class Ui_PhotoEz(object):
         sizePolicy1.setHeightForWidth(self.gallery_pg_btn.sizePolicy().hasHeightForWidth())
         self.gallery_pg_btn.setSizePolicy(sizePolicy1)
         self.gallery_pg_btn.setMaximumSize(QSize(40, 40))
-        icon1 = QIcon()
-        icon1.addFile(u":/icons/assets/picture.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.gallery_pg_btn.setIcon(icon1)
+        icon2 = QIcon()
+        icon2.addFile(u":/icons/assets/picture.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.gallery_pg_btn.setIcon(icon2)
         self.gallery_pg_btn.setIconSize(QSize(28, 28))
 
         self.verticalLayout_2.addWidget(self.gallery_pg_btn)
@@ -604,9 +616,9 @@ class Ui_PhotoEz(object):
         self.profile_pg_btn = QPushButton(self.sidebar)
         self.profile_pg_btn.setObjectName(u"profile_pg_btn")
         self.profile_pg_btn.setMaximumSize(QSize(40, 40))
-        icon2 = QIcon()
-        icon2.addFile(u":/icons/assets/user.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.profile_pg_btn.setIcon(icon2)
+        icon3 = QIcon()
+        icon3.addFile(u":/icons/assets/user.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.profile_pg_btn.setIcon(icon3)
         self.profile_pg_btn.setIconSize(QSize(28, 28))
 
         self.verticalLayout_2.addWidget(self.profile_pg_btn)
@@ -638,6 +650,9 @@ class Ui_PhotoEz(object):
 
     def retranslateUi(self, PhotoEz):
         PhotoEz.setWindowTitle(QCoreApplication.translate("PhotoEz", u"PhotoEz", None))
+#if QT_CONFIG(tooltip)
+        self.pseudoclr_pg_btn.setToolTip(QCoreApplication.translate("PhotoEz", u"<html><head/><body><p>pseudocolor</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
 #if QT_CONFIG(tooltip)
         self.filter_pg_btn.setToolTip(QCoreApplication.translate("PhotoEz", u"<html><head/><body><p>filters</p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
