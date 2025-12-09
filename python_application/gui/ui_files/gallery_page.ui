@@ -46,11 +46,50 @@
     </layout>
    </item>
    <item>
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>gallery here</string>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="bottomMargin">
+      <number>10</number>
      </property>
-    </widget>
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background:transparent; font-weight:bold;</string>
+       </property>
+       <property name="text">
+        <string>Gallery</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="no_upload_lbl">
+       <property name="styleSheet">
+        <string notr="true">background:transparent;</string>
+       </property>
+       <property name="text">
+        <string>No images have been uploaded yet</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
    </item>
    <item>
     <widget class="QScrollArea" name="gallery_scroll_area">
@@ -62,8 +101,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>403</width>
-        <height>227</height>
+        <width>397</width>
+        <height>192</height>
        </rect>
       </property>
      </widget>

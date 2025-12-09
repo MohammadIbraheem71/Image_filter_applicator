@@ -45,17 +45,39 @@ class Ui_gallery_pg(object):
 
         self.verticalLayout.addLayout(self.horizontalLayout_4)
 
+        self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalLayout.setContentsMargins(-1, -1, -1, 10)
         self.label = QLabel(gallery_pg)
         self.label.setObjectName(u"label")
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
+        self.label.setSizePolicy(sizePolicy)
+        self.label.setStyleSheet(u"background:transparent; font-weight:bold;")
 
-        self.verticalLayout.addWidget(self.label)
+        self.horizontalLayout.addWidget(self.label)
+
+        self.no_upload_lbl = QLabel(gallery_pg)
+        self.no_upload_lbl.setObjectName(u"no_upload_lbl")
+        self.no_upload_lbl.setStyleSheet(u"background:transparent;")
+
+        self.horizontalLayout.addWidget(self.no_upload_lbl)
+
+        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout.addItem(self.horizontalSpacer_2)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout)
 
         self.gallery_scroll_area = QScrollArea(gallery_pg)
         self.gallery_scroll_area.setObjectName(u"gallery_scroll_area")
         self.gallery_scroll_area.setWidgetResizable(True)
         self.image_grid = QWidget()
         self.image_grid.setObjectName(u"image_grid")
-        self.image_grid.setGeometry(QRect(0, 0, 403, 227))
+        self.image_grid.setGeometry(QRect(0, 0, 397, 192))
         self.gallery_scroll_area.setWidget(self.image_grid)
 
         self.verticalLayout.addWidget(self.gallery_scroll_area)
@@ -68,7 +90,8 @@ class Ui_gallery_pg(object):
 
     def retranslateUi(self, gallery_pg):
         self.upld_glry_btn.setText(QCoreApplication.translate("gallery_pg", u"upload", None))
-        self.label.setText(QCoreApplication.translate("gallery_pg", u"gallery here", None))
+        self.label.setText(QCoreApplication.translate("gallery_pg", u"Gallery", None))
+        self.no_upload_lbl.setText(QCoreApplication.translate("gallery_pg", u"No images have been uploaded yet", None))
         pass
     # retranslateUi
 

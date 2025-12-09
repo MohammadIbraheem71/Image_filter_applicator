@@ -13,7 +13,7 @@ console.log("email information:", {
 
 import crypto from "crypto";
 function generateShortToken(length = 6) {
-  // Alphanumeric uppercase only for simplicity
+  //Alphanumeric uppercase only for simplicity
   return crypto.randomBytes(length).toString("hex").slice(0, length).toUpperCase();
 }
 
@@ -26,7 +26,7 @@ const transporter = nodemailer.createTransport({
         pass: process.env.PASS // Gmail App password (no spaces)
     }
 });
-//Function for sending mail using transporter
+//the function for sending mail using transporter through nodemailer
 async function sendVerificationEmail(to, token) {
     const url = `http://localhost:3000/routes/auth/verify-email?token=${token}`;
     await transporter.sendMail({
@@ -139,7 +139,7 @@ router.post("/login", async (req, res) =>{
 // Temporary in-memory store for one-time tokens
 const resetTokens = new Map(); // userId -> token
 
-//Request password reset
+//route for resetting passwrod (resetreq dialog)
 router.post("/reset-password-request", (req, res) => {
   const { email } = req.body;
   const user = db.prepare("SELECT * FROM users WHERE email = ?").get(email);
@@ -147,16 +147,16 @@ router.post("/reset-password-request", (req, res) => {
 
   const token = generateShortToken(6);
 
-  // Store token in memory
+  // store token in temprary memory
   resetTokens.set(user.id, token);
 
-  // Send token via email
+  // send the token via email (nodemailer)
   sendPasswordResetEmail(user.email, token);
 
   res.json({ message: "Reset token sent via email" });
 });
 
-// Reset password using token
+//route for reseting passwrd (resetpass dialog)
 router.post("/reset-password", async (req, res) => {
   const { token, newPassword } = req.body;
 
@@ -177,7 +177,7 @@ router.post("/reset-password", async (req, res) => {
   const user = db.prepare("SELECT * FROM users WHERE id = ?").get(userId);
   if (!user) return res.status(404).json({ error: "User not found" });
 
-  // Hash new password
+  // new password to be hashed
   const hash = await bcrypt.hash(newPassword, 10);
   db.prepare("UPDATE users SET password_hash = ? WHERE id = ?").run(hash, user.id);
 

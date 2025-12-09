@@ -19,11 +19,11 @@ class gallery_page(QWidget):
         self.api = api
 
         self.loader = image_loader(self.ui.image_grid, columns=2, api=self.api, widget_cls=image_widget)
-        # Load gallery images
+        #load gallery images
         self.refresh_gallery()
 
-        # Auto-refresh when an image is uploaded
-        self.api.image_uploaded.connect(self.refresh_gallery)
+        
+        self.api.image_uploaded.connect(self.refresh_gallery) #refresh when image is loaded
 
         self.ui.upld_glry_btn.clicked.connect(self.upload_to_gallery)
         
@@ -39,47 +39,27 @@ class gallery_page(QWidget):
                 layout = QGridLayout(self.ui.image_grid)
                 self.ui.image_grid.setLayout(layout)
 
-            # Clear existing widgets (images or previous message)
+            #clear any exiting widgets to prevent interference
             for i in reversed(range(layout.count())):
                 widget = layout.itemAt(i).widget()
                 if widget:
                     widget.setParent(None)
 
             if images_list:
-                # Load images only if list is not empty
+                self.ui.no_upload_lbl.hide()
+                #load images if list is not empty
                 self.loader.load_images(images=images_list)
             else:
-                # Show empty message if truly empty
-                self.show_empty_gallery_message()
+                # show the no_upload_lbl which is the error msg if no imgs are uploded
+                self.ui.no_upload_lbl.show()
         except Exception as e:
             print("Error fetching gallery:", e)
 
-    def show_empty_gallery_message(self):
-        # Create message label
-       
-        msg = QLabel("No images have been uploaded yet.", self.ui.image_grid)
-        msg.setStyleSheet("""
-            QLabel {
-                font-size: 18px;
-                color: white;
-                padding: 20px;
-                background: transparent;
-            }
-        """)
-        msg.setAlignment(Qt.AlignCenter)
-
-        # Put label in the grid area
-        container = QWidget()
-        v = QVBoxLayout(container)
-        v.addWidget(msg)
-        v.setAlignment(Qt.AlignCenter)
-
-        self.ui.image_grid.layout().addWidget(container)
 
     def upload_to_gallery(self):
         upload_dlg = upload_dialog(api=self.api, parent=self)
         if upload_dlg.exec():
-            # Refresh gallery after successful upload
+            #refresh gallery after successful upload
             self.refresh_gallery()
             
 
@@ -91,9 +71,5 @@ class gallery_page(QWidget):
             return
 
         image_data = data.get("image")  # the full image info from backend
-
-        # Here, you would switch the stacked widget to the magnified view and populate it
-        # For example:
-        # self.parent().stacked_widget.setCurrentWidget(self.magnified_view)
-        # self.magnified_view.set_image(image_data)
+        
         print(f"Open magnified view for image ID: {image_id}")

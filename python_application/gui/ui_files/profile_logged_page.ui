@@ -218,6 +218,13 @@
     </layout>
    </item>
    <item>
+    <widget class="QLabel" name="no_upload_lbl">
+     <property name="text">
+      <string>You have not uploaded any images yet.</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QScrollArea" name="scrollArea">
      <property name="widgetResizable">
       <bool>true</bool>
@@ -228,7 +235,7 @@
         <x>0</x>
         <y>0</y>
         <width>514</width>
-        <height>212</height>
+        <height>188</height>
        </rect>
       </property>
      </widget>

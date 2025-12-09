@@ -94,7 +94,7 @@ class signup_dialog(QDialog):
         self.ui.error_lbl.setVisible(False)
 
 
-    # ---------------- Signup logic ----------------
+    #this is the sigup logic handling input validation, api calls and success/error msgs
     def _on_signup(self):
         username = self.ui.username_edt.text().strip()
         email = self.ui.email_edt.text().strip()
@@ -103,7 +103,8 @@ class signup_dialog(QDialog):
         self.ui.success_lbl.setVisible(False)
         self.ui.success_lbl.setText("")
 
-        # INPUT VALIDATION
+
+        #error handling
         if not username:
             self.show_error("Username is required")
             return
@@ -117,14 +118,13 @@ class signup_dialog(QDialog):
             self.show_error("Passwords do not match")
             return
 
-        # API CALL
         try:
             success, error_msg = self.api.signup(username=username, email=email, password=password)
         except Exception as e:
             self.show_error(f"Network error: {e}")
             return
 
-        # SUCCESS
+        #success msg handling
         if success:
             self.show_success("Signup successful! Please check your email to verify your account.")
             self.signup_success.emit(email)

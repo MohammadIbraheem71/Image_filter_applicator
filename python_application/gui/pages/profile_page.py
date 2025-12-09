@@ -23,18 +23,18 @@ class profile_page(QWidget):
         self.ui = Ui_profile_pg()
         self.ui.setupUi(self)
 
-        # The stacked widget inside the container
+        #the stacked widget inside the container
         self.profile_windows = self.ui.profile_windows
 
-        # Create the two pages
+        #ccreate the two pages
         self.auth_page = profile_auth_page(self.api)
         self.logged_page = profile_logged_page(self.api)
 
-        # Add to stacked widget
+        #add widgets to the stacked widget
         self.profile_windows.addWidget(self.auth_page)
         self.profile_windows.addWidget(self.logged_page)
 
-        # Connect signals
+        #connecting signals
         self.auth_page.login_success.connect(self.on_login_success)
         self.auth_page.signup_success.connect(self.on_signup_success)
 
@@ -51,10 +51,6 @@ class profile_page(QWidget):
     def refresh_gallery(self):
         if self.api.token != None:
             self.logged_page.refresh_gallery()
-
-    # ---------------------------------------------------
-    # SIGNAL HANDLERS
-    # ---------------------------------------------------
 
     def on_login_success(self, email):
         """Switch to logged page."""

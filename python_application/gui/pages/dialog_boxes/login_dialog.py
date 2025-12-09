@@ -16,15 +16,15 @@ class login_dialog(QDialog):
         self.ui.setupUi(self)
         self.api = api_client
 
-        # Initially hide labels
+        # hide the error labels at the start
         self.ui.error_lbl.setVisible(False)
         self.ui.success_lbl.setVisible(False)
 
-        # Connect buttons
+        #connecting buttons to respectiv funcs
         self.ui.login_btn.clicked.connect(self._on_submit)
         self.ui.forgotpass_btn.clicked.connect(self.open_reset_password_dialog)
 
-        # Clear error and success when typing
+        #when typing, clear any success, error msgs 
         self.ui.email_edt.textChanged.connect(self.clear_labels)
         self.ui.passwrd_edt.textChanged.connect(self.clear_labels)
 
@@ -49,7 +49,7 @@ class login_dialog(QDialog):
         self.ui.passwrd_edt.resizeEvent = lambda event: self._position_password_button()
         self.ui.passwrd_edt.setStyleSheet("padding-right: 10px;")
 
-    # ---------------- Helper methods ----------------
+    #helper methods
     def show_error(self, message: str):
         self.ui.error_lbl.setText(message)
         self.ui.error_lbl.setVisible(True)
@@ -82,7 +82,7 @@ class login_dialog(QDialog):
             (self.ui.passwrd_edt.rect().height() - self.show_pass_btn.height()) // 2
         )
 
-    # ---------------- Main login logic ----------------
+    
     def _on_submit(self):
         # Clear previous messages
         self.clear_labels()
@@ -117,7 +117,7 @@ class login_dialog(QDialog):
         # SUCCESS
         self.show_success("Login successful!")
         self.login_success.emit(email)
-        # Optionally: close dialog after short delay or keep open
+       
 
     def open_reset_password_dialog(self):
         from pages.dialog_boxes.resetreq_dialog import resetreq_dialog

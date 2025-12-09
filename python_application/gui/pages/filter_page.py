@@ -3,7 +3,7 @@ from PySide6.QtWidgets import QWidget, QFileDialog
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QPixmap, QImage
 from PIL import Image
-from ui_py.filter_gui import Ui_filter_pg  # <-- import the compiled UI
+from ui_py.filter_gui import Ui_filter_pg 
 
 class FilterPage(QWidget):
     def __init__(self, filter_factory, handler):
@@ -15,20 +15,20 @@ class FilterPage(QWidget):
         self.factory = filter_factory
         self.handler = handler
 
-        # Populate filter combo box
+        #ppopulate filter combo box
         self.ui.filter_cbx.addItem("Select Filter...")  # placeholder
         for name in self.factory.filter_dict.keys():
             self.ui.filter_cbx.addItem(name)
             print(f"added {name} to filter_cbx")
 
-        # Page state
+        #page state
         self.original_image = None
         self.filtered_image = None
 
-        # Disable filter dropdown until image is uploaded
+        #disable filter dropdown until image is uploaded
         self.ui.filter_cbx.setEnabled(False)
 
-        # Connect signals
+        #connecting buttons
         self.ui.upload_btn.clicked.connect(self.upload_image)
         self.ui.download_btn.clicked.connect(self.download_image)
         self.ui.filter_cbx.currentIndexChanged.connect(self.apply_filter)
@@ -53,13 +53,13 @@ class FilterPage(QWidget):
 
         filter_obj = self.factory.get_filter(selected_filter)
 
-        # Keep original for insurance
+        #keep original for insurance
         self.original_image = self.handler.image.copy()
 
-        # Apply filter
+        #apply filter
         self.filtered_image = filter_obj.apply(self.original_image.copy())
 
-        # Show images
+        #show images
         self.show_image(self.ui.new_img_lbl, self.filtered_image)
         self.show_image(self.ui.og_img_lbl, self.original_image)
         print(f"original image size = {self.original_image.size}")

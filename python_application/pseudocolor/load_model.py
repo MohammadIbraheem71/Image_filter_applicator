@@ -1,8 +1,15 @@
 # utils/colorize_model.py
 import tensorflow as tf
 from tensorflow import keras
+import os
 
-MODEL_PATH = "pseudocolor\colorization_model_faces.keras"
+#directory whre this file (colorize_model.py) is located
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+#go up 1level to python_application/
+ROOT_DIR = os.path.dirname(BASE_DIR)
+
+MODEL_PATH = os.path.join(ROOT_DIR, "pseudocolor", "colorization_model_faces.keras")
 
 def perceptual_loss(y_true, y_pred):
     mse = tf.reduce_mean(tf.square(y_true - y_pred))

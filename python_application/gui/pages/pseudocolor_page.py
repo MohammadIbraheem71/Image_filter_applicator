@@ -12,26 +12,26 @@ class pseudocolor_page(QWidget):
         self.ui = Ui_pseudoclr_pg()
         self.ui.setupUi(self)
 
-        # Store PIL images
+        #store PIL images
         self.gray_img = None
         self.color_img = None
         self.enhanced_img = None
 
-        # Connect buttons
+        #connect buttons
         self.ui.upload_btn.clicked.connect(self.upload_image)
         self.ui.download_btn.clicked.connect(self.download_image)
 
     def upload_image(self):
-        # Open file dialog
+        #open file dialog
         file_path, _ = QFileDialog.getOpenFileName(self, "Select Grayscale Image", "", "Images (*.png *.jpg *.jpeg)")
         if not file_path:
             return
 
         try:
-            # Colorize image
+            #colorize image
             self.gray_img, self.enhanced_img = colorize_image(file_path)
 
-            # Display original grayscale
+            #display original grayscale
             qt_gray = ImageQt(self.gray_img)
             pixmap_gray = QPixmap.fromImage(qt_gray)
             self.ui.old_img_lbl.setPixmap(pixmap_gray.scaled(
@@ -41,7 +41,7 @@ class pseudocolor_page(QWidget):
                 Qt.TransformationMode.SmoothTransformation
             ))
 
-            # Display enhanced colorized
+            #display enhanced colorized
             qt_enhanced = ImageQt(self.enhanced_img)
             pixmap_enhanced = QPixmap.fromImage(qt_enhanced)
             self.ui.new_img_lbl.setPixmap(pixmap_enhanced.scaled(

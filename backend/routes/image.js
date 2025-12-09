@@ -65,12 +65,12 @@ router.post("/upload", authentication_middleware, upload.single("image"), async(
     }
 });
 
-// Get ONLY the logged-in user's gallery (same format as /gallery)
+//get ONLY the logged-in user's gallery (same format as /gallery)
 router.get("/user_gallery", authentication_middleware, (req, res) => {
   try {
     const userId = req.user.id;
 
-    // Fetch user's images
+    //fetch the user's images 
     const images = db
       .prepare("SELECT * FROM images WHERE user_id = ?")
       .all(userId);
@@ -139,7 +139,7 @@ router.delete("/delete/:id", authentication_middleware, async (req, res) => {
 //gets the shared gallery
 router.get("/gallery", async (req, res) => {
   try {
-    // Check if user is logged in
+    //check if user is logged in
     let userId = null;
     const header = req.headers.authorization;
     if (header) {
@@ -149,7 +149,6 @@ router.get("/gallery", async (req, res) => {
         userId = decoded.id;
         console.log(`Authenticated user viewing gallery: User ID ${userId}`);
       } catch (err) {
-        // Invalid token, treat as guest
         console.log("Invalid token in gallery request, treating as guest");
         userId = null;
       }
@@ -158,11 +157,11 @@ router.get("/gallery", async (req, res) => {
       console.log("guest user viewing gallery")
     }
 
-    // Get all images
+    //get all images from the database
     const images = db.prepare("SELECT * FROM images").all();
     console.log(`Total images in gallery: ${images.length}`);
 
-    // Add likes and liked_by_user
+    // add likes and liked_by_user from db
     const imagesWithLikes = images.map((img) => {
       const likesRow = db
         .prepare("SELECT COUNT(*) AS likes FROM image_likes WHERE image_id = ?")

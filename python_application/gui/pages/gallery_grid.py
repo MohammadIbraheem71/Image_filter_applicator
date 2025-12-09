@@ -11,7 +11,7 @@ class gallery_grid(QWidget, Ui_image_gallery_grid):
         super().__init__(parent)
         self.setupUi(self)
 
-        # Store dynamic row/column position
+        #store dynamic row/column position
         self.row = 0
         self.col = 0
         self.max_columns = 3  # change as you like
@@ -26,10 +26,10 @@ class gallery_grid(QWidget, Ui_image_gallery_grid):
         img_label.setPixmap(pixmap.scaled(250, 250, Qt.KeepAspectRatio, Qt.SmoothTransformation))
         img_label.setAlignment(Qt.AlignCenter)
 
-        # Add label to the next grid cell
+        #add label to the next grid cell
         self.gridLayout.addWidget(img_label, self.row, self.col)
 
-        # Advance grid position
+        #advance grid position
         self.col += 1
         if self.col >= self.max_columns:
             self.col = 0

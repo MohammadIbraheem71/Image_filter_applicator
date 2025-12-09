@@ -129,12 +129,17 @@ class Ui_profile_logged_page(object):
 
         self.verticalLayout.addLayout(self.horizontalLayout)
 
+        self.no_upload_lbl = QLabel(profile_logged_page)
+        self.no_upload_lbl.setObjectName(u"no_upload_lbl")
+
+        self.verticalLayout.addWidget(self.no_upload_lbl)
+
         self.scrollArea = QScrollArea(profile_logged_page)
         self.scrollArea.setObjectName(u"scrollArea")
         self.scrollArea.setWidgetResizable(True)
         self.image_grid = QWidget()
         self.image_grid.setObjectName(u"image_grid")
-        self.image_grid.setGeometry(QRect(0, 0, 514, 212))
+        self.image_grid.setGeometry(QRect(0, 0, 514, 188))
         self.scrollArea.setWidget(self.image_grid)
 
         self.verticalLayout.addWidget(self.scrollArea)
@@ -161,6 +166,7 @@ class Ui_profile_logged_page(object):
         self.img_count_lbl.setText(QCoreApplication.translate("profile_logged_page", u"img count here", None))
         self.like_count_lbl.setText(QCoreApplication.translate("profile_logged_page", u"like count here", None))
         self.verified_status_lbl.setText(QCoreApplication.translate("profile_logged_page", u"verified status here", None))
+        self.no_upload_lbl.setText(QCoreApplication.translate("profile_logged_page", u"You have not uploaded any images yet.", None))
         self.logout_btn.setText(QCoreApplication.translate("profile_logged_page", u"Log out", None))
     # retranslateUi
 

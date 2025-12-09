@@ -8,14 +8,14 @@ class image_widget_trash(image_widget_base):
     def __init__(self, url, likes=0, image_id=None, api=None, liked_by_user=False):
         super().__init__(url, likes, image_id, api, liked_by_user)
         
-        # Load this widget's UI file (with trash button)
+        #load this widget's UI file (with trash button)
         self.ui = Ui_image_widget_trash()
         self.ui.setupUi(self)
         
-        # Call base class setup to initialize all common functionality
+        #call base class setup to initialize all common functionality
         self.setup_widget()
         
-        # Setup trash-specific functionality
+        #setup trash-specific functionality
         self.ui.trash_btn.clicked.connect(self.emit_delete_signal)
     
     #this emits a delete signal whenver the delete button is clicked, listened to by the profile page to delete the image

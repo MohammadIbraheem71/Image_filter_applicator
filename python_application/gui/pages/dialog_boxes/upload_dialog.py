@@ -19,16 +19,21 @@ class upload_dialog(QDialog):
         self.ui.success_lbl.setVisible(False)
         self.ui.success_lbl.setText("")
 
+        self.ui.select_img_btn.clicked.connect(self.clear_errors)
+        self.ui.description_edt.textChanged.connect(self.clear_errors)
+
         # Connect buttons
         self.ui.select_img_btn.clicked.connect(self.choose_file)
         self.ui.upload_btn.clicked.connect(self.upload_file)
-
-    # ------------------------------
-    # Show error and success helper
-    # ------------------------------
     def show_error(self, text: str):
         self.ui.error_lbl.setText(text)
         self.ui.error_lbl.setVisible(True)
+    
+    def clear_errors(self):
+        self.ui.error_lbl.setVisible(False)
+        self.ui.error_lbl.setText("")
+        self.ui.success_lbl.setVisible(False)
+        self.ui.success_lbl.setText("")
 
     def show_success(self, text: str):
         """Display success message inline."""
@@ -36,9 +41,6 @@ class upload_dialog(QDialog):
         self.ui.success_lbl.setVisible(True)
         self.ui.error_lbl.setVisible(False)
 
-    # ------------------------------
-    # File selection
-    # ------------------------------
     def choose_file(self):
         file_path, _ = QFileDialog.getOpenFileName(
             self, "Select Image", "", "Images (*.png *.jpg *.jpeg *.bmp)"
@@ -46,7 +48,7 @@ class upload_dialog(QDialog):
         if file_path:
             self.selected_file = file_path
 
-            # Load preview
+            #loadng the preview
             pixmap = QPixmap(file_path)
             pixmap = pixmap.scaled(
                 self.ui.img_lbl.width(),
@@ -56,17 +58,14 @@ class upload_dialog(QDialog):
             )
             self.ui.img_lbl.setPixmap(pixmap)
 
-            # Clear previous errors
+            #clear previous errors
             self.ui.error_lbl.setVisible(False)
             self.ui.error_lbl.setText("")
 
-    # ------------------------------
-    # Upload handler
-    # ------------------------------
     def upload_file(self):
         filename = self.ui.description_edt.text().strip()
 
-        # Validation errors → error_lbl
+        #validation errors → error_lbl
         if not self.selected_file:
             self.show_error("Please choose an image file.")
             return
@@ -78,16 +77,16 @@ class upload_dialog(QDialog):
         try:
             result = self.api.upload_image(self.selected_file, filename)
 
-            # If API returned unauthorized
+            # if unauthorizedd, show following error
             if isinstance(result, dict) and result.get("status") == "unauthorized":
                 self.show_error("Unauthorized. Please login again.")
                 return
 
-            # SUCCESS popup
+            #the SUCCESS popup
             self.show_success("Image uploaded successfully!")
 
         except Exception as e:
-            # Try to extract HTTP status code if available
+            #try to extract HTTP status code if available
             words = str(e).strip().split(' ')
 
             if '401' in words or '403' in words:
