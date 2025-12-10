@@ -43,7 +43,7 @@ class Ui_image_widget_trash(object):
 "QWidget#sub_widget:hover {\n"
 "    background-color: rgba(220, 180, 240, 0.15); /* Slight highlight on hover */\n"
 "    border: 1px solid rgba(230, 190, 250, 0.4);\n"
-"    box-shadow: 0 0 12px rgba(200, 150, 230, 0.3);\n"
+"    /*box-shadow: 0 0 12px rgba(200, 150, 230, 0.3);*/\n"
 "}\n"
 "\n"
 "\n"
@@ -53,14 +53,16 @@ class Ui_image_widget_trash(object):
 "    border-bottom-left-radius: 0;\n"
 "    border-bottom-right-radius: 0;\n"
 "    background-color: #f5f5f5;\n"
-"    /* Force the label to clip its contents to the border radius */\n"
 "    border: none;\n"
+"\n"
+"   color: #666;\n"
 "}\n"
 "\n"
+"\n"
 "QWidget#sub_widget QWidget#img_info {\n"
-"    background"
-                        "-color: #fafafa;\n"
-"    border-top: 1px solid #eee;\n"
+"    background-color: #fafafa;\n"
+"    border-top: 1"
+                        "px solid #eee;\n"
 "    border-radius: 0 0 12px 12px;\n"
 "}")
         self.verticalLayout = QVBoxLayout(image_widget_trash)
@@ -181,7 +183,7 @@ class Ui_image_widget_trash(object):
 
     def retranslateUi(self, image_widget_trash):
         image_widget_trash.setWindowTitle(QCoreApplication.translate("image_widget_trash", u"Form", None))
-        self.img_lbl.setText(QCoreApplication.translate("image_widget_trash", u"image here", None))
+        self.img_lbl.setText(QCoreApplication.translate("image_widget_trash", u"loading image..", None))
         self.trash_btn.setText("")
         self.magnify_btn.setText("")
         self.like_btn.setText("")

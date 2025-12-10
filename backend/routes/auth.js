@@ -131,6 +131,7 @@ router.post("/login", async (req, res) =>{
         user: {
             id: user.id,
             username: user.username,
+            email: user.email,
             is_verified: user.is_verified
         }});
     });

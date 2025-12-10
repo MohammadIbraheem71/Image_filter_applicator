@@ -43,7 +43,7 @@ class Ui_image_widget(object):
 "QWidget#sub_widget:hover {\n"
 "    background-color: rgba(220, 180, 240, 0.15); /* Slight highlight on hover */\n"
 "    border: 1px solid rgba(230, 190, 250, 0.4);\n"
-"    box-shadow: 0 0 12px rgba(200, 150, 230, 0.3);\n"
+"    /*box-shadow: 0 0 12px rgba(200, 150, 230, 0.3);*/\n"
 "}\n"
 "\n"
 "\n"
@@ -55,11 +55,12 @@ class Ui_image_widget(object):
 "    background-color: #f5f5f5;\n"
 "    /* Force the label to clip its contents to the border radius */\n"
 "    border: none;\n"
+"	color: #666;\n"
 "}\n"
 "\n"
-"QWidget#sub_widget QWidget#img_info {\n"
-"    background"
-                        "-color: #fafafa;\n"
+"QWidget#sub_widget QWidget#img_inf"
+                        "o {\n"
+"    background-color: #fafafa;\n"
 "    border-top: 1px solid #eee;\n"
 "    border-radius: 0 0 12px 12px;\n"
 "}")
@@ -172,7 +173,7 @@ class Ui_image_widget(object):
 
     def retranslateUi(self, image_widget):
         image_widget.setWindowTitle(QCoreApplication.translate("image_widget", u"Form", None))
-        self.img_lbl.setText(QCoreApplication.translate("image_widget", u"image here", None))
+        self.img_lbl.setText(QCoreApplication.translate("image_widget", u"loading image", None))
         self.magnify_btn.setText("")
         self.like_btn.setText("")
         self.liked_btn.setText("")

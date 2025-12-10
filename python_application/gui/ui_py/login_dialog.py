@@ -32,13 +32,27 @@ class Ui_login_dialog(object):
         login_dialog.setSizePolicy(sizePolicy)
         login_dialog.setMinimumSize(QSize(531, 300))
         login_dialog.setMaximumSize(QSize(531, 500))
+        login_dialog.setAutoFillBackground(False)
         login_dialog.setStyleSheet(u"/* -----------------------------------------\n"
+"   MAIN DIALOG BACKGROUND\n"
+"----------------------------------------- */\n"
+"QDialog {\n"
+"    background: qlineargradient(\n"
+"        spread:pad,\n"
+"        x1:0, y1:0, x2:1, y2:1,\n"
+"        stop:0 #2C173A,\n"
+"        stop:1 #0F0A12\n"
+"    );\n"
+"}\n"
+"\n"
+"\n"
+"/* -----------------------------------------\n"
 "   DIALOG BACKGROUND WIDGET\n"
 "----------------------------------------- */\n"
 "QWidget#bg_widget {\n"
 "    /* Full dialog background */\n"
 "    /* FIX: Switched to background-image and related properties for a full background cover */\n"
-"    background-image:url(:/icons/assets/sunset_2.jpg) ;\n"
+"    background-image:url(:/icons/assets/sunset_chimney_text.png) ;\n"
 "    background-repeat: no-repeat;\n"
 "    background-position: center;\n"
 "    background-size: cover; /* Tries to cover the entire area, similar to stretch */\n"
@@ -48,7 +62,8 @@ class Ui_login_dialog(object):
 "/* -----------------------------------------\n"
 "   FORM WIDGET (on top of background)\n"
 "----------------------------------------- */\n"
-"QWidget#form_widget {\n"
+"QWidge"
+                        "t#form_widget {\n"
 "    background-color: rgba(220, 220, 220, 0.7); /* translucent grey */\n"
 "    border: 1px solid rgba(200, 200, 200, 0.5); /* subtle border */\n"
 "    border-radius: 12px;\n"
@@ -57,8 +72,7 @@ class Ui_login_dialog(object):
 "\n"
 "/* -----------------------------------------\n"
 "   LABELS INSIDE FORM\n"
-"---------------------------"
-                        "-------------- */\n"
+"----------------------------------------- */\n"
 "QWidget#form_widget QLabel {\n"
 "    background: transparent;  /* completely transparent, no outline */\n"
 "    color: #2D2440;           /* dark text */\n"
@@ -78,7 +92,8 @@ class Ui_login_dialog(object):
 "    color: #2D2440;\n"
 "    font-size: 14px;\n"
 "}\n"
-"\n"
+""
+                        "\n"
 "QLineEdit:focus, QTextEdit:focus {\n"
 "    background-color: rgba(255, 255, 255, 0.35);\n"
 "    border: 1px solid rgba(220, 180, 230, 0.8);\n"
@@ -88,8 +103,7 @@ class Ui_login_dialog(object):
 "   SIGNUP BUTTON\n"
 "----------------------------------------- */\n"
 "QPushButton#login_btn {\n"
-"    background-color: #"
-                        "A855F7; /* solid purple */\n"
+"    background-color: #A855F7; /* solid purple */\n"
 "    color: #FFFFFF;            /* white text */\n"
 "    border: none;              /* clean look */\n"
 "    border-radius: 8px;\n"
@@ -104,14 +118,15 @@ class Ui_login_dialog(object):
 "\n"
 "QPushButton#login_btn:pressed {\n"
 "    background-color: #9333EA; /* darker purple on press */\n"
-"    transform: scale(0.97);\n"
+"    /*transform: scale(0.97);*/\n"
 "}\n"
 "\n"
 "/* -----------------------------------------\n"
 "   FORGOT PASSWORD BUTTON\n"
 "----------------------------------------- */\n"
 "QPushButton#forgot_password_btn {\n"
-"    background-color: transparent;  /* no solid background */\n"
+"    background-colo"
+                        "r: transparent;  /* no solid background */\n"
 "    color: #6B7280;                 /* greyish text (Tailwind gray-500) */\n"
 "    border: none;\n"
 "    font-weight: 500;\n"
@@ -120,8 +135,7 @@ class Ui_login_dialog(object):
 "    padding: 4px 0;\n"
 "}\n"
 "\n"
-"QPushButton#forgot_"
-                        "password_btn:hover {\n"
+"QPushButton#forgot_password_btn:hover {\n"
 "    color: #4B5563;                 /* slightly darker grey on hover */\n"
 "    cursor: pointer;                /* show pointer cursor */\n"
 "}\n"
@@ -131,6 +145,7 @@ class Ui_login_dialog(object):
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.bg_widget = QWidget(login_dialog)
         self.bg_widget.setObjectName(u"bg_widget")
+        self.bg_widget.setEnabled(True)
         self.bg_widget.setMinimumSize(QSize(0, 80))
         self.horizontalLayout_2 = QHBoxLayout(self.bg_widget)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
@@ -274,7 +289,7 @@ class Ui_login_dialog(object):
     # setupUi
 
     def retranslateUi(self, login_dialog):
-        login_dialog.setWindowTitle(QCoreApplication.translate("login_dialog", u"Dialog", None))
+        login_dialog.setWindowTitle(QCoreApplication.translate("login_dialog", u"PhotoEz-login", None))
         self.login_lbl.setText(QCoreApplication.translate("login_dialog", u"login", None))
         self.email_edt.setPlaceholderText(QCoreApplication.translate("login_dialog", u"email", None))
         self.passwrd_edt.setPlaceholderText(QCoreApplication.translate("login_dialog", u"password", None))

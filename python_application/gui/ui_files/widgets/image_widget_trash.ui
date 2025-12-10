@@ -43,7 +43,7 @@
 QWidget#sub_widget:hover {
     background-color: rgba(220, 180, 240, 0.15); /* Slight highlight on hover */
     border: 1px solid rgba(230, 190, 250, 0.4);
-    box-shadow: 0 0 12px rgba(200, 150, 230, 0.3);
+    /*box-shadow: 0 0 12px rgba(200, 150, 230, 0.3);*/
 }
 
 
@@ -53,9 +53,11 @@ QWidget#sub_widget QLabel#img_lbl {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     background-color: #f5f5f5;
-    /* Force the label to clip its contents to the border radius */
     border: none;
+
+   color: #666;
 }
+
 
 QWidget#sub_widget QWidget#img_info {
     background-color: #fafafa;
@@ -91,7 +93,7 @@ QWidget#sub_widget QWidget#img_info {
          </size>
         </property>
         <property name="text">
-         <string>image here</string>
+         <string>loading image..</string>
         </property>
         <property name="scaledContents">
          <bool>false</bool>

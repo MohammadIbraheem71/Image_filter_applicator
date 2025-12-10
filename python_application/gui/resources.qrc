@@ -17,5 +17,7 @@
     <file>assets/downloads.png</file>
     <file>assets/trash.png</file>
     <file>assets/bucket.png</file>
+    <file>assets/sunset_text.png</file>
+    <file>assets/sunset_chimney_text.png</file>
   </qresource>
 </RCC>
