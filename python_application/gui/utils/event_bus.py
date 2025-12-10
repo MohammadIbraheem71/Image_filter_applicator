@@ -1,5 +1,6 @@
 from PySide6.QtCore import QObject, Signal
 
+#singleton 
 class event_bus(QObject):
     broadcast = Signal(str, object)
 

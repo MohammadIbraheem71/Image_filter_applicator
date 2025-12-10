@@ -17,7 +17,7 @@ class image_loader:
         self.api = api 
 
         self.widget_cls = widget_cls or self.default_widget_class()
-
+        
 
         #this replaces the existing grid layout with the flow layout tthat manages this dynamic layout stuff
 

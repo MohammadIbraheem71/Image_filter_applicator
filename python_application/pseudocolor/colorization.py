@@ -12,7 +12,7 @@ IMG_SIZE = 128
 #this is the colorization function, uses the luminance function for detail transfer. 
 #returns the original image and the enhanced image
 def colorize_image(image_path):
-    print(f"\n🎨 Colorizing: {image_path}")
+    print(f"\nColorizing: {image_path}")
 
     #we first load the grayscale image
     img = Image.open(image_path)

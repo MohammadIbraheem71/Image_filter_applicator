@@ -92,7 +92,7 @@ QWidget#sub_widget QWidget#img_info {
          </size>
         </property>
         <property name="text">
-         <string>loading image</string>
+         <string>loading image..</string>
         </property>
         <property name="scaledContents">
          <bool>false</bool>

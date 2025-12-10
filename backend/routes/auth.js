@@ -141,6 +141,7 @@ router.post("/login", async (req, res) =>{
 const resetTokens = new Map(); // userId -> token
 
 //route for resetting passwrod (resetreq dialog)
+//this is to request a reset of the password, this sends the email
 router.post("/reset-password-request", (req, res) => {
   const { email } = req.body;
   const user = db.prepare("SELECT * FROM users WHERE email = ?").get(email);
@@ -158,6 +159,7 @@ router.post("/reset-password-request", (req, res) => {
 });
 
 //route for reseting passwrd (resetpass dialog)
+//this route does the resetting, (enteres the new passworrd)
 router.post("/reset-password", async (req, res) => {
   const { token, newPassword } = req.body;
 

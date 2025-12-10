@@ -1,8 +1,9 @@
 from PIL import Image
 import os
 
+#saves images to disk
 class ImageSaver:
-    """Handles saving images to disk."""
+    
     def save(self, image: Image.Image, save_path: str):
         if image is None:
             raise ValueError("No image to save")

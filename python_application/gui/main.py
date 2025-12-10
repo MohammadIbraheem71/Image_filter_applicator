@@ -97,7 +97,6 @@ class MainWindow(QMainWindow):
 
     #reload the gallery whenever we click on it, so it stays updated
     def show_gallery_page(self):
-        """Reload the gallery before showing it."""
         try:
             self.gallery_page.refresh_gallery()  # Make sure gallery_page has this method
         except AttributeError:

@@ -4,7 +4,7 @@ from filters.filter_types.base_filter import base_filter
 
 
 class FilterApplier:
-    """Applies filters to images."""
+    #takes in a filter objbject, and applies it to the image
     def apply(self, image: Image.Image, filter_obj: base_filter) -> Image.Image:
         if image is None:
             raise ValueError("No image loaded")

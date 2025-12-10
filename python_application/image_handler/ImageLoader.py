@@ -1,8 +1,9 @@
 from PIL import Image
 import os
 
+#handles loading images form disks
 class ImageLoader:
-    """Handles loading images from disk."""
+    
     def load(self, file_path: str) -> Image.Image:
         if not os.path.exists(file_path):
             raise FileNotFoundError(f"File not found: {file_path}")

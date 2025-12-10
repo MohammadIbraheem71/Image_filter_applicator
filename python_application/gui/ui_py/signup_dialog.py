@@ -237,7 +237,7 @@ class Ui_signup_dialog(object):
     # setupUi
 
     def retranslateUi(self, signup_dialog):
-        signup_dialog.setWindowTitle(QCoreApplication.translate("signup_dialog", u"Dialog", None))
+        signup_dialog.setWindowTitle(QCoreApplication.translate("signup_dialog", u"PhotoEz-signup", None))
         self.sign_up_lbl.setText(QCoreApplication.translate("signup_dialog", u"sign up", None))
         self.username_edt.setPlaceholderText(QCoreApplication.translate("signup_dialog", u"username", None))
         self.email_edt.setPlaceholderText(QCoreApplication.translate("signup_dialog", u"email", None))
